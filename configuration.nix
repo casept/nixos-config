@@ -115,6 +115,7 @@
     unstable.thunderbird
     unstable.ghidra-bin
     vlc
+    calibre
   ];
 
   # Set up virtualization
