@@ -4,7 +4,21 @@
 
 { config, pkgs, ... }:
 
-{
+  # Enable support for installing from unstable without having to add it using nix-channel first
+  let
+  unstableTarball =
+    fetchTarball
+      https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz;
+  in
+  {
+    nixpkgs.config = {
+      packageOverrides = pkgs: {
+        unstable = import unstableTarball {
+          config = config.nixpkgs.config;
+        };
+      };
+    };
+  
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
@@ -41,7 +55,7 @@
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
-  networking.useDHCP = true;
+  # networking.useDHCP = true;
   networking.interfaces.enp0s25.useDHCP = true;
   networking.interfaces.wlp3s0.useDHCP = true;
   networking.interfaces.wwp0s20u4i6.useDHCP = true;
@@ -60,15 +74,52 @@
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+
+  # List packages installed in system profile.
+  # Development environment
+  #devpkgs = with pkgs; [
+  #  vim neovim git vscode python3
+  #]
+
+  # Sysadmin utilities
+  #sysadmpkgs = with pkgs; [
+  #  htop stow tmux alacritty wget curl
+  #]
+
+  # Internet
+  #netpkgs = with pkgs; [
+  #  google-chrome firefox deluge
+  #]
+
+  # Gaming
+  #gamepkgs = with pkgs; [
+  #  steam
+  #]
+
+  # Note taking
+  #noteepkgs = with pkgs; [
+  #  xournalpp
+  #]
+  
   environment.systemPackages = with pkgs; [
-    wget curl vim neovim tmux htop zsh git stow alacritty google-chrome firefox steam vscode keepassxc python3 
+    keepassxc
+    vim neovim git python3 ripgrep
+    unstable.vscode # To always get the latest version
+    htop stow tmux alacritty wget curl nixops
+    unstable.google-chrome unstable.firefox deluge
+    steam
+    lutris
+    unstable.xournalpp # Toolbox is unstable-only
+    texlive.combined.scheme-full
+    unstable.mullvad-vpn
+    unstable.thunderbird
+    unstable.ghidra-bin
+    vlc
   ];
 
   # Set up virtualization
   virtualisation.docker.enable = true;
-  virtualisation.lxd.enable = true;
+  # virtualisation.lxd.enable = true;
   virtualisation.virtualbox.host.enable = true;
   virtualisation.virtualbox.host.enableExtensionPack = true;
 
@@ -78,7 +129,7 @@
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
-  # programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
+  programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
 
   # List services that you want to enable:
 
@@ -103,6 +154,8 @@
   services.xserver.layout = "us";
   services.xserver.xkbOptions = "eurosign:e";
 
+  # TODO: Enable wayland
+
   # Enable touchpad support.
   services.xserver.libinput.enable = true;
 
@@ -110,6 +163,10 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome3.enable = true;
 
+  # Needed for steam.
+  hardware.opengl.driSupport32Bit = true;
+  hardware.pulseaudio.support32Bit = true;
+  
   # Enable NTFS support
   boot.supportedFilesystems = [ "ntfs" ];
 
