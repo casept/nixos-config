@@ -103,7 +103,7 @@
   
   environment.systemPackages = with pkgs; [
     keepassxc
-    vim neovim git python3 ripgrep
+    vim neovim git python3 ripgrep shellcheck openjdk8 unstable.dotnet-sdk
     unstable.vscode # To always get the latest version
     htop stow tmux alacritty wget curl nixops
     unstable.google-chrome unstable.firefox deluge
@@ -116,6 +116,7 @@
     unstable.ghidra-bin
     vlc
     calibre
+    bleachbit
   ];
 
   # Set up virtualization
