@@ -103,13 +103,14 @@
   
   environment.systemPackages = with pkgs; [
     keepassxc
-    vim neovim git python3 ripgrep shellcheck openjdk8 unstable.dotnet-sdk
+    vim neovim git python3 ripgrep shellcheck openjdk8 unstable.dotnet-sdk unstable.rustup unstable.go unstable.android-studio appimage-run
     unstable.vscode # To always get the latest version
     htop stow tmux alacritty wget curl nixops
     unstable.google-chrome unstable.firefox deluge
     steam
     lutris
     unstable.xournalpp # Toolbox is unstable-only
+    unstable.krita
     texlive.combined.scheme-full
     unstable.mullvad-vpn
     unstable.thunderbird
@@ -117,6 +118,7 @@
     vlc
     calibre
     bleachbit
+    speedcrunch
   ];
 
   # Set up virtualization
@@ -146,6 +148,7 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+  services.printing.drivers = [ pkgs.gutenprint pkgs.gutenprintBin pkgs.hplipWithPlugin pkgs.samsungUnifiedLinuxDriver pkgs.splix pkgs.brlaser ];
 
   # Enable sound.
   sound.enable = true;
