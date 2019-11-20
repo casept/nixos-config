@@ -119,6 +119,9 @@
     calibre
     bleachbit
     speedcrunch
+    unar unzip
+    unstable.syncthing-gtk
+    deja-dup
   ];
 
   # Set up virtualization
