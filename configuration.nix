@@ -107,7 +107,7 @@
     unstable.vscode # To always get the latest version
     htop stow tmux alacritty wget curl nixops
     unstable.google-chrome unstable.firefox deluge
-    steam
+    unstable.steam unstable.steam-run
     lutris
     unstable.xournalpp # Toolbox is unstable-only
     unstable.krita
