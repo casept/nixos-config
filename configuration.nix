@@ -169,8 +169,8 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   services.xserver.layout = "eu";
-
-  # TODO: Enable wayland
+  services.xserver.modules = [pkgs.xf86_input_wacom];
+  services.xserver.wacom.enable = true;
 
   # Enable touchpad support.
   services.xserver.libinput.enable = true;
