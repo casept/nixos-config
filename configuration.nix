@@ -22,6 +22,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      <nixos-hardware/lenovo/thinkpad/x230>
     ];
 
   # Allow proprietary derivations
