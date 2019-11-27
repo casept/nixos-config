@@ -123,6 +123,14 @@
     unar unzip
     unstable.syncthing-gtk
     deja-dup
+    unstable.tdesktop
+    unstable.discord
+    unstable.signal-desktop
+    multimc
+    gnucash
+    gnomeExtensions.gsconnect
+    flatpak-builder
+    (wine.override { wineBuild = "wineWow"; })
   ];
 
   # Set up virtualization
