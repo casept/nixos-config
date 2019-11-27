@@ -182,6 +182,9 @@
   };
   services.xserver.desktopManager.gnome3.enable = true;
 
+  # Enable flatpak support
+  services.flatpak.enable = true;
+
   # Needed for steam.
   hardware.opengl.driSupport32Bit = true;
   hardware.pulseaudio.support32Bit = true;
