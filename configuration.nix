@@ -176,7 +176,10 @@
   services.xserver.libinput.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager = {
+    gdm.enable = true;
+    gdm.wayland = true;
+  };
   services.xserver.desktopManager.gnome3.enable = true;
 
   # Needed for steam.
