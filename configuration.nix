@@ -110,7 +110,7 @@
     unstable.google-chrome unstable.firefox deluge
     unstable.steam unstable.steam-run
     lutris
-    unstable.xournalpp # Toolbox is unstable-only
+    #unstable.xournalpp # Toolbox is unstable-only
     unstable.krita
     texlive.combined.scheme-full
     unstable.mullvad-vpn
