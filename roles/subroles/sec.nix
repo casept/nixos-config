@@ -21,39 +21,13 @@
 
   # Development packages
   environment.systemPackages = with pkgs; [
-    # Editors
-    vim
-    neovim
-    unstable.vscode
-    unstable.android-studio
+    # Reversing
+    unstable.ghidra-bin
+    unstable.python37Packages.binwalk-full
+    unstable.jd-gui
 
-    # Misc. CLI tools
-    shellcheck
-    ripgrep
-    htop
-    stow
-    tmux
-    unstable.alacritty
-    wget
-    curl
-    unar
-    unzip
-    binutils
-
-    # Source control    
-    git
-
-    # Languages
-    python3
-    unstable.dotnet-sdk
-    unstable.rustup
-    unstable.go
-    openjdk8
-
-    # Build environment management
-    unstable.vagrant
-    direnv
-    flatpak-builder
+    # Networking
+    unstable.nmap
 
   ];
 

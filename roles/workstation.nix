@@ -60,6 +60,7 @@
     [ 
       ./subroles/dev.nix
       ./subroles/ops.nix
+      ./subroles/sec.nix
       ./subroles/touch.nix
       ./subroles/internet.nix
       ./subroles/entertainment.nix
