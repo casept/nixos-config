@@ -52,4 +52,21 @@
   services.xserver.wacom.enable = true;
   # Enable touchpad support.
   services.xserver.libinput.enable = true;
+
+  # Fingerprint scanner
+  services.fprintd.enable = true;
+  security.pam.services.login.fprintAuth = true;
+  security.pam.services.xscreensaver.fprintAuth = true;
+
+  # Bluetooth
+  hardware.bluetooth.enable = true;
+
+  # Audio
+  sound.enable = true;
+  hardware.pulseaudio = {
+    enable = true;
+    # Needed for bluetooth support
+    package = pkgs.pulseaudioFull;
+    extraModules = [ pkgs.pulseaudio-modules-bt ];
+  };
 }
