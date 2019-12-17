@@ -45,6 +45,11 @@
 
     # Languages
     python3
+    python37Packages.autopep8
+    python37Packages.flake8
+    python37Packages.pydocstyle
+    python37Packages.mypy
+
     unstable.dotnet-sdk
     unstable.rustup
     unstable.go
