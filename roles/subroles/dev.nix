@@ -1,20 +1,5 @@
 { config, pkgs, ... }:
-
-  # Enable support for installing from unstable without having to add it using nix-channel first
-  let
-  unstableTarball =
-    fetchTarball
-      https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz;
-  in
-  {
-    nixpkgs.config = {
-      packageOverrides = pkgs: {
-        unstable = import unstableTarball {
-          config = config.nixpkgs.config;
-        };
-      };
-    };
-  
+{  
 
   # Allow proprietary derivations
   nixpkgs.config.allowUnfree = true;
@@ -22,10 +7,13 @@
   # Development packages
   environment.systemPackages = with pkgs; [
     # Editors
-    vim
     neovim
-    unstable.vscode
-    unstable.android-studio
+    python37Packages.pynvim # For deoplete
+    vimHugeX
+
+    vscode
+    
+    android-studio
 
     # Misc. CLI tools
     shellcheck
@@ -33,7 +21,7 @@
     htop
     stow
     tmux
-    unstable.alacritty
+    alacritty
     wget
     curl
     unar
@@ -50,13 +38,13 @@
     python37Packages.pydocstyle
     python37Packages.mypy
 
-    unstable.dotnet-sdk
-    unstable.rustup
-    unstable.go
+    dotnet-sdk
+    rustup
+    go
     openjdk8
 
     # Build environment management
-    unstable.vagrant
+    vagrant
     direnv
     flatpak-builder
 

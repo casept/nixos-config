@@ -2,6 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
+
 { config, pkgs, ... }:
 {
   imports =
@@ -20,4 +21,16 @@
   # should.
   system.stateVersion = "19.09"; # Did you read the comment?
 
+  # Do not run some shitty, flaky tests
+  nixpkgs.overlays = [
+        (self: super: {
+            python3 = super.python3.override {
+                packageOverrides = python-self: python-super: {
+                    pycurl = python-super.pycurl.overrideAttrs (oldAttrs: {
+                        doInstallCheck = false;
+                    });
+                };
+            };
+        })
+    ];
 }

@@ -39,7 +39,7 @@
   swapDevices = [ ];
 
   nix.maxJobs = lib.mkDefault 4;
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+  powerManagement.cpuFreqGovernor = lib.mkDefault "conservative";
   
   # Enable TLP
   services.tlp.enable = true;
@@ -54,9 +54,9 @@
   services.xserver.libinput.enable = true;
 
   # Fingerprint scanner
-  services.fprintd.enable = true;
-  security.pam.services.login.fprintAuth = true;
-  security.pam.services.xscreensaver.fprintAuth = true;
+  #services.fprintd.enable = true;
+  #security.pam.services.login.fprintAuth = true;
+  #security.pam.services.xscreensaver.fprintAuth = true;
 
   # Bluetooth
   hardware.bluetooth.enable = true;
