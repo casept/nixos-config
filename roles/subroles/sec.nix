@@ -7,7 +7,7 @@
   environment.systemPackages = with pkgs; [
     # Reversing
     ghidra-bin
-    python37Packages.binwalk-full
+    python38Packages.binwalk-full
     jd-gui
 
     # Networking
