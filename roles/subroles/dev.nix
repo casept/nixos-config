@@ -8,11 +8,9 @@
   environment.systemPackages = with pkgs; [
     # Editors
     neovim
-    python37Packages.pynvim # For deoplete
-    vimHugeX
-
-    vscode
+    python38Packages.pynvim # For deoplete
     
+    vscode
     android-studio
 
     # Misc. CLI tools
@@ -32,11 +30,11 @@
     git
 
     # Languages
-    python3
-    python37Packages.autopep8
-    python37Packages.flake8
-    python37Packages.pydocstyle
-    python37Packages.mypy
+    python38
+    python38Packages.autopep8
+    python38Packages.flake8
+    python38Packages.pydocstyle
+    python38Packages.mypy
 
     dotnet-sdk
     rustup
