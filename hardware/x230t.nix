@@ -14,14 +14,13 @@
 
   #### Filesysem configuration ####
   # Configure encrypted boot device.
-  boot.initrd.luks.devices = [
-    {
-      name = "root";
-      device = "/dev/disk/by-uuid/8ff732bc-94fe-42ec-883c-b0e7e960e5fc";
-      preLVM = true;
-      allowDiscards = true;
-    }
-  ];
+  boot.initrd.luks.devices = {
+      root = {
+        device = "/dev/disk/by-uuid/8ff732bc-94fe-42ec-883c-b0e7e960e5fc";
+        preLVM = true;
+        allowDiscards = true;
+      };
+  };
 
   # Supposedly better for the SSD.
   fileSystems."/".options = [ "noatime" "nodiratime" "discard" ];
