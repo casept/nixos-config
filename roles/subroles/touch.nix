@@ -5,7 +5,7 @@
 
   # Touch and pen-related packages
   environment.systemPackages = with pkgs; [
-    krita
+    #krita
     xournalpp
   ];
 }
