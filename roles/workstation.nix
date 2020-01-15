@@ -57,10 +57,13 @@
     texlive.combined.scheme-full
     bleachbit
     speedcrunch
-    deja-dup
     gnucash
     gnomeExtensions.gsconnect
+    # Desktop backup
+    (import ../pkgs/rclone-master.nix) # Stable does not support jottacloud well
+    restic
   ];
+
 
 
   # Set up virtualisation
