@@ -21,16 +21,16 @@
   # should.
   system.stateVersion = "19.09"; # Did you read the comment?
 
-  # Do not run some shitty, flaky tests
   nixpkgs.overlays = [
-        (self: super: {
-            python3 = super.python3.override {
-                packageOverrides = python-self: python-super: {
-                    pycurl = python-super.pycurl.overrideAttrs (oldAttrs: {
-                        doInstallCheck = false;
-                    });
-                };
-            };
-        })
-    ];
+    (self: super: {
+       # Do not run some shitty, flaky tests
+       python3 = super.python3.override {
+         packageOverrides = python-self: python-super: {
+           pycurl = python-super.pycurl.overrideAttrs (oldAttrs: {
+             doInstallCheck = false;
+           });
+        };
+      };
+   })
+ ];
 }
