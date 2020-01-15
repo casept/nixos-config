@@ -22,7 +22,7 @@
     alacritty
     wget
     curl
-    unar
+    #unar
     unzip
     binutils
 
