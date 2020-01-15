@@ -11,5 +11,9 @@
     # Automation
     nixops
     ansible
+
+    # Debugging
+    wireshark-qt
+
   ];
 }
