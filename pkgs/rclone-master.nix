@@ -1,12 +1,12 @@
 with import <nixpkgs> {};
 
 buildGoPackage rec {
-  pname = "rclone";
+  pname = "rclone-master";
   version = "master";
 
   src = fetchGit {
     url = "https://github.com/rclone/rclone";
-    rev = "63128834dae262f4413130458f552737a867fac1";
+    rev = "1ba5e991526db5ec0242f4f51fb35688f4a0e71c";
   };
 
   goPackagePath = "github.com/rclone/rclone";
