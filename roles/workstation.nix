@@ -88,7 +88,8 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
-  services.printing.drivers = [ pkgs.gutenprint pkgs.gutenprintBin pkgs.hplipWithPlugin pkgs.samsungUnifiedLinuxDriver pkgs.splix pkgs.brlaser ];
+  # services.printing.drivers = [ pkgs.gutenprint pkgs.gutenprintBin pkgs.hplipWithPlugin pkgs.samsungUnifiedLinuxDriver pkgs.splix pkgs.brlaser ];
+  services.printing.drivers = [ pkgs.gutenprint pkgs.gutenprintBin pkgs.samsungUnifiedLinuxDriver pkgs.splix pkgs.brlaser ];
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
