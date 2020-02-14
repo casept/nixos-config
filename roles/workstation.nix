@@ -64,7 +64,7 @@
     bleachbit
     speedcrunch
     gnucash
-    gnomeExtensions.gsconnect
+    #gnomeExtensions.gsconnect
     # Desktop backup
     (import ../pkgs/rclone-master.nix) # Stable does not support jottacloud well
     restic
