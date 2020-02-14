@@ -19,6 +19,7 @@
 
     # Misc. CLI tools
     shellcheck
+    nixfmt
     ripgrep
     htop
     stow
