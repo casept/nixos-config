@@ -15,6 +15,7 @@
 
     vscode
     android-studio
+    jetbrains.idea-ultimate
 
     # Misc. CLI tools
     shellcheck
