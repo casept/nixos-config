@@ -4,6 +4,12 @@
 
 { config, pkgs, builtins, ... }:
 {
+
+  services.openssh.enable = true;
+  services.openssh.forwardX11 = true;
+  services.openssh.passwordAuthentication = false;
+
+
   # Allow proprietary derivations
   nixpkgs.config.allowUnfree = true;
 
