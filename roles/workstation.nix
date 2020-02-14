@@ -98,7 +98,7 @@
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager = {
     gdm.enable = true;
-    gdm.wayland = false; # TODO: Change back once wacom bugfix is in nixos
+    gdm.wayland = true;
   };
   services.xserver.desktopManager.gnome3.enable = true;
 
