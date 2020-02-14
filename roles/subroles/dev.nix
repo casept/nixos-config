@@ -9,7 +9,10 @@
     # Editors
     neovim
     python38Packages.pynvim # For deoplete
-    
+
+    kakoune
+    kak-lsp
+
     vscode
     android-studio
 
