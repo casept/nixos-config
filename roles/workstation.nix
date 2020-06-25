@@ -2,13 +2,11 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, builtins, ... }:
-{
+{ config, pkgs, builtins, ... }: {
 
   services.openssh.enable = true;
   services.openssh.forwardX11 = true;
   services.openssh.passwordAuthentication = false;
-
 
   # Allow proprietary derivations
   nixpkgs.config.allowUnfree = true;
@@ -21,7 +19,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot";
   boot.loader.grub.efiInstallAsRemovable = false;
-  
+
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
@@ -45,16 +43,15 @@
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
- 
-  imports =
-    [ 
-      ./subroles/dev.nix
-      ./subroles/ops.nix
-      ./subroles/sec.nix
-      ./subroles/touch.nix
-      ./subroles/internet.nix
-      ./subroles/entertainment.nix
-    ];
+
+  imports = [
+    ./subroles/workstation/dev.nix
+    ./subroles/workstation/ops.nix
+    ./subroles/workstation/sec.nix
+    ./subroles/workstation/touch.nix
+    ./subroles/workstation/internet.nix
+    ./subroles/workstation/entertainment.nix
+  ];
 
   # Misc. uncategorized packages
   environment.systemPackages = with pkgs; [
@@ -70,8 +67,6 @@
     restic
   ];
 
-
-
   # Set up virtualisation
   virtualisation.docker.enable = true;
   virtualisation.lxd.enable = true;
@@ -84,12 +79,21 @@
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
-  programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
   # services.printing.drivers = [ pkgs.gutenprint pkgs.gutenprintBin pkgs.hplipWithPlugin pkgs.samsungUnifiedLinuxDriver pkgs.splix pkgs.brlaser ];
-  services.printing.drivers = [ pkgs.gutenprint pkgs.gutenprintBin pkgs.samsungUnifiedLinuxDriver pkgs.splix pkgs.brlaser ];
+  services.printing.drivers = [
+    pkgs.gutenprint
+    pkgs.gutenprintBin
+    pkgs.samsungUnifiedLinuxDriver
+    pkgs.splix
+    pkgs.brlaser
+  ];
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -107,11 +111,11 @@
 
   # Enable NTFS support
   boot.supportedFilesystems = [ "ntfs" ];
-  
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.user = {
     shell = pkgs.zsh;
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" "vboxusers" "plugdev" "adbusers"];
+    extraGroups = [ "wheel" "docker" "vboxusers" "plugdev" "adbusers" ];
   };
 }
