@@ -14,7 +14,6 @@
     kak-lsp
 
     vscode
-    android-studio
     jetbrains.idea-ultimate
 
     # Misc. CLI tools
@@ -42,7 +41,6 @@
     python38Packages.mypy
 
     dotnet-sdk
-    rustup
     go
     openjdk8
 

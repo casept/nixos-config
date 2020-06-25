@@ -16,11 +16,6 @@
     deluge
     syncthing-gtk
 
-    # Messengers
-    tdesktop
-    discord
-    signal-desktop
-
     # Misc
     mullvad-vpn
 
