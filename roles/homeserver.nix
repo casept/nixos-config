@@ -43,11 +43,44 @@
   networking.nat.externalInterface = "eth0"; # TODO: Get primary iface name here
   containers.media = {
     config = import ./subroles/server/media-server.nix;
+    # Mount in the wireguard key
+    bindMounts = {
+      "/root/wg-key" = {
+        hostPath = "/root/wg-key";
+        isReadOnly = true;
+      };
+    };
     autoStart = true;
     privateNetwork = true;
     hostAddress = "10.234.98.1";
     # FIXME: changing this breaks wireguard ATM
     localAddress = "10.234.98.2";
+    forwardPorts = [
+      # Transmission webUI
+      {
+        protocol = "tcp";
+        hostPort = 9091;
+        containerPort = 9091;
+      }
+      # Jellyfin webUI
+      {
+        protocol = "tcp";
+        hostPort = 8096;
+        containerPort = 8096;
+      }
+      # Jellyfin discovery
+      {
+        protocol = "udp";
+        hostPort = 1900;
+        containerPort = 1900;
+      }
+      {
+        protocol = "udp";
+        hostPort = 7359;
+        containerPort = 7359;
+      }
+    ];
+
   };
   containers.strelay = {
     config = import ./subroles/server/syncthing-relay.nix;
@@ -55,6 +88,19 @@
     privateNetwork = true;
     hostAddress = "10.234.98.1";
     localAddress = "10.234.98.3";
+    forwardPorts = [
+      # Syncthing relay proto and stats collection
+      {
+        protocol = "tcp";
+        hostPort = 22067;
+        containerPort = 22067;
+      }
+      {
+        protocol = "tcp";
+        hostPort = 22070;
+        containerPort = 22070;
+      }
+    ];
   };
   containers.zeronet = {
     config = import ./subroles/server/zeronet.nix;
@@ -62,6 +108,14 @@
     privateNetwork = true;
     hostAddress = "10.234.98.1";
     localAddress = "10.234.98.4";
+    forwardPorts = [
+      # Zeronet webUI
+      {
+        protocol = "tcp";
+        hostPort = 43110;
+        containerPort = 43110;
+      }
+    ];
   };
 
   # Enable LXD host for running other distros on
