@@ -1,6 +1,9 @@
 # The top-level config deployed on the host.
 # Services are run as NixOS containers.
 { config, pkgs, ... }: {
+  # Running this on the host is less work than in a container
+  imports = [ ./subroles/server/wireguard-server.nix ];
+
   system.stateVersion = "20.03";
 
   # Use the GRUB 2 boot loader, because systemd doesn't support legacy BIOS
