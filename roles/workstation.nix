@@ -11,14 +11,11 @@
   # Allow proprietary derivations
   nixpkgs.config.allowUnfree = true;
 
-  # Use the GRUB 2 boot loader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
-  boot.loader.grub.device = "nodev";
-  boot.loader.grub.efiSupport = true;
+  # I like systemd, fite me
+  boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot";
-  boot.loader.grub.efiInstallAsRemovable = false;
+  boot.loader.systemd-boot.configurationLimit = 50;
+  boot.loader.systemd-boot.editor = false;
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 

@@ -2,9 +2,20 @@
 # Services are run as NixOS containers.
 { config, pkgs, ... }: {
   system.stateVersion = "20.03";
+
+  # Use the GRUB 2 boot loader, because systemd doesn't support legacy BIOS
+  boot.loader.grub.enable = true;
+  boot.loader.grub.version = 2;
+  boot.loader.grub.device = "nodev";
+  boot.loader.grub.efiSupport = true;
+  boot.loader.grub.efiInstallAsRemovable = false;
+  boot.loader.grub.configurationLimit = 50;
+  boot.loader.efi.canTouchEfiVariables = true;
+
   # Prevent the drive from filling up with too many old generations
   nix.gc.automatic = true;
   nix.gc.dates = "03:15";
+
   services.openssh.enable = true;
   services.openssh.passwordAuthentication = false;
 
@@ -35,6 +46,8 @@
   };
   # We want mainline wireguard support
   boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  # TODO: Backups via restic and rclone
 
   # NixOS container config
   boot.enableContainers = true;
