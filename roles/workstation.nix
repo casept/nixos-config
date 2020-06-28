@@ -61,6 +61,7 @@
     #gnomeExtensions.gsconnect
     # Desktop backup
     (import ../pkgs/rclone-master.nix) # Stable does not support jottacloud well
+    (import ../pkgs/dislocker-master.nix) # Stable does not support new bitlocker versions
     restic
   ];
 
