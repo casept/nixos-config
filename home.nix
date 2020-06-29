@@ -1,5 +1,4 @@
-let
-  unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
+let unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
 in { config, pkgs, ... }:
 
 {
@@ -29,13 +28,26 @@ in { config, pkgs, ... }:
     enable = true;
     package = unstable.vscode;
   };
+
+  # VS live share is broken without this
+  imports = [
+    "${
+      fetchTarball "https://github.com/msteen/nixos-vsliveshare/tarball/master"
+    }/modules/vsliveshare/home.nix"
+  ];
+
+  services.vsliveshare = {
+    enable = true;
+    extensionsDir = "$HOME/.vscode/extensions";
+  };
+
   home.packages = [
     # Editors
     pkgs.neovim
     pkgs.python38Packages.pynvim # For deoplete
     pkgs.kakoune
     pkgs.kak-lsp
-    pkgs.jetbrains.idea-ultimate
+    unstable.pkgs.jetbrains.idea-ultimate
 
     # Linters and formatters
     pkgs.shellcheck
