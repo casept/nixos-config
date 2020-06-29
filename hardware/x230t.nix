@@ -17,7 +17,10 @@
   
   # Enable TLP
   services.tlp.enable = true;
-  
+
+  # Firmware updates
+  services.fwupd.enable = true;
+
   #### Input configuration ####
   # Enable wacom support.
   services.xserver.modules = [pkgs.xf86_input_wacom];
