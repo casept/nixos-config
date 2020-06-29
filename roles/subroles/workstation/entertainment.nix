@@ -1,12 +1,8 @@
 { config, pkgs, ... }:
 {
-  # Allow proprietary derivations
-  nixpkgs.config.allowUnfree = true;
-
   # Entertainment-related packages
   environment.systemPackages = with pkgs; [
     # Games
-    lutris
     multimc
     (wine.override { wineBuild = "wineWow"; })
    
