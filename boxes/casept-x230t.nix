@@ -37,4 +37,7 @@
   # TODO: Can we do this when not on bat/working?
   services.zfs.autoScrub.enable = true;
   services.zfs.trim.enable = true;
+  # Allegedly, ZFS does not like the kernel scheduler messing with it
+  # TODO: Research how to set this only for /dev/sda
+  boot.kernelParams = [ "elevator=none" ];
 }
