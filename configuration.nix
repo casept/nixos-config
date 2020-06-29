@@ -10,6 +10,10 @@
     # Include the appropriate file for the current role
     # Symlink the appropriate config to role-current.nix from roles/ for this to work!
     ./role-current.nix
+    # Include the appropriate file for current box (not hardware, this file contains stuff like FS layout config.
+    # Basically anything that is specific to a single physical machine).
+    # Symlink the appropriate config to box-current.nix from boxes/ for this to work!
+    ./box-current.nix
   ];
 
   # This value determines the NixOS release with which your system is to be
