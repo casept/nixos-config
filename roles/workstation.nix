@@ -32,12 +32,9 @@
 
   # Misc. uncategorized packages
   environment.systemPackages = with pkgs; [
-    keepassxc
     appimage-run
     #texlive.combined.scheme-full
     bleachbit
-    speedcrunch
-    gnucash
     #gnomeExtensions.gsconnect
     # Desktop backup
     (import ../pkgs/rclone-master.nix) # Stable does not support jottacloud well

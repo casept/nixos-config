@@ -9,13 +9,6 @@
     google-chrome
     firefox
 
-    # Mail
-    thunderbird
-
-    # P2P
-    deluge
-    syncthing-gtk
-
     # Misc
     mullvad-vpn
 
