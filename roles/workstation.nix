@@ -45,6 +45,7 @@
   # Set up virtualisation
   virtualisation.docker.enable = true;
   virtualisation.lxd.enable = true;
+  virtualisation.libvirtd.enable = true;
 
   # Enable zsh properly
   programs.zsh.enable = true;
