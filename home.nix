@@ -42,6 +42,10 @@ in { config, pkgs, ... }:
   };
 
   home.packages = [
+    # Browsers
+    unstable.pkgs.firefox
+    unstable.pkgs.google-chrome
+
     # Editors
     pkgs.neovim
     pkgs.python38Packages.pynvim # For deoplete
@@ -53,7 +57,7 @@ in { config, pkgs, ... }:
     pkgs.shellcheck
     pkgs.nixfmt
 
-    # Misc. tools
+    # Misc. Unix-ish tools
     pkgs.direnv
     pkgs.ripgrep
     pkgs.htop
@@ -66,6 +70,19 @@ in { config, pkgs, ... }:
     pkgs.unzip
     pkgs.binutils
     pkgs.file
+    pkgs.killall
     pkgs.git
+
+    # Reverse engineering
+    unstable.pkgs.ghidra-bin
+    pkgs.jd-gui
+    unstable.pkgs.python38Packages.binwalk-full
+
+    # Games
+    pkgs.multimc
+    pkgs.wine
+
+    # Note-taking
+    pkgs.xournalpp
   ];
 }

@@ -21,24 +21,24 @@
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
 
-  imports = [
-    ./subroles/workstation/dev.nix
-    ./subroles/workstation/ops.nix
-    ./subroles/workstation/sec.nix
-    ./subroles/workstation/touch.nix
-    ./subroles/workstation/internet.nix
-    ./subroles/workstation/entertainment.nix
-  ];
+  imports = [ ./subroles/workstation/dev.nix ./subroles/workstation/ops.nix ];
+
+  # Needed for steam and many games.
+  hardware.opengl.driSupport32Bit = true;
+  hardware.pulseaudio.support32Bit = true;
 
   # Misc. uncategorized packages
   environment.systemPackages = with pkgs; [
+    mullvad-vpn
+
     appimage-run
     #texlive.combined.scheme-full
     bleachbit
     #gnomeExtensions.gsconnect
     # Desktop backup
     (import ../pkgs/rclone-master.nix) # Stable does not support jottacloud well
-    (import ../pkgs/dislocker-master.nix) # Stable does not support new bitlocker versions
+    (import
+      ../pkgs/dislocker-master.nix) # Stable does not support new bitlocker versions
     restic
   ];
 
