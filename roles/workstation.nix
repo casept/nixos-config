@@ -2,12 +2,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, builtins, ... }: {
+let unstable = import <nixos-unstable> { };
+in { config, pkgs, builtins, ... }: {
 
   services.openssh.enable = true;
   services.openssh.forwardX11 = true;
   services.openssh.passwordAuthentication = false;
-
   # Allow proprietary derivations
   nixpkgs.config.allowUnfree = true;
 
@@ -21,18 +21,27 @@
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
 
-  imports = [ ./subroles/workstation/dev.nix ./subroles/workstation/ops.nix ];
+  imports = [
+    ./subroles/workstation/dev.nix
+    ./subroles/workstation/ops.nix
+    ../services/mullvad.nix
+  ];
 
   # Needed for steam and many games.
   hardware.opengl.driSupport32Bit = true;
   hardware.pulseaudio.support32Bit = true;
 
+  # Override select packages to use the unstable channel
+  nixpkgs.config.packageOverrides = pkgs: {
+    # Old versions are potentially insecure
+    mullvad-vpn = unstable.mullvad-vpn;
+  };
+
   # Misc. uncategorized packages
   environment.systemPackages = with pkgs; [
-    mullvad-vpn
-
+    unstable.pkgs.mullvad-vpn
+    openconnect
     appimage-run
-    #texlive.combined.scheme-full
     bleachbit
     #gnomeExtensions.gsconnect
     # Desktop backup
