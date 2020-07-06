@@ -81,8 +81,11 @@ in { config, pkgs, ... }:
     # Games
     pkgs.multimc
     pkgs.wine
+    pkgs.steam-run-native
 
     # Note-taking
     pkgs.xournalpp
+    pkgs.simple-scan
+    pkgs.texlive.combined.scheme-full
   ];
 }
