@@ -43,12 +43,12 @@ in { config, pkgs, builtins, ... }: {
     openconnect
     appimage-run
     bleachbit
-    #gnomeExtensions.gsconnect
     # Desktop backup
     (import ../pkgs/rclone-master.nix) # Stable does not support jottacloud well
     (import
       ../pkgs/dislocker-master.nix) # Stable does not support new bitlocker versions
     restic
+    virt-manager
   ];
 
   # Set up virtualisation
@@ -78,6 +78,16 @@ in { config, pkgs, builtins, ... }: {
     pkgs.brlaser
   ];
 
+  # Enable SANE.
+  hardware.sane.enable = true;
+  hardware.sane.brscan4.enable = true;
+  hardware.sane.brscan4.netDevices = {
+    e514dw = {
+      ip = "192.168.0.105";
+      model = "MFC-L2700DW"; # Dunno why this model, but it works
+    };
+  };
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   services.xserver.layout = "eu";
@@ -99,6 +109,6 @@ in { config, pkgs, builtins, ... }: {
   users.users.user = {
     shell = pkgs.zsh;
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" "plugdev" "adbusers" ];
+    extraGroups = [ "wheel" "docker" "plugdev" "adbusers" "lp" "scanner" ];
   };
 }
