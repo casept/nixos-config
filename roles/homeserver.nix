@@ -6,24 +6,12 @@
 
   system.stateVersion = "20.03";
 
-  # Use the GRUB 2 boot loader, because systemd doesn't support legacy BIOS
-  boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
-  boot.loader.grub.device = "nodev";
-  boot.loader.grub.efiSupport = true;
-  boot.loader.grub.efiInstallAsRemovable = false;
-  boot.loader.grub.configurationLimit = 50;
-  boot.loader.efi.canTouchEfiVariables = true;
-
   # Prevent the drive from filling up with too many old generations
   nix.gc.automatic = true;
   nix.gc.dates = "03:15";
 
   services.openssh.enable = true;
   services.openssh.passwordAuthentication = false;
-
-  # As you can see here, I like to use old laptops as home servers.
-  services.logind.lidSwitch = "ignore";
 
   # Admin user
   programs.zsh.enable = true;
@@ -40,13 +28,6 @@
     ];
   };
 
-  # These options are only relevant for testing the setup in a VM.
-  virtualisation.memorySize = "4096M";
-  virtualisation.cores = 2;
-  nixos-shell.mounts = {
-    mountHome = false;
-    mountNixProfile = false;
-  };
   # We want mainline wireguard support
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
