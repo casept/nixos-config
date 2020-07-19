@@ -78,6 +78,9 @@ in { config, pkgs, ... }:
     pkgs.jd-gui
     unstable.pkgs.python38Packages.binwalk-full
 
+    # Nix-specific tools
+    pkgs.appimage-run
+
     # Games
     pkgs.multimc
     pkgs.wine

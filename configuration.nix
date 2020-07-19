@@ -21,16 +21,4 @@
   # servers. You should change this only after NixOS release notes say you
   # should.
   system.stateVersion = "20.03"; # Did you read the comment?
-
-  nixpkgs.overlays = [
-    (self: super: {
-      # Do not run some shitty, flaky tests
-      python3 = super.python3.override {
-        packageOverrides = python-self: python-super: {
-          pycurl = python-super.pycurl.overrideAttrs
-            (oldAttrs: { doInstallCheck = false; });
-        };
-      };
-    })
-  ];
 }

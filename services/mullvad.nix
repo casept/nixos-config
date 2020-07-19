@@ -1,10 +1,6 @@
-# Basically a verbatim copy of the in-tree service, except that we use mullvad from unstable.
-# TODO: Figure out how to do this in a nicer way with overrides or so
+# This seems to not yet be in stable, which is why it's copied here.
 let unstable = import <nixos-unstable> { };
-
-in { config, lib, pkgs, ... }:
-let cfg = config.services.mullvad-vpn;
-in with lib; {
+in { config, lib, pkgs, ... }: {
   config = {
     boot.kernelModules = [ "tun" ];
 

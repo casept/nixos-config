@@ -1,6 +1,7 @@
 { config, pkgs, ... }: {
-  # Allow proprietary derivations
-  nixpkgs.config.allowUnfree = true;
+  # Set up virtualisation
+  virtualisation.lxd.enable = true;
+  virtualisation.libvirtd.enable = true;
 
   # Podman config in nixOS <= 20.03 is a bit tricky
   environment.systemPackages = with pkgs; [
