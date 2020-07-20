@@ -35,9 +35,13 @@
   boot.zfs.requestEncryptionCredentials = true;
   # ZFS services
   services.zfs.autoSnapshot.enable = true;
-  # TODO: Can we do this when not on bat/working?
+  # ZFS scrubbing, but only on AC power
   services.zfs.autoScrub.enable = true;
+  systemd.services.zfs-scrub.unitConfig.ConditionACPower = true;
+  # ZFS trim, but also only on AC
   services.zfs.trim.enable = true;
+  systemd.services.zpool-trim.unitConfig.ConditionACPower = true;
+
   # Allegedly, ZFS does not like the kernel scheduler messing with it
   # TODO: Research how to set this only for /dev/sda
   boot.kernelParams = [ "elevator=none" ];
