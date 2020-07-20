@@ -12,25 +12,26 @@
   networking.hostName = "casept-x230t";
   networking.hostId = "8a629679";
 
+  fileSystems."/" = {
+    device = "rpool/root/nixos";
+    fsType = "zfs";
+  };
 
-  fileSystems."/" =
-    { device = "rpool/root/nixos";
-      fsType = "zfs";
-    };
+  fileSystems."/home" = {
+    device = "rpool/home";
+    fsType = "zfs";
+  };
 
-  fileSystems."/home" =
-    { device = "rpool/home";
-      fsType = "zfs";
-    };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/541E-6256";
+    fsType = "vfat";
+  };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/541E-6256";
-      fsType = "vfat";
-    };
-
+  # Needed so that nixos-hardware enables CPU microcode updates
+  hardware.enableRedistributableFirmware = true;
 
   # Add ZFS support
-  boot.supportedFilesystems = ["zfs"];
+  boot.supportedFilesystems = [ "zfs" ];
   boot.zfs.requestEncryptionCredentials = true;
   # ZFS services
   services.zfs.autoSnapshot.enable = true;
