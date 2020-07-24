@@ -56,4 +56,10 @@
     "mips-linux"
     "mipsel-linux"
   ];
+
+  # Debugging the network
+  programs.wireshark.enable = true;
+  programs.wireshark.package = pkgs.wireshark-qt;
+  services.geoip-updater.enable = true;
+  users.users.user.extraGroups = [ "wireshark" ];
 }
