@@ -71,6 +71,7 @@ in { config, pkgs, ... }:
     pkgs.binutils
     pkgs.file
     pkgs.killall
+    pkgs.xorg.xkill
     pkgs.git
 
     # Reverse engineering
@@ -80,6 +81,8 @@ in { config, pkgs, ... }:
 
     # Nix-specific tools
     pkgs.appimage-run
+    pkgs.nix-index
+    pkgs.patchelf
 
     # Games
     pkgs.multimc
@@ -90,5 +93,9 @@ in { config, pkgs, ... }:
     pkgs.xournalpp
     pkgs.simple-scan
     pkgs.texlive.combined.scheme-full
+
+    # Network diagnostics
+    pkgs.nmap
+    pkgs.inetutils
   ];
 }
