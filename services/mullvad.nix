@@ -3,6 +3,8 @@ let unstable = import <nixos-unstable> { };
 in { config, lib, pkgs, ... }: {
   config = {
     boot.kernelModules = [ "tun" ];
+    # Required until a nixpkgs PR is merged
+    networking.iproute2.enable = true;
 
     systemd.services.mullvad-daemon = {
       description = "Mullvad VPN daemon";

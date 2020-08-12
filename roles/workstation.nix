@@ -103,4 +103,6 @@ in { config, pkgs, builtins, ... }: {
   # I'm the only user and desktop Linux security is a mess, so this isn't really a problem
   nix.trustedUsers = [ "root" "user" ];
 
+  # Way too annoying to manage on a desktop system IMHO
+  networking.firewall.enable = false;
 }
