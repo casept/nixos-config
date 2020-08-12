@@ -2,6 +2,8 @@ let unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
 in { config, pkgs, ... }:
 
 {
+  imports = [ "/etc/nixos/home/gnome.nix" "/etc/nixos/home/vscode.nix" ];
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
@@ -22,24 +24,6 @@ in { config, pkgs, ... }:
 
   # Enable lorri
   services.lorri.enable = true;
-
-  # Enable vscode
-  programs.vscode = {
-    enable = true;
-    package = unstable.vscode;
-  };
-
-  # VS live share is broken without this
-  imports = [
-    "${
-      fetchTarball "https://github.com/msteen/nixos-vsliveshare/tarball/master"
-    }/modules/vsliveshare/home.nix"
-  ];
-
-  services.vsliveshare = {
-    enable = true;
-    extensionsDir = "$HOME/.vscode/extensions";
-  };
 
   home.packages = [
     # Browsers

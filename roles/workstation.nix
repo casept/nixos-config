@@ -74,16 +74,18 @@ in { config, pkgs, builtins, ... }: {
     };
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.layout = "eu";
-
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager = {
-    gdm.enable = true;
-    gdm.wayland = true;
+  # GNOME config
+  services.xserver = {
+    enable = true;
+    layout = "eu";
+    displayManager = {
+      gdm.enable = true;
+      gdm.wayland = true;
+    };
+    desktopManager.gnome3.enable = true;
   };
-  services.xserver.desktopManager.gnome3.enable = true;
+  services.dbus.packages = [ pkgs.gnome3.dconf ];
+  services.udev.packages = [ pkgs.gnome3.gnome-settings-daemon ];
 
   # Enable flatpak support
   services.flatpak.enable = true;
