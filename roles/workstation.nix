@@ -30,7 +30,7 @@ in { config, pkgs, builtins, ... }: {
     openconnect
     bleachbit
     # Desktop backup
-    (import ../pkgs/rclone-master.nix) # Stable does not support jottacloud well
+    unstable.pkgs.rclone
     (import
       ../pkgs/dislocker-master.nix) # Stable does not support new bitlocker versions
     restic
