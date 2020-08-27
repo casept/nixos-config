@@ -1,8 +1,7 @@
 # The version in nixpkgs is the latest release, but it's not compatible with new bitlocker features.
 
-with import <nixpkgs> { };
-
-stdenv.mkDerivation rec {
+{ stdenv, fetchFromGitHub, cmake, fuse, mbedtls }:
+stdenv.mkDerivation {
   pname = "dislocker-master";
   version = "master";
 

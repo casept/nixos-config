@@ -1,6 +1,6 @@
-# { stdenv, lib, fetchFromGitHub, glib }:
-with import <nixpkgs> { };
-stdenv.mkDerivation rec {
+{ stdenv, lib, fetchFromGitHub, glib, gnome3 }:
+let uuid = "wintile@nowsci.com";
+in stdenv.mkDerivation {
   pname = "gnome-shell-extension-wintile";
   version = "v5";
 
@@ -25,8 +25,6 @@ stdenv.mkDerivation rec {
     cp -r * $out/share/gnome-shell/extensions/${uuid}/
     runHook postInstall
   '';
-
-  uuid = "wintile@nowsci.com";
 
   meta = with stdenv.lib; {
     description = "Windows 10 window tiling for GNOME";

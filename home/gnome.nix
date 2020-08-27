@@ -2,7 +2,7 @@
   home.packages = [
     pkgs.gnomeExtensions.gsconnect
     pkgs.gnomeExtensions.caffeine
-    (import /etc/nixos/pkgs/wintile.nix)
+    (pkgs.callPackage /etc/nixos/pkgs/wintile { })
   ];
 
   dconf = {

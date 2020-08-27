@@ -31,8 +31,8 @@ in { config, pkgs, builtins, ... }: {
     bleachbit
     # Desktop backup
     unstable.pkgs.rclone
-    (import
-      ../pkgs/dislocker-master.nix) # Stable does not support new bitlocker versions
+    # Stable does not support new bitlocker versions
+    (callPackage ../pkgs/dislocker-master { })
     restic
     virt-manager
   ];
