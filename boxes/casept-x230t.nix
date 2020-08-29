@@ -14,28 +14,28 @@
 
   # See https://grahamc.com/blog/erase-your-darlings for rationale behind this setup
 
-  # Wiped on every boot
+  # / is wiped on every boot to keep unmanaged state under control
   fileSystems."/" = {
-    device = "rpool/root/wipedonboot";
+    device = "rpool/expendable/wipedonboot";
     fsType = "zfs";
   };
   boot.initrd.postDeviceCommands = lib.mkAfter ''
-    zfs rollback -r rpool/root/wipedonboot@blank
+    zfs rollback -r rpool/expendable/wipedonboot@blank
   '';
 
   fileSystems."/nix" = {
-    device = "rpool/root/nixos";
+    device = "rpool/expendable/nix";
     fsType = "zfs";
   };
 
-  # Only place outside /home and /nix that persists state 
+  # This is where precious system state outside /home is stored
   fileSystems."/persist" = {
-    device = "rpool/root/systempersist";
+    device = "rpool/precious/systempersist";
     fsType = "zfs";
   };
 
   fileSystems."/home" = {
-    device = "rpool/home";
+    device = "rpool/precious/home";
     fsType = "zfs";
   };
 
@@ -44,40 +44,40 @@
     fsType = "vfat";
   };
 
-  # Redirect NetworkManager state
+  # Remember connected networks and their creds
   environment.etc."NetworkManager/system-connections" = {
     source = "/persist/etc/NetworkManager/system-connections/";
   };
 
-  # Redirect Mullvad credentials and config
+  # Remember Mullvad credentials and config
   environment.etc."mullvad-vpn" = { source = "/persist/etc/mullvad-vpn/"; };
 
-  # Redirect the actual NixOS config directory
+  # Remember NixOS configuration
   environment.etc."nixos" = { source = "/persist/etc/nixos/"; };
 
-  # Redirect user credentials
+  # Remember user credentials
   environment.etc."shadow" = { source = "/persist/etc/shadow"; };
   environment.etc."shadow-" = { source = "/persist/etc/shadow-"; };
 
   # For services where state location can't be changed in the config, we use symlinks
   systemd.tmpfiles.rules = [
-    # Redirect Bluetooth pairings
+    # Remember Bluetooth pairings
     "L /var/lib/bluetooth - - - - /persist/var/lib/bluetooth"
-    # Redirect upower histograms for battery life prediction
+    # Remember upower histograms for battery life prediction
     "L /var/lib/upower - - - - /persist/var/lib/upower"
-    # Redirect LXD container info
+    # Remember LXD containers
     "L /var/lib/lxd - - - - /persist/var/lib/lxd"
-    # Redirect docker container info
+    # Remember docker containers
     "L /var/lib/docker - - - - /persist/var/lib/docker"
-    # Redirect libvirt VM info and storage
+    # Remember libvirt VMs
     "L /var/lib/libvirt - - - - /persist/var/lib/libvirt"
-    # Redirect account info service
-    "L /var/lib/AccountsService - - - - /persist/var/lib/AccountsService"
-    # Redirect the actual NixOS config directory
-    "L /var/lib/AccountsService - - - - /persist/var/lib/AccountsService"
+    # Remember root's home (needed to keep system channels)
+    "L /root - - - - /persist/root"
+    # Remember users who completed the sudo lecture so it doesn't repeat after every boot
+    "L /var/db/sudo/lectured - - - - /persist/var/db/sudo/lectured"
   ];
 
-  # Redirect SSH host keys
+  # Remember SSH host keys
   services.openssh = {
     hostKeys = [
       {
