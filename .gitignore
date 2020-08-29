@@ -2,3 +2,5 @@
 nixos.qcow2
 # Secrets
 wg-key
+# Editor junk
+.vscode/
