@@ -99,6 +99,11 @@
       }
     ];
   };
+  containers.torbridge = {
+    config = import ./subroles/server/tor-bridge.nix;
+    autoStart = true;
+    privateNetwork = false;
+  };
   containers.zeronet = {
     config = import ./subroles/server/zeronet.nix;
     autoStart = true;
@@ -114,6 +119,32 @@
       }
     ];
   };
+  containers.gitea = {
+    config = import ./subroles/server/gitea.nix;
+    autoStart = true;
+    privateNetwork = true;
+    hostAddress = "10.234.98.1";
+    localAddress = "10.234.98.5";
+    forwardPorts = [{
+      protocol = "tcp";
+      hostPort = 80;
+      containerPort = 80;
+    }];
+  };
+  containers.nextcloud = {
+    config = import ./subroles/server/nextcloud.nix;
+    autoStart = true;
+    privateNetwork = true;
+    hostAddress = "10.234.98.1";
+    localAddress = "10.234.98.6";
+    forwardPorts = [{
+      protocol = "tcp";
+      hostPort = 80;
+      containerPort = 80;
+    }];
+  };
+
+  # TODO: Configure Nginx as reverse proxy for TLS
 
   # Enable LXD host for running other distros on
   virtualisation.lxc.lxcfs.enable = true;
