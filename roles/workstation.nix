@@ -33,7 +33,7 @@ in { config, pkgs, builtins, ... }: {
     unstable.pkgs.rclone
     # Stable does not support new bitlocker versions
     (callPackage ../pkgs/dislocker-master { })
-    restic
+    unstable.pkgs.restic
     virt-manager
   ];
 
