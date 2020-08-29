@@ -56,10 +56,12 @@
     "mips-linux"
     "mipsel-linux"
   ];
-
+  # Arion doesn't support podman yet
+  virtualisation.docker.enable = true;
   # Debugging the network
   programs.wireshark.enable = true;
   programs.wireshark.package = pkgs.wireshark-qt;
   services.geoip-updater.enable = true;
-  users.users.user.extraGroups = [ "wireshark" ];
+
+  users.users.user.extraGroups = [ "wireshark" "docker" ];
 }
