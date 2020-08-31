@@ -1,4 +1,11 @@
-let unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
+let
+  unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
+  comma = import (builtins.fetchGit {
+    name = "comma";
+    url = "https://github.com/Shopify/comma";
+    ref = "refs/heads/master";
+    rev = "4a62ec17e20ce0e738a8e5126b4298a73903b468";
+  });
 in { config, pkgs, ... }:
 
 {
@@ -29,6 +36,7 @@ in { config, pkgs, ... }:
     # Browsers
     unstable.pkgs.firefox
     unstable.pkgs.google-chrome
+    pkgs.filezilla
 
     # Editors
     pkgs.neovim
@@ -67,6 +75,8 @@ in { config, pkgs, ... }:
     pkgs.appimage-run
     pkgs.nix-index
     pkgs.patchelf
+    unstable.pkgs.cachix
+    (pkgs.callPackage comma { })
 
     # Games
     pkgs.multimc
