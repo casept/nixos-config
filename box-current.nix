@@ -1,1 +1,0 @@
-boxes/casept-x230t.nix

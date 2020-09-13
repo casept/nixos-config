@@ -1,1 +1,1 @@
-roles/workstation.nix
+roles/homeserver.nix

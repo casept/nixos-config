@@ -1,1 +1,0 @@
-hardware/x230t.nix
