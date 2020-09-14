@@ -46,6 +46,13 @@
     fsType = "ext4";
   };
 
+  # ZFS storage for various kinds of mass media
+  fileSystems."/tank/torrents" = {
+    device = "tank/torrents";
+    fsType = "zfs";
+  };
+
+
   # Remember connected networks and their creds
   # TODO: Replace w/ server solution
   environment.etc."NetworkManager/system-connections" = {
