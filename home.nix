@@ -65,6 +65,7 @@ in { config, pkgs, ... }:
     pkgs.killall
     pkgs.xorg.xkill
     pkgs.git
+    pkgs.sshfs
 
     # Reverse engineering
     unstable.pkgs.ghidra-bin
