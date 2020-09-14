@@ -68,7 +68,10 @@
   environment.etc."shadow" = { source = "/persist/etc/shadow"; };
   environment.etc."shadow-" = { source = "/persist/etc/shadow-"; };
 
-  # For services where state location can't be changed in the config, we use symlinks
+  # Remember ddclient secrets
+  environment.etc."ddclient.conf" = { source = "/persist/etc/ddclient.conf"; };
+
+# For services where state location can't be changed in the config, we use symlinks
   systemd.tmpfiles.rules = [
     # Remember LXD containers
     "L /var/lib/lxd - - - - /persist/var/lib/lxd"
