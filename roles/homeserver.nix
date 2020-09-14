@@ -147,6 +147,18 @@
       containerPort = 80;
     }];
   };
+  containers.ddclient = {
+    config = import ./subroles/server/ddclient.nix;
+    autoStart = true;
+    privateNetwork = false;
+    # Mount in the ddclient config file only containing the secret password
+    bindMounts = {
+      "/etc/ddclient.conf" = {
+        hostPath = "/etc/ddclient.conf";
+        isReadOnly = true;
+      };
+    };
+  };
 
   # TODO: Configure Nginx as reverse proxy for TLS
 
