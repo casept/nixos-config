@@ -77,6 +77,7 @@ in { config, pkgs, ... }:
     pkgs.nix-index
     pkgs.patchelf
     unstable.pkgs.cachix
+    unstable.pkgs.nix-tree
     (pkgs.callPackage comma { })
 
     # Games
@@ -92,5 +93,11 @@ in { config, pkgs, ... }:
     # Network diagnostics
     pkgs.nmap
     pkgs.inetutils
+
+    # Media playback
+    pkgs.rhythmbox
+
+    # Misc
+    unstable.pkgs.vagrant
   ];
 }
