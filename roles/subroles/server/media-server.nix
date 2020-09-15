@@ -5,7 +5,7 @@ let
   jellyfin_client_discovery_port = 7359;
   transmission_rpc_port = 9091;
   # Must be forwarded by your VPN provider
-  transmission_peer_port = 11803;
+  transmission_peer_port = 16651;
   # User that all this stuff runs under
   media_user = "media";
   media_group = "media";
@@ -19,7 +19,7 @@ in {
     # This is a configuration for the Latvian Mullvad server.
     wg0 = {
       # Determines the IP address and subnet of the client's end of the tunnel interface.
-      ips = [ "10.67.94.197/32" "fc00:bbbb:bbbb:bb01::4:5ec4/128" ];
+      ips = [ "10.67.123.231/32" "fc00:bbbb:bbbb:bb01::4:7be6/128" ];
 
       # Path to the private key file.
       #
@@ -80,7 +80,7 @@ in {
           ];
 
           # Set this to the server IP and port.
-          endpoint = "31.170.22.15:51820";
+          endpoint = "193.27.14.146:51820";
 
           # Send keepalives every 25 seconds. Important to keep NAT tables alive.
           persistentKeepalive = 25;
