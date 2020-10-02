@@ -66,6 +66,7 @@ in { config, pkgs, ... }:
     pkgs.xorg.xkill
     pkgs.git
     pkgs.sshfs
+    pkgs.pv
 
     # Reverse engineering
     unstable.pkgs.ghidra-bin
@@ -82,8 +83,10 @@ in { config, pkgs, ... }:
 
     # Games
     pkgs.multimc
-    pkgs.wine
+    unstable.pkgs.wine
+    (pkgs.lowPrio unstable.pkgs.wineWowPackages.full)
     pkgs.steam-run-native
+    unstable.pkgs.lutris
 
     # Note-taking
     pkgs.xournalpp
