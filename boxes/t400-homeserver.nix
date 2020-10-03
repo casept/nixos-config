@@ -83,6 +83,8 @@
     "L /root - - - - /persist/root"
     # Remember users who completed the sudo lecture so it doesn't repeat after every boot
     "L /var/db/sudo/lectured - - - - /persist/var/db/sudo/lectured"
+    # Remember private key and other data for tor SSH hidden service
+    "L /var/lib/torssh - - - - /persist/var/lib/torssh"
   ];
 
   # Remember SSH host keys

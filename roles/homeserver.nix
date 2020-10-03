@@ -108,6 +108,35 @@
     autoStart = true;
     privateNetwork = false;
   };
+
+  # Create an SSH hidden service in order to enable login in case dynamic DNS fails
+  containers.torssh = {
+    config = {
+      system.stateVersion = "20.03";
+      services.tor.enable = true;
+      services.tor.hiddenServices = {
+        ssh = {
+          name = "ssh";
+          version = 3;
+          map = [{
+            port = "22";
+            toHost = "localhost";
+            toPort = "22";
+          }];
+        };
+      };
+    };
+      bindMounts = {
+        "/var/lib/tor" = {
+          hostPath = "/var/lib/torssh";
+          isReadOnly = false;
+        };
+    };
+    autoStart = true;
+    privateNetwork = false;
+    ephemeral = true;
+  };
+
   containers.zeronet = {
     config = import ./subroles/server/zeronet.nix;
     autoStart = true;
