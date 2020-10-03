@@ -10,9 +10,18 @@
   nix.gc.automatic = true;
   nix.gc.dates = "03:15";
 
+  # This server is not exactly "production", and I'd rather not get pwned
+  system.autoUpgrade.enable = true;
+  # The system won't come up without manual intervention due to having to manually enter decryption passwords
+  system.autoUpgrade.allowReboot = false;
+
   services.openssh.enable = true;
   services.openssh.passwordAuthentication = false;
 
+  # Passwordless sudo
+  security.sudo.extraConfig = ''
+    %wheel         ALL = (ALL) NOPASSWD: ALL
+  '';
   # TODO: Remove
   environment.systemPackages = [ pkgs.git ];
 
