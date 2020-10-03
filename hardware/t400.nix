@@ -10,7 +10,9 @@
   ];
 
   boot.initrd.availableKernelModules =
-    [ "xhci_pci" "ehci_pci" "ahci" "sd_mod" "sdhci_pci" ];
+    [ "xhci_pci" "ehci_pci" "ahci" "sd_mod" "sdhci_pci" "e1000" "usb-storage" ];
+
+  # Ethernet driver is needed to allow unlocking root from initramfs over SSH
   boot.initrd.kernelModules = [ "dm-snapshot" "e1000" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
