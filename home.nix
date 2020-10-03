@@ -9,7 +9,11 @@ let
 in { config, pkgs, ... }:
 
 {
-  imports = [ "/etc/nixos/home/gnome.nix" "/etc/nixos/home/vscode.nix" ];
+  imports = [
+    "/etc/nixos/home/gnome.nix"
+    "/etc/nixos/home/vscode.nix"
+    "/etc/nixos/home/neovim.nix"
+  ];
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -39,8 +43,6 @@ in { config, pkgs, ... }:
     pkgs.filezilla
 
     # Editors
-    pkgs.neovim
-    pkgs.python38Packages.pynvim # For deoplete
     pkgs.kakoune
     pkgs.kak-lsp
     unstable.pkgs.jetbrains.idea-ultimate
