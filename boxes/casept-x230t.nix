@@ -1,4 +1,5 @@
-{ config, pkgs, lib, environment, ... }: {
+let unstable = import <nixos-unstable> { };
+in { config, pkgs, lib, environment, ... }: {
   # I like systemd, fite me
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -63,8 +64,9 @@
   systemd.tmpfiles.rules = [
     # Remember Bluetooth pairings
     "L /var/lib/bluetooth - - - - /persist/var/lib/bluetooth"
+    # TODO: Upower doesn't seem to like the symlink, reenable once I figure out a fix
     # Remember upower histograms for battery life prediction
-    "L /var/lib/upower - - - - /persist/var/lib/upower"
+    # "L /var/lib/upower - - - - /persist/var/lib/upower"
     # Remember LXD containers
     "L /var/lib/lxd - - - - /persist/var/lib/lxd"
     # Remember docker containers
@@ -110,4 +112,6 @@
   # Allegedly, ZFS does not like the kernel scheduler messing with it
   # TODO: Research how to set this only for /dev/sda
   boot.kernelParams = [ "elevator=none" ];
+
+  boot.kernelPackages = unstable.pkgs.linuxPackages_latest;
 }
