@@ -54,6 +54,8 @@ in { config, pkgs, ... }:
     # Misc. Unix-ish tools
     pkgs.direnv
     pkgs.ripgrep
+    pkgs.fzf
+    pkgs.gnupg
     pkgs.htop
     pkgs.stow
     pkgs.tmux
