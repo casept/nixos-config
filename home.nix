@@ -6,11 +6,12 @@ let
     ref = "refs/heads/master";
     rev = "4a62ec17e20ce0e738a8e5126b4298a73903b468";
   });
-in { config, pkgs, ... }:
+in { config, pkgs, home, ... }:
 
 {
   imports = [
     "/etc/nixos/home/gnome.nix"
+    "/etc/nixos/home/sway.nix"
     "/etc/nixos/home/vscode.nix"
     "/etc/nixos/home/neovim.nix"
   ];

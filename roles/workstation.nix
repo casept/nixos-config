@@ -35,6 +35,8 @@ in { config, pkgs, builtins, ... }: {
     (callPackage ../pkgs/dislocker-master { })
     unstable.pkgs.restic
     virt-manager
+    # Required for proper QT sway support
+    qt5.qtwayland
   ];
 
   # Enable zsh properly
@@ -87,6 +89,22 @@ in { config, pkgs, builtins, ... }: {
   services.dbus.packages = [ pkgs.gnome3.dconf ];
   services.udev.packages = [ pkgs.gnome3.gnome-settings-daemon ];
 
+  # Sway config
+  programs.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true;
+    extraSessionCommands = ''
+      export SDL_VIDEODRIVER=wayland
+      # needs qt5.qtwayland in systemPackages
+      export QT_QPA_PLATFORM=wayland
+      export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+      # Fix for some Java AWT applications (e.g. Android Studio),
+      # use this if they aren't displayed properly:
+      export _JAVA_AWT_WM_NONREPARENTING=1
+    '';
+  };
+  # TODO: Pull from stable once 20.09 is released
+  xdg.portal.extraPortals = [ unstable.pkgs.xdg-desktop-portal-wlr ];
   # Enable flatpak support
   services.flatpak.enable = true;
 
