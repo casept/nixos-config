@@ -34,8 +34,9 @@ in { config, pkgs, home, ... }:
   # changes in each release.
   home.stateVersion = "20.09";
 
-  # Enable lorri
   services.lorri.enable = true;
+  services.syncthing.enable = true;
+  services.syncthing.tray = true;
 
   home.packages = [
     # Browsers
