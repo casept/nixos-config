@@ -1,17 +1,22 @@
 let
   unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
   comma = import (builtins.fetchGit {
-    name = "comma";
+    #name = "comma";
     url = "https://github.com/Shopify/comma";
     ref = "refs/heads/master";
     rev = "4a62ec17e20ce0e738a8e5126b4298a73903b468";
   });
-in { config, pkgs, home, ... }:
+in { config, pkgs, home, programs, ... }:
 
 {
   imports = [
     "/etc/nixos/home/gnome.nix"
-    "/etc/nixos/home/sway.nix"
+    (import "/etc/nixos/home/sway.nix" {
+      inherit pkgs;
+      inherit home;
+      inherit programs;
+      gammastep = unstable.pkgs.gammastep;
+    })
     "/etc/nixos/home/vscode.nix"
     "/etc/nixos/home/neovim.nix"
   ];
