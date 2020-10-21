@@ -1,5 +1,8 @@
-let unstable = import <nixos-unstable> { };
-in { config, pkgs, lib, environment, ... }: {
+{ pkgs, lib, nixpkgs, nixpkgs-unstable, nixos-hardware, home-manager, comma
+, nixos-vsliveshare, ... }: {
+
+  imports = [ ../roles/workstation.nix ../hardware/x230t.nix ];
+
   # I like systemd, fite me
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -112,6 +115,4 @@ in { config, pkgs, lib, environment, ... }: {
   # Allegedly, ZFS does not like the kernel scheduler messing with it
   # TODO: Research how to set this only for /dev/sda
   boot.kernelParams = [ "elevator=none" ];
-
-  boot.kernelPackages = unstable.pkgs.linuxPackages_latest;
 }

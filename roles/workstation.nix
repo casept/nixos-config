@@ -1,25 +1,18 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
-let unstable = import <nixos-unstable> { };
-
-in { config, pkgs, builtins, ... }: {
-
+{ pkgs, hardware, home-manager, comma, nixos-vsliveshare, nixpkgs
+, nixpkgs-unstable, ... }: {
   services.openssh.enable = true;
   services.openssh.forwardX11 = true;
   services.openssh.passwordAuthentication = false;
-  # Allow proprietary derivations
-  nixpkgs.config.allowUnfree = true;
 
-  # Set your time zone.
   time.timeZone = "Europe/Berlin";
 
   imports = [
     ./subroles/workstation/dev.nix
     ./subroles/workstation/ops.nix
-    ./subroles/workstation/mullvad.nix
+    ../services/mullvad.nix
   ];
+
+  systemd.services.mullvad-daemon.enable = true;
 
   # Needed for steam and many games.
   hardware.opengl.driSupport32Bit = true;
@@ -30,13 +23,15 @@ in { config, pkgs, builtins, ... }: {
     openconnect
     bleachbit
     # Desktop backup
-    unstable.pkgs.rclone
+    pkgs.unstable.rclone
     # Stable does not support new bitlocker versions
     (callPackage ../pkgs/dislocker-master { })
-    unstable.pkgs.restic
+    pkgs.unstable.restic
     virt-manager
     # Required for proper QT sway support
     qt5.qtwayland
+    # The service doesn't put the client into PATH
+    pkgs.unstable.mullvad-vpn
   ];
 
   # Enable zsh properly
@@ -50,20 +45,20 @@ in { config, pkgs, builtins, ... }: {
     enableSSHSupport = true;
   };
 
-  # Enable CUPS to print documents.
+  #Enable CUPS to print documents.
   services.printing.enable = true;
-  services.printing.drivers = [
-    pkgs.gutenprint
-    pkgs.gutenprintBin
-    pkgs.hplipWithPlugin
-    pkgs.samsungUnifiedLinuxDriver
-    pkgs.splix
-    pkgs.brlaser
-    pkgs.brgenml1lpr
-    pkgs.brgenml1cupswrapper
-    pkgs.cups-dymo
-    pkgs.mfcl2700dncupswrapper
-    pkgs.mfcl2700dnlpr
+  services.printing.drivers = with pkgs; [
+    gutenprint
+    gutenprintBin
+    hplipWithPlugin
+    samsungUnifiedLinuxDriver
+    splix
+    brlaser
+    brgenml1lpr
+    brgenml1cupswrapper
+    cups-dymo
+    mfcl2700dncupswrapper
+    mfcl2700dnlpr
   ];
 
   # Enable SANE.
@@ -104,7 +99,8 @@ in { config, pkgs, builtins, ... }: {
     '';
   };
   # TODO: Pull from stable once 20.09 is released
-  xdg.portal.extraPortals = [ unstable.pkgs.xdg-desktop-portal-wlr ];
+  xdg.portal.extraPortals = [ pkgs.unstable.xdg-desktop-portal-wlr ];
+
   # Enable flatpak support
   services.flatpak.enable = true;
 
@@ -112,11 +108,16 @@ in { config, pkgs, builtins, ... }: {
   boot.supportedFilesystems = [ "ntfs" ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
+
   users.users.user = {
     shell = pkgs.zsh;
     isNormalUser = true;
     extraGroups = [ "wheel" "docker" "plugdev" "adbusers" "lp" "scanner" ];
   };
+  # FIXME: Call home-manager from here so it's guaranteed to have the same flake versions as system
+  #home-manager.users.user = (import ../home.nix {
+  #  inherit nixpkgs nixpkgs-unstable comma nixos-vsliveshare;
+  #});
 
   # I'm the only user and desktop Linux security is a mess, so this isn't really a problem
   nix.trustedUsers = [ "root" "user" ];

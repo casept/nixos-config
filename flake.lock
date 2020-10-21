@@ -1,0 +1,149 @@
+{
+  "nodes": {
+    "comma": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1588170489,
+        "narHash": "sha256-IT7zlcM1Oh4sWeCJ1m4NkteuajPxTnNo1tbitG0eqlg=",
+        "owner": "Shopify",
+        "repo": "comma",
+        "rev": "4a62ec17e20ce0e738a8e5126b4298a73903b468",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Shopify",
+        "repo": "comma",
+        "type": "github"
+      }
+    },
+    "flake-utils": {
+      "locked": {
+        "lastModified": 1601282935,
+        "narHash": "sha256-WQAFV6sGGQxrRs3a+/Yj9xUYvhTpukQJIcMbIi7LCJ4=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "588973065fce51f4763287f0fda87a174d78bf48",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "home-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1602452024,
+        "narHash": "sha256-UZ8YYjSFKMlv4Wb4Qaq4TYewuLH2qBXkZE9JFo7SUTo=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "7339784e07217ed0232e08d1ea33b610c94657d8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "ref": "release-20.09",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "nixos-generators": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1603185450,
+        "narHash": "sha256-JjLnqGXaKHSBbaZA58jqD3GfpCupf4iq5/D0AzvwHD4=",
+        "owner": "nix-community",
+        "repo": "nixos-generators",
+        "rev": "5eb0cbe93bd1bcf134ec330c06b6f1e645de64c6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixos-generators",
+        "type": "github"
+      }
+    },
+    "nixos-hardware": {
+      "locked": {
+        "lastModified": 1603168674,
+        "narHash": "sha256-nX7t9jtzX96xieiwsKf/AL3yBiMl20Z2/IFyc1GQZk4=",
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "rev": "e8c5f886b05178367c6a86903921c1e934303075",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "type": "github"
+      }
+    },
+    "nixos-vsliveshare": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1585828976,
+        "narHash": "sha256-/c7CJ2TDwgsKEidwxgIOqyTx1YcPgYRqzS1AV6a4b2c=",
+        "owner": "msteen",
+        "repo": "nixos-vsliveshare",
+        "rev": "a54bfc74c5e7ae056f61abdb970c6cd6e8fb5e53",
+        "type": "github"
+      },
+      "original": {
+        "owner": "msteen",
+        "repo": "nixos-vsliveshare",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1603179151,
+        "narHash": "sha256-RP88t8wxWPZjo4wm2AXlpxCNeOoj1rJbUlpB5ZvthD4=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "7c2a362b58a1c2ba72d24aa3869da3b1a91d39e1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-20.03",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-unstable": {
+      "locked": {
+        "lastModified": 1603066386,
+        "narHash": "sha256-BpO5yrRi2oqYaOHwWZBoRlLydOeYm0YhuLG4ISsaSzE=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "5265d49a36bb5a18c85e6817b338b456acc3b8cc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "comma": "comma",
+        "flake-utils": "flake-utils",
+        "home-manager": "home-manager",
+        "nixos-generators": "nixos-generators",
+        "nixos-hardware": "nixos-hardware",
+        "nixos-vsliveshare": "nixos-vsliveshare",
+        "nixpkgs": "nixpkgs",
+        "nixpkgs-unstable": "nixpkgs-unstable"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

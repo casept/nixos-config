@@ -1,5 +1,4 @@
-let unstable = import <nixpkgs-unstable>;
-in { pkgs, home, programs, ... }: {
+{ pkgs, ... }: {
   programs.neovim.enable = true;
   programs.neovim.viAlias = true;
   programs.neovim.vimAlias = true;

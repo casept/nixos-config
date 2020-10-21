@@ -1,6 +1,6 @@
 # The top-level config deployed on the host.
 # Services are run as NixOS containers.
-{ config, pkgs, ... }: {
+{ pkgs, ... }: {
   # Running this on the host is less work than in a container
   imports = [ ./subroles/server/wireguard-server.nix ];
 
@@ -40,6 +40,10 @@
       "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC2rqIQyFmQPgv11ABOoOvNycHz1eHu+sCMYN9XfQeFtaFJlz0MSxwYDOdqfLTuFwMaNiQqxVeES/unNa/YqKtTtclUgme/c6kqxh8+JaOI3dDSQQoA5Kgg5TVRiTue46ojOL766nty1L6SrJ7ivrJF+4g5Vrbocim1dN5tPsLCeOdsV6Nr9UxwlI7yTQb5hOo9EC/iZrExVqUthn5XzjiPaERDcCYeqdb/1sFeMqv4QWwTlk9mMGRxUoWyJa12XiLwlB5MMvN4IW+NyVbs82SA3hc45vBFHwaLDymsYoMby4wdL6fLAGNoi5fuyfG1iOPG5eArs8oeN+INLoZzu8OLLqQwPMIUqrzwoB+MBDzkbj37z1C3k8zMhSQesO4ZYP/huhJW24SwQrK7pNMCSais2HLvt/cR3QlMfShBkxeBnIkkIzXZXSHyxr3aGCyY0VpmHXz92gmfVq+pnVCOBpowTBtM/scHqroZYzMchqPtlJSECgzRFLrcV4BUAQzkUnVHFkR/zejuOc0Nd45NteU7SapZUq2jJGO6qS75iYy+I5n/Ta0r23vhU9o5L2A+qj0CeAIZCbuizHGRB76QFOIrzRE1xvZ6Eeqiz7pKoci9+BiOQfweisQh7dz3kfUrvpEvys2CryF+DnZf5ygVGTbOK02tpNlLrUCF8DV38e2aBQ=="
     ];
   };
+  # FIXME: Call home-manager from here so it's guaranteed to have the same flake versions as system
+  #home-manager.users.user = (import ../home.nix {
+  #  inherit nixpkgs nixpkgs-unstable comma nixos-vsliveshare;
+  #});
 
   # We want mainline wireguard support
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -135,11 +139,11 @@
         };
       };
     };
-      bindMounts = {
-        "/var/lib/tor" = {
-          hostPath = "/var/lib/torssh";
-          isReadOnly = false;
-        };
+    bindMounts = {
+      "/var/lib/tor" = {
+        hostPath = "/var/lib/torssh";
+        isReadOnly = false;
+      };
     };
     autoStart = true;
     privateNetwork = false;

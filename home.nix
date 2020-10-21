@@ -1,25 +1,18 @@
+{ nixpkgs, nixpkgs-unstable, comma, nixos-vsliveshare, ... }:
 let
-  unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
-  comma = import (builtins.fetchGit {
-    #name = "comma";
-    url = "https://github.com/Shopify/comma";
-    ref = "refs/heads/master";
-    rev = "4a62ec17e20ce0e738a8e5126b4298a73903b468";
-  });
-in { config, pkgs, home, programs, ... }:
+  system = "x86_64-linux";
+  overlay-unstable = final: prev: {
+    unstable = import nixpkgs-unstable {
+      inherit system;
+      config.allowUnfree = true;
+    };
+  };
+in {
+  nixpkgs.config.allowUnfree = true;
+  nixpkgs.overlays = [ overlay-unstable ];
 
-{
-  imports = [
-    "/etc/nixos/home/gnome.nix"
-    (import "/etc/nixos/home/sway.nix" {
-      inherit pkgs;
-      inherit home;
-      inherit programs;
-      gammastep = unstable.pkgs.gammastep;
-    })
-    "/etc/nixos/home/vscode.nix"
-    "/etc/nixos/home/neovim.nix"
-  ];
+  imports =
+    [ ./home/gnome.nix ./home/sway.nix ./home/vscode.nix ./home/neovim.nix ];
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -43,75 +36,75 @@ in { config, pkgs, home, programs, ... }:
   services.syncthing.enable = true;
   services.syncthing.tray = true;
 
-  home.packages = [
+  home.packages = with nixpkgs.pkgs; [
     # Browsers
-    unstable.pkgs.firefox
-    unstable.pkgs.google-chrome
-    pkgs.filezilla
+    unstable.firefox
+    unstable.google-chrome
+    filezilla
 
     # Editors
-    pkgs.kakoune
-    pkgs.kak-lsp
-    unstable.pkgs.jetbrains.idea-ultimate
+    kakoune
+    kak-lsp
+    unstable.jetbrains.idea-ultimate
 
     # Linters and formatters
-    pkgs.shellcheck
-    pkgs.nixfmt
+    shellcheck
+    nixfmt
 
     # Misc. Unix-ish tools
-    pkgs.direnv
-    pkgs.ripgrep
-    pkgs.fzf
-    pkgs.gnupg
-    pkgs.htop
-    pkgs.stow
-    pkgs.tmux
-    pkgs.alacritty
-    pkgs.wget
-    pkgs.curl
-    pkgs.unar
-    pkgs.unzip
-    pkgs.binutils
-    pkgs.file
-    pkgs.killall
-    pkgs.xorg.xkill
-    pkgs.git
-    pkgs.sshfs
-    pkgs.pv
+    direnv
+    ripgrep
+    fzf
+    gnupg
+    htop
+    stow
+    tmux
+    alacritty
+    wget
+    curl
+    unar
+    unzip
+    binutils
+    file
+    killall
+    xorg.xkill
+    git
+    sshfs
+    pv
 
     # Reverse engineering
-    unstable.pkgs.ghidra-bin
-    pkgs.jd-gui
-    unstable.pkgs.python38Packages.binwalk-full
+    unstable.ghidra-bin
+    jd-gui
+    unstable.python38Packages.binwalk-full
 
     # Nix-specific tools
-    pkgs.appimage-run
-    pkgs.nix-index
-    pkgs.patchelf
-    unstable.pkgs.cachix
-    unstable.pkgs.nix-tree
-    (pkgs.callPackage comma { })
+    appimage-run
+    nix-index
+    patchelf
+    unstable.cachix
+    unstable.nix-tree
+    (callPackage comma { })
 
     # Games
-    pkgs.multimc
-    unstable.pkgs.wine
-    (pkgs.lowPrio unstable.pkgs.wineWowPackages.full)
-    pkgs.steam-run-native
-    unstable.pkgs.lutris
+    multimc
+    unstable.wine
+    (lowPrio unstable.wineWowPackages.full)
+    steam-run-native
+    unstable.lutris
 
     # Note-taking
-    pkgs.xournalpp
-    pkgs.simple-scan
-    pkgs.texlive.combined.scheme-full
+    xournalpp
+    simple-scan
+    texlive.combined.scheme-full
 
     # Network diagnostics
-    pkgs.nmap
-    pkgs.inetutils
+    nmap
+    inetutils
 
     # Media playback
-    pkgs.rhythmbox
+    rhythmbox
 
     # Misc
-    unstable.pkgs.vagrant
+    unstable.vagrant
   ];
 }

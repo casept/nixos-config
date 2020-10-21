@@ -1,10 +1,10 @@
 # TODO: Once upgraded to 20.09 gammastep is in stable
-{ pkgs, home, programs, gammastep, ... }: {
+{ pkgs, ... }: {
   # Needed to enable pulseaudio support for waybar
   nixpkgs.config.pulseaudio = true;
 
   home.packages = [
-    gammastep
+    pkgs.unstable.gammastep
     pkgs.bemenu
     pkgs.brightnessctl
     pkgs.grim
@@ -25,7 +25,7 @@
   systemd.user.services.gammastep = {
     Unit.Description = "Gammastep service";
     Install.WantedBy = [ "graphical-session.target" ];
-    Service = { ExecStart = "${gammastep}/bin/gammastep"; };
+    Service = { ExecStart = "${pkgs.unstable.gammastep}/bin/gammastep"; };
   };
 
   home.sessionVariables = {

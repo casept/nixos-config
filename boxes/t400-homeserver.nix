@@ -1,4 +1,6 @@
-{ config, pkgs, lib, ... }: {
+{ config, lib, pkgs, ... }: {
+  imports = [ ../roles/homeserver.nix ../hardware/t400.nix ];
+
   # Use the GRUB 2 boot loader, because systemd doesn't support legacy BIOS
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
@@ -23,7 +25,6 @@
     device = "rpool/expendable/wipedonboot";
     fsType = "zfs";
   };
-
 
   fileSystems."/nix" = {
     device = "rpool/expendable/nix";
@@ -52,7 +53,6 @@
     fsType = "zfs";
   };
 
-
   # Remember connected networks and their creds
   # TODO: Replace w/ server solution
   environment.etc."NetworkManager/system-connections" = {
@@ -71,7 +71,7 @@
   # Remember ddclient secrets
   environment.etc."ddclient.conf" = { source = "/persist/etc/ddclient.conf"; };
 
-# For services where state location can't be changed in the config, we use symlinks
+  # For services where state location can't be changed in the config, we use symlinks
   systemd.tmpfiles.rules = [
     # Remember LXD containers
     "L /var/lib/lxd - - - - /persist/var/lib/lxd"
@@ -102,13 +102,10 @@
     ];
   };
 
-  # Needed so that nixos-hardware enables CPU microcode updates
-  hardware.enableRedistributableFirmware = true;
-
   # Add ZFS support
   boot.supportedFilesystems = [ "zfs" ];
   boot.zfs.requestEncryptionCredentials = true;
-  boot.zfs.extraPools = ["tank"];
+  boot.zfs.extraPools = [ "tank" ];
   # ZFS services
   services.zfs.autoSnapshot.enable = true;
   # ZFS scrubbing, but only on AC power
@@ -148,7 +145,12 @@
         # $ nix-shell -p dropbear --command "dropbearkey -t rsa -s 4096 -f /persist/etc/initrd-ssh-key-rsa"
         hostRSAKey = /persist/etc/initrd-ssh-key-rsa;
         # All users being a member of the "wheel" group are allowed to connect and enter the password.
-        authorizedKeys = with lib; concatLists (mapAttrsToList (name: user: if elem "wheel" user.extraGroups then user.openssh.authorizedKeys.keys else []) config.users.users);
+        authorizedKeys = with lib;
+          concatLists (mapAttrsToList (name: user:
+            if elem "wheel" user.extraGroups then
+              user.openssh.authorizedKeys.keys
+            else
+              [ ]) config.users.users);
       };
       # this will automatically load the zfs password prompt on login
       # and kill the other prompt so boot can continue

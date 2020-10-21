@@ -1,20 +1,18 @@
-{ config, lib, pkgs, ... }:
+{ lib, pkgs, nixos-hardware, ... }:
 
 {
 
-  imports = [
-    <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
-    <nixos-hardware/lenovo/thinkpad/x230>
-  ];
+  hardware.enableRedistributableFirmware = lib.mkDefault true;
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "sd_mod" "sdhci_pci" ];
+  boot.initrd.availableKernelModules =
+    [ "xhci_pci" "ehci_pci" "ahci" "sd_mod" "sdhci_pci" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   nix.maxJobs = lib.mkDefault 4;
   powerManagement.cpuFreqGovernor = lib.mkDefault "conservative";
-  
+
   # Enable TLP
   services.tlp.enable = true;
 
@@ -23,7 +21,7 @@
 
   #### Input configuration ####
   # Enable wacom support.
-  services.xserver.modules = [pkgs.xf86_input_wacom];
+  services.xserver.modules = [ pkgs.xf86_input_wacom ];
   services.xserver.wacom.enable = true;
   # Enable touchpad support.
   services.xserver.libinput.enable = true;

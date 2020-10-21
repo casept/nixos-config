@@ -2,7 +2,5 @@
 nixos.qcow2
 # Editor junk
 .vscode/
-# Per-machine symlinks
-box-current.nix
-hardware-configuration-current.nix
-role-current.nix
+
+result
