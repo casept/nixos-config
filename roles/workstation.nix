@@ -112,7 +112,8 @@
   users.users.user = {
     shell = pkgs.zsh;
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" "plugdev" "adbusers" "lp" "scanner" ];
+    extraGroups =
+      [ "wheel" "docker" "plugdev" "adbusers" "lp" "scanner" "vboxusers" ];
   };
   # FIXME: Call home-manager from here so it's guaranteed to have the same flake versions as system
   #home-manager.users.user = (import ../home.nix {

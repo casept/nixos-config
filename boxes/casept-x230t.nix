@@ -74,8 +74,6 @@
     "L /var/lib/lxd - - - - /persist/var/lib/lxd"
     # Remember docker containers
     "L /var/lib/docker - - - - /persist/var/lib/docker"
-    # Remember libvirt VMs
-    "L /var/lib/libvirt - - - - /persist/var/lib/libvirt"
     # Remember root's home (needed to keep system channels)
     "L /root - - - - /persist/root"
     # Remember users who completed the sudo lecture so it doesn't repeat after every boot

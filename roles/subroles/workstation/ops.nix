@@ -1,7 +1,11 @@
 { config, pkgs, ... }: {
   # Set up virtualisation
   virtualisation.lxd.enable = true;
-  virtualisation.libvirtd.enable = true;
+  virtualisation.virtualbox = {
+    host.enable = true;
+    host.package = pkgs.unstable.virtualbox;
+    host.enableExtensionPack = true;
+  };
 
   # Podman config in nixOS <= 20.03 is a bit tricky
   environment.systemPackages = with pkgs; [
