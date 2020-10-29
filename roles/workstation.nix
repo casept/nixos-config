@@ -1,18 +1,15 @@
-{ pkgs, hardware, home-manager, comma, nixos-vsliveshare, nixpkgs
-, nixpkgs-unstable, ... }: {
+{ pkgs, hardware, home-manager, nixos-vsliveshare, ... }: {
   services.openssh.enable = true;
   services.openssh.forwardX11 = true;
   services.openssh.passwordAuthentication = false;
 
   time.timeZone = "Europe/Berlin";
 
-  imports = [
-    ./subroles/workstation/dev.nix
-    ./subroles/workstation/ops.nix
-    ../services/mullvad.nix
-  ];
+  imports = [ ./subroles/workstation/dev.nix ./subroles/workstation/ops.nix ];
 
-  systemd.services.mullvad-daemon.enable = true;
+  services.mullvad-vpn.enable = true;
+  # Needed  by Mullvad until the client or nixpkgs is fixed.
+  networking.iproute2.enable = true;
 
   # Needed for steam and many games.
   hardware.opengl.driSupport32Bit = true;
@@ -31,7 +28,7 @@
     # Required for proper QT sway support
     qt5.qtwayland
     # The service doesn't put the client into PATH
-    pkgs.unstable.mullvad-vpn
+    mullvad-vpn
   ];
 
   # Enable zsh properly
@@ -98,8 +95,7 @@
       export _JAVA_AWT_WM_NONREPARENTING=1
     '';
   };
-  # TODO: Pull from stable once 20.09 is released
-  xdg.portal.extraPortals = [ pkgs.unstable.xdg-desktop-portal-wlr ];
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
 
   # Enable flatpak support
   services.flatpak.enable = true;
@@ -112,13 +108,11 @@
   users.users.user = {
     shell = pkgs.zsh;
     isNormalUser = true;
-    extraGroups =
-      [ "wheel" "docker" "plugdev" "adbusers" "lp" "scanner" "vboxusers" ];
+    extraGroups = [ "wheel" "plugdev" "adbusers" "lp" "scanner" "vboxusers" ];
   };
-  # FIXME: Call home-manager from here so it's guaranteed to have the same flake versions as system
-  #home-manager.users.user = (import ../home.nix {
-  #  inherit nixpkgs nixpkgs-unstable comma nixos-vsliveshare;
-  #});
+
+  home-manager.useGlobalPkgs = true;
+  home-manager.users.user = ../home.nix;
 
   # I'm the only user and desktop Linux security is a mess, so this isn't really a problem
   nix.trustedUsers = [ "root" "user" ];

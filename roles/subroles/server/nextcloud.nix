@@ -34,10 +34,6 @@
   services.nextcloud = {
     enable = true;
     hostName = "casept.dynv6.net";
-    # Enable built-in virtual host management
-    # Takes care of somewhat complicated setup
-    # See here: https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/web-apps/nextcloud.nix#L529
-    nginx.enable = true;
 
     # Use HTTPS for links
     https = true;

@@ -8,10 +8,11 @@
   };
 
   # VS live share is broken without this
-  imports = [ "${nixos-vsliveshare}/modules/vsliveshare/home.nix" ];
-
-  services.vsliveshare = {
-    enable = true;
-    extensionsDir = "$HOME/.vscode/extensions";
-  };
+  # TODO: Reenable, currently mysteriously fails to import properly
+  #imports = [ "${nixos-vsliveshare}/modules/vsliveshare/home.nix" ];
+  #services.vsliveshare = {
+  #  enable = true;
+  #  extensionsDir = "$HOME/.vscode/extensions";
+  #  nixpkgs = pkgs;
+  #};
 }

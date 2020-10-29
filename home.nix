@@ -1,15 +1,16 @@
-{ nixpkgs, nixpkgs-unstable, comma, nixos-vsliveshare, ... }:
-let
-  system = "x86_64-linux";
-  overlay-unstable = final: prev: {
-    unstable = import nixpkgs-unstable {
-      inherit system;
-      config.allowUnfree = true;
-    };
-  };
-in {
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.overlays = [ overlay-unstable ];
+# { nixpkgs, nixpkgs-unstable, comma, nixos-vsliveshare, ... }:
+#let
+#  system = "x86_64-linux";
+#  overlay-unstable = final: prev: {
+#    unstable = import nixpkgs-unstable {
+#      inherit system;
+#      config.allowUnfree = true;
+#    };
+#  };
+#in {
+{ pkgs, nixos-vsliveshare, ... }: {
+  #nixpkgs.config.allowUnfree = true;
+  #nixpkgs.overlays = [ overlay-unstable ];
 
   imports =
     [ ./home/gnome.nix ./home/sway.nix ./home/vscode.nix ./home/neovim.nix ];
@@ -36,7 +37,8 @@ in {
   services.syncthing.enable = true;
   services.syncthing.tray = true;
 
-  home.packages = with nixpkgs.pkgs; [
+  #home.packages = with nixpkgs.pkgs; [
+  home.packages = with pkgs; [
     # Browsers
     unstable.firefox
     unstable.google-chrome
@@ -83,7 +85,7 @@ in {
     patchelf
     unstable.cachix
     unstable.nix-tree
-    (callPackage comma { })
+    #comma
 
     # Games
     multimc

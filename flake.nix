@@ -3,7 +3,7 @@
 
   inputs = {
     # Used by the core system config
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-20.03";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-20.09";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-hardware = {
       url = "github:NixOS/nixos-hardware";
@@ -27,9 +27,9 @@
       flake = false;
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # TODO: Switch back to upstream once flakeified
     nixos-vsliveshare = {
-      url = "github:msteen/nixos-vsliveshare";
-      flake = false;
+      url = "github:Flakebi/nixos-vsliveshare";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -38,12 +38,15 @@
     , comma, nixos-vsliveshare, ... }:
     let
       system = "x86_64-linux";
-      overlay-unstable = final: prev: {
+      overlay-unstable = self: super: {
         unstable = import nixpkgs-unstable {
           inherit system;
           config.allowUnfree = true;
         };
       };
+      extra-pkgs = self: super:
+        { # pkgs.comma = (super.callPackage comma { });
+        };
     in {
       nixosConfigurations.casept-x230t = nixpkgs.lib.nixosSystem {
         inherit system;
@@ -55,15 +58,16 @@
               nixos-hardware.nixosModules.lenovo-thinkpad-x230
 
               (import ./boxes/casept-x230t.nix {
-                inherit pkgs lib nixpkgs nixpkgs-unstable nixos-hardware
-                  home-manager comma nixos-vsliveshare;
+                inherit pkgs lib comma nixpkgs nixpkgs-unstable nixos-hardware
+                  home-manager nixos-vsliveshare;
               })
               (import ./common/flake-conf.nix {
                 inherit pkgs nixpkgs nixpkgs-unstable;
               })
             ];
-            nixpkgs.overlays = [ overlay-unstable ];
+            nixpkgs.overlays = [ overlay-unstable extra-pkgs ];
             nixpkgs.config.allowUnfree = true;
+            nixpkgs.config.pulseaudio = true; # Needed for waybar PA widget
             # Let 'nixos-version --json' know about the Git revision of this flake.
             system.configurationRevision =
               nixpkgs.lib.mkIf (self ? rev) self.rev;
