@@ -44,6 +44,10 @@
           config.allowUnfree = true;
         };
       };
+      # The Mullvad client in stable is outdated
+      overlay-mullvad = self: super: {
+        mullvad-vpn = super.unstable.pkgs.mullvad-vpn;
+      };
       extra-pkgs = self: super:
         { # pkgs.comma = (super.callPackage comma { });
         };
@@ -65,7 +69,7 @@
                 inherit pkgs nixpkgs nixpkgs-unstable;
               })
             ];
-            nixpkgs.overlays = [ overlay-unstable extra-pkgs ];
+            nixpkgs.overlays = [ overlay-unstable overlay-mullvad extra-pkgs ];
             nixpkgs.config.allowUnfree = true;
             nixpkgs.config.pulseaudio = true; # Needed for waybar PA widget
             # Let 'nixos-version --json' know about the Git revision of this flake.

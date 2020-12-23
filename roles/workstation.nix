@@ -8,8 +8,6 @@
   imports = [ ./subroles/workstation/dev.nix ./subroles/workstation/ops.nix ];
 
   services.mullvad-vpn.enable = true;
-  # Needed  by Mullvad until the client or nixpkgs is fixed.
-  networking.iproute2.enable = true;
 
   # Needed for steam and many games.
   hardware.opengl.driSupport32Bit = true;
@@ -30,6 +28,10 @@
     # The service doesn't put the client into PATH
     mullvad-vpn
   ];
+
+  # Mainline wireguard plus nice power savings
+  # 5.8 because Oracle
+  boot.kernelPackages = pkgs.linuxPackages_5_8;
 
   # Enable zsh properly
   programs.zsh.enable = true;
@@ -119,4 +121,7 @@
 
   # Way too annoying to manage on a desktop system IMHO
   networking.firewall.enable = false;
+
+  # Need some of that v4l loopback as a workaround for apps dragging their feet on pipewire support
+  boot.extraModulePackages = [ pkgs.linuxPackages_5_8.v4l2loopback ];
 }
