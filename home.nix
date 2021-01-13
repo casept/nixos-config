@@ -1,13 +1,3 @@
-# { nixpkgs, nixpkgs-unstable, comma, nixos-vsliveshare, ... }:
-#let
-#  system = "x86_64-linux";
-#  overlay-unstable = final: prev: {
-#    unstable = import nixpkgs-unstable {
-#      inherit system;
-#      config.allowUnfree = true;
-#    };
-#  };
-#in {
 { pkgs, nixos-vsliveshare, ... }: {
   #nixpkgs.config.allowUnfree = true;
   #nixpkgs.overlays = [ overlay-unstable ];
@@ -41,7 +31,7 @@
   home.packages = with pkgs; [
     # Browsers
     unstable.firefox
-    unstable.google-chrome
+    unstable.chromium
     filezilla
 
     # Editors
@@ -107,6 +97,6 @@
     rhythmbox
 
     # Misc
-    unstable.vagrant
+    vagrant
   ];
 }
