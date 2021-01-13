@@ -26,7 +26,6 @@
 
   home.sessionVariables = {
     BEMENU_BACKEND = "wayland";
-    # Needed to have a functional waybar tray
-    XDG_CURRENT_DESKTOP = "Unity";
+    XDG_CURRENT_DESKTOP = "sway";
   };
 }

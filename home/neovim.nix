@@ -6,4 +6,5 @@
 
   # Stuff needed by plugins
   programs.neovim.withNodeJs = true;
+  home.packages = with pkgs; [ zathura xdotool ];
 }
