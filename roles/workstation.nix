@@ -13,6 +13,10 @@
   hardware.opengl.driSupport32Bit = true;
   hardware.pulseaudio.support32Bit = true;
 
+  # For Dualshock 3 support
+  hardware.bluetooth.package = pkgs.bluezFull;
+  hardware.steam-hardware.enable = true;
+
   # Misc. uncategorized packages
   environment.systemPackages = with pkgs; [
     openconnect
@@ -30,8 +34,7 @@
   ];
 
   # Mainline wireguard plus nice power savings
-  # 5.8 because Oracle
-  boot.kernelPackages = pkgs.linuxPackages_5_8;
+  boot.kernelPackages = pkgs.linuxPackages_5_10;
 
   # Enable zsh properly
   programs.zsh.enable = true;
@@ -123,5 +126,5 @@
   networking.firewall.enable = false;
 
   # Need some of that v4l loopback as a workaround for apps dragging their feet on pipewire support
-  boot.extraModulePackages = [ pkgs.linuxPackages_5_8.v4l2loopback ];
+  boot.extraModulePackages = [ pkgs.linuxPackages_5_10.v4l2loopback ];
 }
