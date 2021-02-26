@@ -27,7 +27,15 @@
   services.syncthing.enable = true;
   services.syncthing.tray = true;
 
-  #home.packages = with nixpkgs.pkgs; [
+  # Legacy tools expect a channel
+  #home.sessionVariables = {
+  #  NIX_PATH = builtins.concatStringsSep ":" [
+  #    "nixpkgs=${pkgs}"
+  #    "nixos-config=/etc/nixos/configuration.nix"
+  #    "/nix/var/nix/profiles/per-user/root/channels"
+  #  ];
+  #};
+
   home.packages = with pkgs; [
     # Browsers
     unstable.firefox
@@ -46,11 +54,13 @@
     # Misc. Unix-ish tools
     direnv
     ripgrep
+    ripgrep-all
     fzf
     gnupg
     htop
     stow
     tmux
+    tmate
     alacritty
     wget
     curl
@@ -95,6 +105,9 @@
 
     # Media playback
     rhythmbox
+
+    # Office
+    libreoffice-fresh
 
     # Misc
     vagrant
