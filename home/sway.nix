@@ -1,6 +1,5 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
-    bemenu
     brightnessctl
     gammastep
     grim
@@ -16,6 +15,14 @@
     waybar
     wdisplays
     xwayland
+    wf-recorder
+    wofi
+    ffmpeg-full
+    libnotify
+    blueberry
+    xfce.thunar
+    xfce.thunar-volman
+    xfce.thunar-archive-plugin
   ];
 
   systemd.user.services.gammastep = {
@@ -25,7 +32,8 @@
   };
 
   home.sessionVariables = {
-    BEMENU_BACKEND = "wayland";
+    GDK_BACKEND = "wayland";
+    CLUTTER_BACKEND = "wayland";
     XDG_CURRENT_DESKTOP = "sway";
   };
 }
