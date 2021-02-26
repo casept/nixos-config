@@ -42,6 +42,7 @@
         unstable = import nixpkgs-unstable {
           inherit system;
           config.allowUnfree = true;
+          config.allowBroken = true;
         };
       };
       # The Mullvad client in stable is outdated
@@ -71,6 +72,7 @@
             ];
             nixpkgs.overlays = [ overlay-unstable overlay-mullvad extra-pkgs ];
             nixpkgs.config.allowUnfree = true;
+            nixpkgs.config.allowBroken = true;
             nixpkgs.config.pulseaudio = true; # Needed for waybar PA widget
             # Let 'nixos-version --json' know about the Git revision of this flake.
             system.configurationRevision =
