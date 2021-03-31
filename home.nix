@@ -73,6 +73,8 @@
     git
     sshfs
     pv
+    psensor
+    zeal
 
     # Reverse engineering
     unstable.ghidra-bin
