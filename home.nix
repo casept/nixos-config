@@ -91,10 +91,9 @@
 
     # Games
     multimc
-    unstable.wine
-    (lowPrio unstable.wineWowPackages.full)
+    wine
+    (lowPrio wineWowPackages.full)
     steam-run-native
-    unstable.lutris
 
     # Note-taking
     xournalpp
@@ -105,8 +104,9 @@
     nmap
     inetutils
 
-    # Media playback
+    # Media
     rhythmbox
+    unstable.noisetorch
 
     # Office
     libreoffice-fresh
