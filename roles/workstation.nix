@@ -17,6 +17,10 @@
   hardware.bluetooth.package = pkgs.bluezFull;
   hardware.steam-hardware.enable = true;
 
+  # Enable Wi-Fi
+  networking.wireless.enable = true;
+  networking.wireless.userControlled.enable = true;
+
   # Misc. uncategorized packages
   environment.systemPackages = with pkgs; [
     openconnect
@@ -41,7 +45,6 @@
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
-  # programs.mtr.enable = true;
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
@@ -73,28 +76,19 @@
     };
   };
 
-  # GNOME config
-  services.xserver = {
-    enable = true;
-    layout = "eu";
-    displayManager = {
-      gdm.enable = true;
-      gdm.wayland = true;
-    };
-    desktopManager.gnome3.enable = true;
-  };
-  services.dbus.packages = [ pkgs.gnome3.dconf ];
-  services.udev.packages = [ pkgs.gnome3.gnome-settings-daemon ];
-
   # Sway config
+  programs.qt5ct.enable = true;
   programs.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
     extraSessionCommands = ''
       export SDL_VIDEODRIVER=wayland
+      export CLUTTER_BACKEND=wayland
+      export XDG_CURRENT_DESKTOP=sway
+      export MOZ_ENABLE_WAYLAND=1
       # needs qt5.qtwayland in systemPackages
       export QT_QPA_PLATFORM=wayland
-      export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+      export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
       # Fix for some Java AWT applications (e.g. Android Studio),
       # use this if they aren't displayed properly:
       export _JAVA_AWT_WM_NONREPARENTING=1
@@ -114,11 +108,11 @@
   boot.supportedFilesystems = [ "ntfs" ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-
   users.users.user = {
     shell = pkgs.zsh;
     isNormalUser = true;
-    extraGroups = [ "wheel" "plugdev" "adbusers" "lp" "scanner" "vboxusers" ];
+    extraGroups =
+      [ "wheel" "plugdev" "adbusers" "lp" "scanner" "vboxusers" "video" ];
   };
 
   home-manager.useGlobalPkgs = true;

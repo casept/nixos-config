@@ -2,8 +2,9 @@
   #nixpkgs.config.allowUnfree = true;
   #nixpkgs.overlays = [ overlay-unstable ];
 
-  imports =
-    [ ./home/gnome.nix ./home/sway.nix ./home/vscode.nix ./home/neovim.nix ];
+  #imports =
+  #  [ ./home/gnome.nix ./home/sway.nix ./home/vscode.nix ./home/neovim.nix ];
+  imports = [ ./home/sway.nix ./home/vscode.nix ./home/neovim.nix ];
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -99,6 +100,7 @@
     xournalpp
     simple-scan
     texlive.combined.scheme-full
+    evince
 
     # Network diagnostics
     nmap
