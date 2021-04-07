@@ -100,7 +100,12 @@
       export _JAVA_AWT_WM_NONREPARENTING=1
     '';
   };
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
+
+  services.pipewire.enable = true;
+  xdg.portal.enable = true;
+  xdg.portal.gtkUsePortal = true;
+  xdg.portal.extraPortals =
+    [ pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-wlr ];
 
   # Enable flatpak support
   services.flatpak.enable = true;
