@@ -109,6 +109,7 @@
     # Media
     rhythmbox
     unstable.noisetorch
+    unstable.droidcam
 
     # Office
     libreoffice-fresh
