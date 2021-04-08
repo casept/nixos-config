@@ -22,6 +22,8 @@
     blueberry
     wpa_supplicant
     wpa_supplicant_gui
+    gnome3.networkmanagerapplet
+
     xfce.gvfs
     xfce.thunar
     xfce.thunar-volman
@@ -33,10 +35,10 @@
     noto-fonts
     noto-fonts-cjk
     noto-fonts-emoji
+    noto-fonts-extra
     liberation_ttf
-    fira-code
-    fira-code-symbols
-    mplus-outline-fonts
+    source-code-pro
+    roboto
   ];
 
   # GTK stuff
@@ -46,6 +48,8 @@
   gtk.font.name = "DejaVu Sans";
   gtk.iconTheme.package = pkgs.paper-icon-theme;
   gtk.iconTheme.name = "Paper";
+  gtk.theme.package = pkgs.unstable.gruvbox-dark-gtk;
+  gtk.theme.name = "gruvbox-dark";
 
   home.keyboard.layout = "eu";
 

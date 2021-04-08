@@ -17,9 +17,12 @@
   hardware.bluetooth.package = pkgs.bluezFull;
   hardware.steam-hardware.enable = true;
 
+  # Networking
+  networking.networkmanager.enable = true;
+
   # Enable Wi-Fi
-  networking.wireless.enable = true;
-  networking.wireless.userControlled.enable = true;
+  #networking.wireless.enable = true;
+  #networking.wireless.userControlled.enable = true;
 
   # Misc. uncategorized packages
   environment.systemPackages = with pkgs; [
@@ -77,7 +80,6 @@
   };
 
   # Sway config
-  programs.qt5ct.enable = true;
   programs.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
