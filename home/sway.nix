@@ -20,9 +20,8 @@
     ffmpeg-full
     libnotify
     blueberry
-    wpa_supplicant
-    wpa_supplicant_gui
     gnome3.networkmanagerapplet
+    kanshi
 
     xfce.gvfs
     xfce.thunar
@@ -42,7 +41,6 @@
   ];
 
   # GTK stuff
-  #fonts.fontconfig.enable = true;
   gtk.enable = true;
   gtk.font.package = pkgs.dejavu_fonts;
   gtk.font.name = "DejaVu Sans";

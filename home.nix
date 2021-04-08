@@ -27,6 +27,8 @@
   services.lorri.enable = true;
   services.syncthing.enable = true;
   services.syncthing.tray = true;
+  services.kdeconnect.enable = true;
+  services.kdeconnect.indicator = true;
 
   # Legacy tools expect a channel
   #home.sessionVariables = {
@@ -107,12 +109,16 @@
     inetutils
 
     # Media
+    vlc
     rhythmbox
     unstable.noisetorch
     unstable.droidcam
 
     # Office
     libreoffice-fresh
+
+    # Security
+    keepassxc
 
     # Misc
     vagrant
