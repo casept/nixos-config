@@ -30,6 +30,12 @@
   services.kdeconnect.enable = true;
   services.kdeconnect.indicator = true;
 
+  xdg.mime.enable = true;
+  xdg.mimeApps.enable = true;
+  xdg.mimeApps.defaultApplications = {
+    "application/pdf" = [ "org.gnome.Evince.desktop" ];
+  };
+
   # Legacy tools expect a channel
   #home.sessionVariables = {
   #  NIX_PATH = builtins.concatStringsSep ":" [
@@ -59,6 +65,7 @@
     ripgrep
     ripgrep-all
     fzf
+    filet
     gnupg
     htop
     stow
