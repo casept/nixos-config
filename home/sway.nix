@@ -21,7 +21,10 @@
     libnotify
     blueberry
     gnome3.networkmanagerapplet
+    gnome3.gnome-keyring
     kanshi
+    autotiling
+    xdg_utils
 
     xfce.gvfs
     xfce.thunar
