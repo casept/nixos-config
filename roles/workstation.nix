@@ -113,8 +113,16 @@
   users.users.user = {
     shell = pkgs.zsh;
     isNormalUser = true;
-    extraGroups =
-      [ "wheel" "plugdev" "adbusers" "lp" "scanner" "vboxusers" "video" ];
+    extraGroups = [
+      "wheel"
+      "plugdev"
+      "adbusers"
+      "lp"
+      "scanner"
+      "vboxusers"
+      "video"
+      "rfkill"
+    ];
   };
 
   home-manager.useGlobalPkgs = true;
