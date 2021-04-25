@@ -34,6 +34,14 @@
   xdg.mimeApps.enable = true;
   xdg.mimeApps.defaultApplications = {
     "application/pdf" = [ "org.gnome.Evince.desktop" ];
+    "text/html" = "firefox.desktop";
+    "x-scheme-handler/http" = "firefox.desktop";
+    "x-scheme-handler/https" = "firefox.desktop";
+    "x-scheme-handler/about" = "firefox.desktop";
+    "x-scheme-handler/unknown" = "firefox.desktop";
+    "application/x-bittorrent" = "com.transmissionbt.Transmission.desktop";
+    "x-scheme-handler/magnet" = "com.transmissionbt.Transmission.desktop";
+
   };
 
   # Legacy tools expect a channel
@@ -92,7 +100,7 @@
     unstable.python38Packages.binwalk-full
 
     # Nix-specific tools
-    appimage-run
+    (appimage-run.override { extraPkgs = pkgs: [ pkgs.xorg.libxshmfence ]; })
     nix-index
     patchelf
     unstable.cachix
