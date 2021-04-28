@@ -129,6 +129,9 @@
     rhythmbox
     unstable.noisetorch
     unstable.droidcam
+    unstable.obs-studio
+    unstable.obs-wlrobs
+    unstable.obs-v4l2sink
 
     # Office
     libreoffice-fresh
