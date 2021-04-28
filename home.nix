@@ -57,6 +57,7 @@
     # Browsers
     unstable.firefox
     unstable.chromium
+    unstable.thunderbird
     filezilla
 
     # Editors
