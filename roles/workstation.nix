@@ -20,9 +20,9 @@
   # Networking
   networking.networkmanager.enable = true;
 
-  # Enable Wi-Fi
-  #networking.wireless.enable = true;
-  #networking.wireless.userControlled.enable = true;
+  # Enable talking to a U2F dongle
+  services.udev.extraRules =
+    "ATTRS{idVendor}''=''\"2ccf''\", ATTRS{idProduct}''=''\"0854''\", MODE=''\"0660''\"";
 
   # Misc. uncategorized packages
   environment.systemPackages = with pkgs; [
@@ -122,6 +122,7 @@
       "vboxusers"
       "video"
       "rfkill"
+      "wireshark"
     ];
   };
 
