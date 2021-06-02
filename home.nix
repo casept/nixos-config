@@ -110,6 +110,7 @@
 
     # Games
     multimc
+    (pkgs.callPackage ./pkgs/technic-launcher { })
     wine
     (lowPrio wineWowPackages.full)
     steam-run-native
