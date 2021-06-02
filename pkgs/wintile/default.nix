@@ -1,4 +1,4 @@
-{ stdenv, lib, fetchFromGitHub, glib, gnome3 }:
+{ lib, fetchFromGitHub, glib, gnome3 }:
 let uuid = "wintile@nowsci.com";
 in stdenv.mkDerivation {
   pname = "gnome-shell-extension-wintile";
@@ -26,7 +26,7 @@ in stdenv.mkDerivation {
     runHook postInstall
   '';
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "Windows 10 window tiling for GNOME";
     license = licenses.gpl3;
     homepage = "https://github.com/Fmstrat/wintile";

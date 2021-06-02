@@ -30,7 +30,6 @@
     xdg-user-dirs
     polkit_gnome
 
-    xfce.gvfs
     xfce.thunar
     xfce.thunar-volman
     xfce.thunar-archive-plugin

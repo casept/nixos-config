@@ -4,7 +4,12 @@
 
   #imports =
   #  [ ./home/gnome.nix ./home/sway.nix ./home/vscode.nix ./home/neovim.nix ];
-  imports = [ ./home/sway.nix ./home/vscode.nix ./home/neovim.nix ];
+  # FIXME:
+  # Home-manager is currently broken in that it generates a config file even if no config options
+  # are set via Nix, which conflicts with my manual config.
+  # As a temporary workaround, I've moved the manual config and source it here.
+  # imports = [ ./home/sway.nix ./home/vscode.nix ./home/neovim.nix ];
+  imports = [ ./home/sway.nix ./home/vscode.nix ];
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -26,7 +31,7 @@
 
   services.lorri.enable = true;
   services.syncthing.enable = true;
-  services.syncthing.tray = true;
+  services.syncthing.tray.enable = true;
   services.kdeconnect.enable = true;
   services.kdeconnect.indicator = true;
 

@@ -1,6 +1,6 @@
 # The version in nixpkgs is the latest release, but it's not compatible with new bitlocker features.
 
-{ stdenv, fetchFromGitHub, cmake, fuse, mbedtls }:
+{ stdenv, lib, fetchFromGitHub, cmake, fuse, mbedtls }:
 stdenv.mkDerivation {
   pname = "dislocker-master";
   version = "master";
@@ -15,7 +15,7 @@ stdenv.mkDerivation {
   nativeBuildInputs = [ cmake ];
   buildInputs = [ fuse mbedtls ];
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "Read BitLocker encrypted partitions in Linux";
     homepage = "https://github.com/aorimn/dislocker";
     license = licenses.gpl2;
