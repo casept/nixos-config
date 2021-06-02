@@ -17,6 +17,8 @@
     xwayland
     wf-recorder
     wofi
+    unstable.squeekboard
+    unstable.albert
     ffmpeg-full
     libnotify
     blueberry
@@ -25,6 +27,8 @@
     kanshi
     autotiling
     xdg_utils
+    xdg-user-dirs
+    polkit_gnome
 
     xfce.gvfs
     xfce.thunar

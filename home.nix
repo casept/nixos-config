@@ -108,6 +108,7 @@
     pv
     psensor
     zeal
+    imv
 
     # Reverse engineering
     unstable.ghidra-bin
@@ -134,6 +135,7 @@
     simple-scan
     texlive.combined.scheme-full
     evince
+    inkscape
 
     # Network diagnostics
     nmap
