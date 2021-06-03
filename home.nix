@@ -1,15 +1,5 @@
 { pkgs, nixos-vsliveshare, ... }: {
-  #nixpkgs.config.allowUnfree = true;
-  #nixpkgs.overlays = [ overlay-unstable ];
-
-  #imports =
-  #  [ ./home/gnome.nix ./home/sway.nix ./home/vscode.nix ./home/neovim.nix ];
-  # FIXME:
-  # Home-manager is currently broken in that it generates a config file even if no config options
-  # are set via Nix, which conflicts with my manual config.
-  # As a temporary workaround, I've moved the manual config and source it here.
-  # imports = [ ./home/sway.nix ./home/vscode.nix ./home/neovim.nix ];
-  imports = [ ./home/sway.nix ./home/vscode.nix ];
+  imports = [ ./home/sway.nix ./home/vscode.nix ./home/neovim.nix ];
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -63,15 +53,6 @@
     "video/x-msvideo" = "vlc.desktop";
   };
 
-  # Legacy tools expect a channel
-  #home.sessionVariables = {
-  #  NIX_PATH = builtins.concatStringsSep ":" [
-  #    "nixpkgs=${pkgs}"
-  #    "nixos-config=/etc/nixos/configuration.nix"
-  #    "/nix/var/nix/profiles/per-user/root/channels"
-  #  ];
-  #};
-
   home.packages = with pkgs; [
     # Browsers
     unstable.firefox
@@ -80,8 +61,6 @@
     filezilla
 
     # Editors
-    kakoune
-    kak-lsp
     unstable.jetbrains.idea-ultimate
 
     # Linters and formatters
