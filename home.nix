@@ -62,7 +62,7 @@
 
     # Editors
     unstable.jetbrains.idea-ultimate
-
+    unstable.jetbrains.clion
     # Linters and formatters
     shellcheck
     nixfmt
