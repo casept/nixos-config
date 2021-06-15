@@ -95,7 +95,7 @@
     imv
 
     # Reverse engineering
-    unstable.ghidra-bin
+    (callPackage ./pkgs/ghidra-beta { })
     jd-gui
     unstable.python38Packages.binwalk-full
 
@@ -113,6 +113,7 @@
     wine
     (lowPrio wineWowPackages.full)
     steam-run-native
+    unstable.lutris
 
     # Note-taking
     xournalpp
