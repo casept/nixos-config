@@ -132,8 +132,7 @@
     unstable.noisetorch
     unstable.droidcam
     unstable.obs-studio
-    unstable.obs-wlrobs
-    unstable.obs-v4l2sink
+    unstable.obs-studio-plugins.wlrobs
 
     # Office
     libreoffice-fresh
