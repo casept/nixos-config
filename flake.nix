@@ -32,10 +32,14 @@
       url = "github:Flakebi/nixos-vsliveshare";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    rnix-lsp-flake = {
+      url = "github:nix-community/rnix-lsp";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, nixpkgs-unstable, nixos-hardware, home-manager
-    , comma, nixos-vsliveshare, ... }:
+    , comma, nixos-vsliveshare, rnix-lsp-flake, ... }:
     let
       system = "x86_64-linux";
       overlay-unstable = self: super: {
@@ -64,7 +68,7 @@
 
               (import ./boxes/casept-x230t.nix {
                 inherit pkgs lib comma nixpkgs nixpkgs-unstable nixos-hardware
-                  home-manager nixos-vsliveshare;
+                  home-manager nixos-vsliveshare rnix-lsp-flake;
               })
               (import ./common/flake-conf.nix {
                 inherit pkgs nixpkgs nixpkgs-unstable;
@@ -95,7 +99,7 @@
 
               (import ./boxes/t400-homeserver.nix {
                 inherit config pkgs lib nixpkgs nixpkgs-unstable nixos-hardware
-                  home-manager comma nixos-vsliveshare;
+                  home-manager comma nixos-vsliveshare rnix-lsp-flake;
               })
               (import ./common/flake-conf.nix {
                 inherit pkgs nixpkgs nixpkgs-unstable;

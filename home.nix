@@ -1,4 +1,4 @@
-{ pkgs, nixos-vsliveshare, ... }: {
+{ pkgs, nixos-vsliveshare, rnix-lsp-flake, ... }: {
   imports = [ ./home/sway.nix ./home/vscode.nix ./home/neovim.nix ];
 
   # Let Home Manager install and manage itself.
@@ -63,10 +63,11 @@
     # Editors
     unstable.jetbrains.idea-ultimate
     unstable.jetbrains.clion
-    # Linters and formatters
+    # Linters and formatters (global for convenience)
     shellcheck
     nixfmt
-
+    # TODO: This is currently pulled from nixpkgs because I don't know how to pass a flake input to home-manager.
+    rnix-lsp
     # Misc. Unix-ish tools
     direnv
     ripgrep

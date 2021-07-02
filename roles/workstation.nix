@@ -1,4 +1,4 @@
-{ pkgs, hardware, home-manager, nixos-vsliveshare, ... }: {
+{ pkgs, hardware, home-manager, nixos-vsliveshare, rnix-lsp-flake, ... }: {
   services.openssh.enable = true;
   services.openssh.forwardX11 = true;
   services.openssh.passwordAuthentication = false;
