@@ -96,7 +96,7 @@
     imv
 
     # Reverse engineering
-    (callPackage ./pkgs/ghidra-beta { })
+    unstable.ghidra-bin
     jd-gui
     unstable.python38Packages.binwalk-full
 
