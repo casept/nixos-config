@@ -1,7 +1,7 @@
 { nix, ... }: {
   nix.buildMachines = [{
     hostName = "builder";
-    systems = [ "x86_64-linux" ];
+    systems = [ "x86_64-linux" "i686-linux" ];
     maxJobs = 10;
     speedFactor = 10;
     supportedFeatures = [ "benchmark" "big-parallel" ];
