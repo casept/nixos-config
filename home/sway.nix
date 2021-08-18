@@ -36,15 +36,19 @@
 
     # Fonts
     dejavu_fonts
-    # nerdfonts
     noto-fonts
     noto-fonts-cjk
     noto-fonts-emoji
     noto-fonts-extra
+    powerline-fonts
     liberation_ttf
     source-code-pro
     roboto
   ];
+
+  # Font configuration
+  fonts.fontconfig.enable =
+    pkgs.lib.mkForce true; # No idea where the conflict comes from
 
   # GTK stuff
   gtk.enable = true;
