@@ -13,9 +13,6 @@
   nix.settings.max-jobs = lib.mkDefault 4;
   powerManagement.cpuFreqGovernor = lib.mkDefault "conservative";
 
-  # Enable TLP
-  services.tlp.enable = true;
-
   # Firmware updates
   services.fwupd.enable = true;
 

@@ -44,9 +44,6 @@
     mullvad-vpn
   ];
 
-  # Mainline wireguard plus nice power savings
-  boot.kernelPackages = pkgs.linuxPackages_5_10;
-
   # Enable zsh properly
   programs.zsh.enable = true;
 
@@ -83,29 +80,18 @@
     };
   };
 
-  # Sway config
-  programs.sway = {
+  services.pipewire.enable = true;
+  xdg.portal = {
     enable = true;
-    wrapperFeatures.gtk = true;
-    extraSessionCommands = ''
-      export SDL_VIDEODRIVER=wayland
-      export CLUTTER_BACKEND=wayland
-      export XDG_CURRENT_DESKTOP=sway
-      export MOZ_ENABLE_WAYLAND=1
-      # needs qt5.qtwayland in systemPackages
-      export QT_QPA_PLATFORM=wayland
-      export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
-      # Fix for some Java AWT applications (e.g. Android Studio),
-      # use this if they aren't displayed properly:
-      export _JAVA_AWT_WM_NONREPARENTING=1
-    '';
+    extraPortals = [ pkgs.xdg-desktop-portal-kde ];
   };
 
-  services.pipewire.enable = true;
-  xdg.portal.enable = true;
-  xdg.portal.gtkUsePortal = true;
-  xdg.portal.extraPortals =
-    [ pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-wlr ];
+  # Enable KDE
+  services.xserver.enable = true;
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.desktopManager.plasma5.enable = true;
+  # So themes are applied to GTK apps
+  programs.dconf.enable = true;
 
   # Enable flatpak support
   services.flatpak.enable = true;
@@ -138,7 +124,4 @@
 
   # Way too annoying to manage on a desktop system IMHO
   networking.firewall.enable = false;
-
-  # Need some of that v4l loopback as a workaround for apps dragging their feet on pipewire support
-  boot.extraModulePackages = [ pkgs.linuxPackages_5_10.v4l2loopback ];
 }
