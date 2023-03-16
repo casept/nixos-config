@@ -1,5 +1,5 @@
 { config, pkgs, ... }: {
-  system.stateVersion = "20.03";
+  system.stateVersion = "22.11";
   services.gitea = {
     enable = true;
     stateDir = "/persist";

@@ -27,7 +27,7 @@
     };
   };
 
-  security.acme.email = "davids.paskevics@gmail.com";
+  security.acme.defaults.email = "davids.paskevics@gmail.com";
   security.acme.acceptTerms = true;
 
   # Actual Nextcloud Config

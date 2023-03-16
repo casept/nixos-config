@@ -12,7 +12,7 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  nix.maxJobs = lib.mkDefault 2;
+  nix.settings.max-jobs = lib.mkDefault 2;
   powerManagement.cpuFreqGovernor = lib.mkDefault "conservative";
 
   # Enable TLP

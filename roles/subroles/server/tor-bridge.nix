@@ -1,14 +1,15 @@
 { config, pkgs, ... }: {
-  system.stateVersion = "20.03";
+  system.stateVersion = "22.11";
   services.tor.enable = true;
+  services.tor.settings = {
+    ContactInfo = "davids.paskevics@gmail.com";
+    BandwidthRate = 1048576; # 1MiB/s
+    BandwidthBurst = 3145728; # 3MiB/s
+    ORPort = 143;
+  };
   services.tor.relay = {
     enable = true;
-    contactInfo = "davids.paskevics@gmail.com";
     role = "bridge";
-    bandwidthRate = 1048576; # 1MiB/s
-    bandwidthBurst = 3145728; # 3MiB/s
-    port = 143;
-
   };
   networking.firewall.enable = true;
   networking.firewall.allowedTCPPorts = [ 143 ];

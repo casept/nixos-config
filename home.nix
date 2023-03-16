@@ -1,5 +1,6 @@
 { pkgs, nixos-vsliveshare, rnix-lsp-flake, ... }: {
-  imports = [ ./home/sway.nix ./home/vscode.nix ./home/neovim.nix ];
+  # imports = [ ./home/sway.nix ./home/vscode.nix ./home/neovim.nix ];
+  imports = [ ./home/vscode.nix ./home/neovim.nix ];
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -17,7 +18,7 @@
   # You can update Home Manager without changing this value. See
   # the Home Manager release notes for a list of state version
   # changes in each release.
-  home.stateVersion = "20.09";
+  home.stateVersion = "22.11";
 
   services.lorri.enable = true;
   services.syncthing.enable = true;
@@ -98,7 +99,7 @@
     # Reverse engineering
     unstable.ghidra-bin
     jd-gui
-    unstable.python38Packages.binwalk-full
+    unstable.python311Packages.binwalk-full
 
     # Nix-specific tools
     (appimage-run.override { extraPkgs = pkgs: [ pkgs.xorg.libxshmfence ]; })
@@ -109,7 +110,7 @@
     #comma
 
     # Games
-    multimc
+    prismlauncher
     (pkgs.callPackage ./pkgs/technic-launcher { })
     wine
     (lowPrio wineWowPackages.full)

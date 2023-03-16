@@ -15,7 +15,7 @@
 
   # Needed for steam and many games.
   hardware.opengl.driSupport32Bit = true;
-  hardware.pulseaudio.support32Bit = true;
+  services.pipewire.alsa.support32Bit = true;
 
   # For Dualshock 3 support
   hardware.bluetooth.package = pkgs.bluezFull;
@@ -63,7 +63,7 @@
     gutenprint
     gutenprintBin
     hplipWithPlugin
-    samsungUnifiedLinuxDriver
+    samsung-unified-linux-driver
     splix
     brlaser
     brgenml1lpr
@@ -134,7 +134,7 @@
   home-manager.users.user = ../home.nix;
 
   # I'm the only user and desktop Linux security is a mess, so this isn't really a problem
-  nix.trustedUsers = [ "root" "user" ];
+  nix.settings.trusted-users = [ "root" "user" ];
 
   # Way too annoying to manage on a desktop system IMHO
   networking.firewall.enable = false;

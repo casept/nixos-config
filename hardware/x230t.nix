@@ -10,7 +10,7 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  nix.maxJobs = lib.mkDefault 4;
+  nix.settings.max-jobs = lib.mkDefault 4;
   powerManagement.cpuFreqGovernor = lib.mkDefault "conservative";
 
   # Enable TLP
@@ -35,11 +35,10 @@
   hardware.bluetooth.enable = true;
 
   # Audio
-  sound.enable = true;
-  hardware.pulseaudio = {
+  security.rtkit.enable = true;
+  services.pipewire = {
     enable = true;
-    # Needed for bluetooth support
-    package = pkgs.pulseaudioFull;
-    extraModules = [ pkgs.pulseaudio-modules-bt ];
-  };
+    alsa.enable = true;
+    pulse.enable = true;
+};
 }

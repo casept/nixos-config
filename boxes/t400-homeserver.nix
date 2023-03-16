@@ -1,6 +1,8 @@
 { config, lib, pkgs, ... }: {
   imports = [ ../roles/homeserver.nix ../hardware/t400.nix ];
 
+  system.stateVersion = "22.11";
+
   # Use the GRUB 2 boot loader, because systemd doesn't support legacy BIOS
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;

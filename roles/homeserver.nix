@@ -4,8 +4,6 @@
   # Running this on the host is less work than in a container
   imports = [ ./subroles/server/wireguard-server.nix ];
 
-  system.stateVersion = "20.03";
-
   # Prevent the drive from filling up with too many old generations
   nix.gc.automatic = true;
   nix.gc.dates = "03:15";
@@ -43,9 +41,6 @@
 
   home-manager.useGlobalPkgs = true;
   home-manager.users.user = ../home.nix;
-
-  # We want mainline wireguard support
-  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # TODO: Backups via restic and rclone
 
@@ -121,33 +116,30 @@
     privateNetwork = false;
   };
 
+  # TODO: Fix and re-enable
   # Create an SSH hidden service in order to enable login in case dynamic DNS fails
-  containers.torssh = {
-    config = {
-      system.stateVersion = "20.03";
-      services.tor.enable = true;
-      services.tor.hiddenServices = {
-        ssh = {
-          name = "ssh";
-          version = 3;
-          map = [{
-            port = "22";
-            toHost = "localhost";
-            toPort = "22";
-          }];
-        };
-      };
-    };
-    bindMounts = {
-      "/var/lib/tor" = {
-        hostPath = "/var/lib/torssh";
-        isReadOnly = false;
-      };
-    };
-    autoStart = true;
-    privateNetwork = false;
-    ephemeral = true;
-  };
+  #containers.torssh = {
+  #  config = {
+  #    system.stateVersion = "22.11";
+  #    services.tor.enable = true;
+  #    services.tor.client.onionServices = {
+  #      ssh = {
+  #        name = "ssh";
+  #        version = 3;
+  #        map = [ 22 ];
+  #      };
+  #    };
+  #  };
+  #  bindMounts = {
+  #    "/var/lib/tor" = {
+  #      hostPath = "/var/lib/torssh";
+  #      isReadOnly = false;
+  #    };
+  #  };
+  #  autoStart = true;
+  #  privateNetwork = false;
+  #  ephemeral = true;
+  #};
 
   containers.zeronet = {
     config = import ./subroles/server/zeronet.nix;

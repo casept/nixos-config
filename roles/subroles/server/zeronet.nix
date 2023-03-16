@@ -1,6 +1,7 @@
 { config, pkgs, ... }: {
-  system.stateVersion = "20.03";
+  system.stateVersion = "22.11";
   services.zeronet = {
+    package = pkgs.zeronet-conservancy;
     enable = true;
     port = 43110;
     torAlways = true;

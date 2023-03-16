@@ -3,29 +3,24 @@
 
   inputs = {
     # Used by the core system config
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixos-hardware = {
-      url = "github:NixOS/nixos-hardware";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
     # Used by the dev shell
     flake-utils.url = "github:numtide/flake-utils";
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       flake = false;
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Used by home-manager
     home-manager = {
-      url = "github:nix-community/home-manager/release-21.05";
+      url = "github:nix-community/home-manager/release-22.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     comma = {
       url = "github:Shopify/comma";
       flake = false;
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     # TODO: Switch back to upstream once flakeified
     nixos-vsliveshare = {
