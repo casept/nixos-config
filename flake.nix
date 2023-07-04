@@ -72,7 +72,7 @@
             nixpkgs.overlays = [ overlay-unstable overlay-mullvad extra-pkgs ];
             nixpkgs.config.allowUnfree = true;
             nixpkgs.config.allowBroken = true;
-            nixpkgs.config.pulseaudio = true; # Needed for waybar PA widget
+            nixpkgs.config.pipewire = true; # Needed for waybar PA widget
             # Let 'nixos-version --json' know about the Git revision of this flake.
             system.configurationRevision =
               nixpkgs.lib.mkIf (self ? rev) self.rev;

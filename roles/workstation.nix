@@ -9,6 +9,7 @@
     ../builders.nix
     ./subroles/workstation/dev.nix
     ./subroles/workstation/ops.nix
+    ./subroles/workstation/gnome.nix
   ];
 
   services.mullvad-vpn.enable = true;
@@ -83,13 +84,13 @@
   services.pipewire.enable = true;
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-kde ];
+    #extraPortals = [ pkgs.xdg-desktop-portal-kde ];
   };
 
   # Enable KDE
-  services.xserver.enable = true;
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+  #services.xserver.enable = true;
+  #services.xserver.displayManager.sddm.enable = true;
+  #services.xserver.desktopManager.plasma5.enable = true;
   # So themes are applied to GTK apps
   programs.dconf.enable = true;
 

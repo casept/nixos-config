@@ -1,17 +1,16 @@
-{ lib, fetchFromGitHub, glib, gnome3 }:
+{ stdenv, lib, fetchFromGitHub, glib, gnome3 }:
 let uuid = "wintile@nowsci.com";
 in stdenv.mkDerivation {
   pname = "gnome-shell-extension-wintile";
-  version = "v5";
+  version = "v2023.07.03-1";
 
   src = fetchFromGitHub {
     owner = "Fmstrat";
     repo = "wintile";
-    rev = "99d11df499ea1e155fbaf48c31d464fb8976d8c0";
-    sha256 = "0haq4i01h4wf0w52ri6r16yja6ca1qinx3fcigxiz5gv7pj2wgsh";
+    rev = "3e43c62dd5f25aa32e28a65f2c4777b03b6ca3ee";
+    sha256 = "sha256-hD1muHnC+5oFOFwm8IVC9WHyzfdCDj5O35kK3mXUgak=";
   };
 
-  patches = [ ./0001-Removed-reference-to-gsconnect-extension.patch ];
   nativeBuildInputs = [ glib ];
   buildPhase = ''
     runHook preBuild
