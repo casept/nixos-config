@@ -1,5 +1,5 @@
 { nixpkgs, nixpkgs-unstable, pkgs, ... }: {
-  system.stateVersion = "22.11";
+  system.stateVersion = "23.05";
   # Enable using the same nixpkgs commit in the imperative tools
   nix.registry = {
     nixpkgs.flake = nixpkgs;

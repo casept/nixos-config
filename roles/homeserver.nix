@@ -120,7 +120,7 @@
   # Create an SSH hidden service in order to enable login in case dynamic DNS fails
   #containers.torssh = {
   #  config = {
-  #    system.stateVersion = "22.11";
+  #    system.stateVersion = "23.05";
   #    services.tor.enable = true;
   #    services.tor.client.onionServices = {
   #      ssh = {

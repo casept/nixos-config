@@ -1,5 +1,5 @@
 { config, pkgs, ... }: {
-  system.stateVersion = "22.11";
+  system.stateVersion = "23.05";
   services.zeronet = {
     package = pkgs.zeronet-conservancy;
     enable = true;

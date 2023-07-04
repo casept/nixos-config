@@ -2,7 +2,7 @@ let
   sources = import ./nix/sources.nix;
   pkgs = import sources.nixpkgs { };
 in {
-  system.stateVersion = "22.11";
+  system.stateVersion = "23.05";
   virtualisation.lxc.lxcfs.enable = true;
   virtualisation.lxd = {
     enable = true;

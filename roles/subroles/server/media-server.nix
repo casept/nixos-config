@@ -10,7 +10,7 @@ let
   media_user = "media";
   media_group = "media";
 in {
-  system.stateVersion = "22.11";
+  system.stateVersion = "23.05";
   networking.firewall.enable = true;
   # VPN
   networking.nameservers = [ "193.138.218.74" ];

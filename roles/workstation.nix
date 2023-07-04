@@ -1,7 +1,7 @@
 { pkgs, hardware, home-manager, nixos-vsliveshare, rnix-lsp-flake, ... }: {
   services.openssh.enable = true;
-  services.openssh.forwardX11 = true;
-  services.openssh.passwordAuthentication = false;
+  services.openssh.settings.X11Forwarding = true;
+  services.openssh.settings.PasswordAuthentication = false;
 
   time.timeZone = "Europe/Berlin";
 
