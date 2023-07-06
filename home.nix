@@ -1,6 +1,5 @@
 { pkgs, nixos-vsliveshare, rnix-lsp-flake, ... }: {
-  # imports = [ ./home/sway.nix ./home/vscode.nix ./home/neovim.nix ];
-  imports = [ ./home/vscode.nix ./home/neovim.nix ];
+  imports = [ ./home/vscode.nix ];
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
