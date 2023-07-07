@@ -1,6 +1,7 @@
 { pkgs, stdenv, lib, fetchFromGitHub, dconf, ... }: {
   home.packages = [
     pkgs.gnomeExtensions.gsconnect
+    pkgs.gnomeExtensions.appindicator
     pkgs.gnomeExtensions.caffeine
     (pkgs.callPackage ../pkgs/wintile { })
   ];
