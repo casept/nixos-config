@@ -98,14 +98,15 @@
     # Reverse engineering
     unstable.ghidra-bin
     jd-gui
-    unstable.python311Packages.binwalk-full
+    python311Packages.binwalk-full
+    avalonia-ilspy
 
     # Nix-specific tools
     (appimage-run.override { extraPkgs = pkgs: [ pkgs.xorg.libxshmfence ]; })
     nix-index
     patchelf
-    unstable.cachix
-    unstable.nix-tree
+    cachix
+    nix-tree
     #comma
 
     # Games
