@@ -101,7 +101,7 @@
   boot.supportedFilesystems = [ "ntfs" ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.user = {
+  users.users.casept = {
     shell = pkgs.zsh;
     isNormalUser = true;
     extraGroups = [
@@ -118,10 +118,10 @@
   };
 
   home-manager.useGlobalPkgs = true;
-  home-manager.users.user = ../home.nix;
+  home-manager.users.casept = ../home.nix;
 
   # I'm the only user and desktop Linux security is a mess, so this isn't really a problem
-  nix.settings.trusted-users = [ "root" "user" ];
+  nix.settings.trusted-users = [ "root" "casept" ];
 
   # Way too annoying to manage on a desktop system IMHO
   networking.firewall.enable = false;
