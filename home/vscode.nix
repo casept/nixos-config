@@ -4,15 +4,9 @@
   # Enable vscode
   programs.vscode = {
     enable = true;
-    package = pkgs.unstable.vscode;
+    package = pkgs.unstable.vscode.fhs;
   };
 
-  # VS live share is broken without this
-  # TODO: Reenable, currently mysteriously fails to import properly
-  #imports = [ "${nixos-vsliveshare}/modules/vsliveshare/home.nix" ];
-  #services.vsliveshare = {
-  #  enable = true;
-  #  extensionsDir = "$HOME/.vscode/extensions";
-  #  nixpkgs = pkgs;
-  #};
+  # Enable native Wayland support
+  home.sessionVariables.NIXOS_OZONE_WL = "1";
 }
