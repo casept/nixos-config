@@ -61,8 +61,8 @@
     filezilla
 
     # Editors
-    unstable.jetbrains.idea-ultimate
-    unstable.jetbrains.clion
+    helix
+
     # Linters and formatters (global for convenience)
     shellcheck
     nixfmt
