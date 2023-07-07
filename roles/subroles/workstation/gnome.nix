@@ -9,10 +9,6 @@
 
   environment.systemPackages = with pkgs; [
     gnome.adwaita-icon-theme
-
-    # Extensions
-    gnomeExtensions.appindicator
-    (callPackage ../../../pkgs/wintile { })
   ];
 
   # Needed by AppIndicators
