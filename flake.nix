@@ -5,7 +5,8 @@
     # Used by the core system config
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixos-hardware.url = "github:NixOS/nixos-hardware";
+    # TODO: Switch back once l13 amd yoga gen2 is merged
+    nixos-hardware.url = "github:casept/nixos-hardware";
     # Used by the dev shell
     flake-utils.url = "github:numtide/flake-utils";
     nixos-generators = {
@@ -62,6 +63,35 @@
               nixos-hardware.nixosModules.lenovo-thinkpad-x230
 
               (import ./boxes/casept-x230t.nix {
+                inherit pkgs lib comma nixpkgs nixpkgs-unstable nixos-hardware
+                  home-manager nixos-vsliveshare rnix-lsp-flake;
+              })
+              (import ./common/flake-conf.nix {
+                inherit pkgs nixpkgs nixpkgs-unstable;
+              })
+            ];
+            nixpkgs.overlays = [ overlay-unstable overlay-mullvad extra-pkgs ];
+            nixpkgs.config.allowUnfree = true;
+            nixpkgs.config.allowBroken = true;
+            nixpkgs.config.pipewire = true; # Needed for waybar PA widget
+            # Let 'nixos-version --json' know about the Git revision of this flake.
+            system.configurationRevision =
+              nixpkgs.lib.mkIf (self ? rev) self.rev;
+            nix.registry.nixpkgs.flake = nixpkgs;
+          })
+        ];
+      };
+
+      nixosConfigurations.l13 = nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules = [
+          ({ lib, config, pkgs, ... }: {
+            imports = [
+              # These should be imported in the hardware/role modules, but that causes infinite recursion
+              home-manager.nixosModules.home-manager
+              nixos-hardware.nixosModules.lenovo-thinkpad-l13-yoga-amd-gen2
+
+              (import ./boxes/l13.nix {
                 inherit pkgs lib comma nixpkgs nixpkgs-unstable nixos-hardware
                   home-manager nixos-vsliveshare rnix-lsp-flake;
               })
