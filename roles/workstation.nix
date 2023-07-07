@@ -30,14 +30,16 @@
     "ATTRS{idVendor}''=''\"2ccf''\", ATTRS{idProduct}''=''\"0854''\", MODE=''\"0660''\"";
 
   # Misc. uncategorized packages
+
+
   environment.systemPackages = with pkgs; [
     openconnect
     bleachbit
     # Desktop backup
-    pkgs.unstable.rclone
+    pkgs.rclone
     # Stable does not support new bitlocker versions
     (callPackage ../pkgs/dislocker-master { })
-    pkgs.unstable.restic
+    pkgs.restic
     virt-manager
     # Required for proper QT sway support
     qt5.qtwayland
