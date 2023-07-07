@@ -43,6 +43,14 @@
     qt5.qtwayland
     # The service doesn't put the client into PATH
     mullvad-vpn
+
+    # Keyboard config
+    (callPackage ../pkgs/obinskit-fixed { })
+  ];
+
+  # Needed by obinskit
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-13.6.9"
   ];
 
   # Enable zsh properly
