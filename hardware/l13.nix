@@ -21,7 +21,7 @@
   services.xserver.modules = [ pkgs.xf86_input_wacom ];
   services.xserver.wacom.enable = true;
   # Enable touchpad support.
-  services.xserver.libinput.enable = true;
+  services.libinput.enable = true;
 
   # Fingerprint scanner
   services.fprintd.enable = true;

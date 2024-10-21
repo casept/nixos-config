@@ -19,7 +19,7 @@
   services.pipewire.alsa.support32Bit = true;
 
   # For Dualshock 3 support
-  hardware.bluetooth.package = pkgs.bluezFull;
+  hardware.bluetooth.package = pkgs.bluez;
   hardware.steam-hardware.enable = true;
 
   # Networking
@@ -45,14 +45,6 @@
     qt5.qtwayland
     # The service doesn't put the client into PATH
     mullvad-vpn
-
-    # Keyboard config
-    (callPackage ../pkgs/obinskit-fixed { })
-  ];
-
-  # Needed by obinskit
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-13.6.9"
   ];
 
   # Enable zsh properly

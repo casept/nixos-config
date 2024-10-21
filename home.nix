@@ -1,4 +1,4 @@
-{ pkgs, nixos-vsliveshare, rnix-lsp-flake, ... }: {
+{ pkgs, nixos-vsliveshare, ... }: {
   imports = [ ./home/vscode.nix ];
 
   # Let Home Manager install and manage itself.
@@ -65,9 +65,7 @@
 
     # Linters and formatters (global for convenience)
     shellcheck
-    nixfmt
-    # TODO: This is currently pulled from nixpkgs because I don't know how to pass a flake input to home-manager.
-    rnix-lsp
+    nixfmt-classic
     # Misc. Unix-ish tools
     direnv
     ripgrep

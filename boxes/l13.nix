@@ -1,5 +1,5 @@
 { pkgs, lib, nixpkgs, nixpkgs-unstable, nixos-hardware, home-manager, comma
-, nixos-vsliveshare, rnix-lsp-flake, ... }: {
+, nixos-vsliveshare, ... }: {
 
   imports = [ ../roles/workstation.nix ../hardware/l13.nix ];
 

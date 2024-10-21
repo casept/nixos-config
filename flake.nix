@@ -3,7 +3,7 @@
 
   inputs = {
     # Used by the core system config
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     # TODO: Switch back once l13 amd yoga gen2 is merged
     nixos-hardware.url = "github:casept/nixos-hardware";
@@ -16,7 +16,7 @@
 
     # Used by home-manager
     home-manager = {
-      url = "github:nix-community/home-manager/release-23.05";
+      url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     comma = {
@@ -28,14 +28,10 @@
       url = "github:Flakebi/nixos-vsliveshare";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    rnix-lsp-flake = {
-      url = "github:nix-community/rnix-lsp";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = { self, nixpkgs, nixpkgs-unstable, nixos-hardware, home-manager
-    , comma, nixos-vsliveshare, rnix-lsp-flake, ... }:
+    , comma, nixos-vsliveshare, ... }:
     let
       system = "x86_64-linux";
       overlay-unstable = self: super: {
@@ -60,11 +56,11 @@
             imports = [
               # These should be imported in the hardware/role modules, but that causes infinite recursion
               home-manager.nixosModules.home-manager
-              nixos-hardware.nixosModules.lenovo-thinkpad-l13-yoga-amd-gen2
+              nixos-hardware.nixosModules.lenovo-thinkpad-l13-amd-gen2-yoga
 
               (import ./boxes/l13.nix {
                 inherit pkgs lib comma nixpkgs nixpkgs-unstable nixos-hardware
-                  home-manager nixos-vsliveshare rnix-lsp-flake;
+                  home-manager nixos-vsliveshare;
               })
               (import ./common/flake-conf.nix {
                 inherit pkgs nixpkgs nixpkgs-unstable;
