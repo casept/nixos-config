@@ -65,29 +65,22 @@
 
   # Enable SANE.
   hardware.sane.enable = true;
-  hardware.sane.brscan4.enable = true;
-  hardware.sane.brscan4.netDevices = {
-    e514dw = {
-      ip = "192.168.0.105";
-      model = "MFC-L2700DW"; # Dunno why this model, but it works
-    };
-  };
 
   services.pipewire.enable = true;
   xdg.portal = {
     enable = true;
-    #extraPortals = [ pkgs.xdg-desktop-portal-kde ];
   };
-
-  # Enable KDE
-  #services.xserver.enable = true;
-  #services.xserver.displayManager.sddm.enable = true;
-  #services.xserver.desktopManager.plasma5.enable = true;
-  # So themes are applied to GTK apps
-  programs.dconf.enable = true;
 
   # Enable flatpak support
   services.flatpak.enable = true;
+  systemd.services.flatpak-repo = {
+    wantedBy = [ "multi-user.target" ];
+    path = [ pkgs.flatpak ];
+    script = ''
+      flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    '';
+  };
+
 
   # Enable NTFS support
   boot.supportedFilesystems = [ "ntfs" ];
