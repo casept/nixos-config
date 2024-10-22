@@ -17,7 +17,7 @@
   # You can update Home Manager without changing this value. See
   # the Home Manager release notes for a list of state version
   # changes in each release.
-  home.stateVersion = "23.05";
+  home.stateVersion = "24.05";
 
   services.lorri.enable = true;
   services.syncthing.enable = true;
@@ -28,44 +28,37 @@
   xdg.mime.enable = true;
   xdg.mimeApps.enable = true;
   xdg.mimeApps.defaultApplications = {
-    "application/pdf" = [ "org.gnome.Evince.desktop" ];
-
-    "text/html" = "firefox.desktop";
-    "x-scheme-handler/http" = "firefox.desktop";
-    "x-scheme-handler/https" = "firefox.desktop";
-    "x-scheme-handler/about" = "firefox.desktop";
-    "x-scheme-handler/unknown" = "firefox.desktop";
+    "text/html" = "org.mozilla.firefox.desktop";
+    "x-scheme-handler/http" = "org.mozilla.firefox.desktop";
+    "x-scheme-handler/https" = "org.mozilla.firefox.desktop";
+    "x-scheme-handler/about" = "org.mozilla.firefox.desktop";
+    "x-scheme-handler/unknown" = "org.mozilla.firefox.desktop";
 
     "application/x-bittorrent" = "com.transmissionbt.Transmission.desktop";
     "x-scheme-handler/magnet" = "com.transmissionbt.Transmission.desktop";
 
     "application/vnd.apple.mpegurl" = "vlc.desktop";
     "application/x-mpegurl" = "vlc.desktop";
-    "video/3gpp" = "vlc.desktop";
-    "video/mp4" = "vlc.desktop";
-    "video/mpeg" = "vlc.desktop";
-    "video/ogg" = "vlc.desktop";
-    "video/quicktime" = "vlc.desktop";
-    "video/webm" = "vlc.desktop";
-    "video/x-m4v" = "vlc.desktop";
-    "video/ms-asf" = "vlc.desktop";
-    "video/x-ms-wmv" = "vlc.desktop";
-    "video/x-msvideo" = "vlc.desktop";
+    "video/3gpp" = "org.videolan.VLC.desktop";
+    "video/mp4" = "org.videolan.VLC.desktop";
+    "video/mpeg" = "org.videolan.VLC.desktop";
+    "video/ogg" = "org.videolan.VLC.desktop";
+    "video/quicktime" = "org.videolan.VLC.desktop";
+    "video/webm" = "org.videolan.VLC.desktop";
+    "video/x-m4v" = "org.videolan.VLC.desktop";
+    "video/ms-asf" = "org.videolan.VLC.desktop";
+    "video/x-ms-wmv" = "org.videolan.VLC.desktop";
+    "video/x-msvideo" = "org.videolan.VLC.desktop";
   };
 
   home.packages = with pkgs; [
-    # Browsers
-    unstable.firefox
-    unstable.chromium
-    unstable.thunderbird
-    filezilla
-
     # Editors
-    helix
+    unstable.helix
 
     # Linters and formatters (global for convenience)
     shellcheck
-    nixfmt-classic
+    nixpkgs-fmt
+    unstable.nixd
     # Misc. Unix-ish tools
     direnv
     ripgrep
@@ -77,7 +70,6 @@
     stow
     tmux
     tmate
-    alacritty
     wget
     curl
     unar
@@ -90,12 +82,10 @@
     sshfs
     pv
     psensor
-    zeal
     imv
 
     # Reverse engineering
     unstable.ghidra-bin
-    jd-gui
     python311Packages.binwalk-full
     avalonia-ilspy
 
@@ -116,29 +106,18 @@
     unstable.lutris
 
     # Note-taking
-    xournalpp
     simple-scan
     texlive.combined.scheme-full
-    evince
-    inkscape
 
     # Network diagnostics
     nmap
     inetutils
 
     # Media
-    vlc
-    rhythmbox
     unstable.noisetorch
     unstable.droidcam
     unstable.obs-studio
     unstable.obs-studio-plugins.wlrobs
-
-    # Office
-    libreoffice-fresh
-
-    # Security
-    keepassxc
 
     # Misc
     vagrant

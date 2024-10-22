@@ -55,6 +55,21 @@
         "type": "github"
       }
     },
+    "nix-flatpak": {
+      "locked": {
+        "lastModified": 1729453639,
+        "narHash": "sha256-L19R5CXCfTU9IFs9FAaYhDiteegfhJQMiAHLfls4Pdw=",
+        "owner": "gmodena",
+        "repo": "nix-flatpak",
+        "rev": "68bc646058386e2ffbd9d78d79d6558e684f6b8c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gmodena",
+        "repo": "nix-flatpak",
+        "type": "github"
+      }
+    },
     "nixos-generators": {
       "flake": false,
       "locked": {
@@ -143,6 +158,7 @@
         "comma": "comma",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
+        "nix-flatpak": "nix-flatpak",
         "nixos-generators": "nixos-generators",
         "nixos-hardware": "nixos-hardware",
         "nixos-vsliveshare": "nixos-vsliveshare",

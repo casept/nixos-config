@@ -73,13 +73,49 @@
 
   # Enable flatpak support
   services.flatpak.enable = true;
-  systemd.services.flatpak-repo = {
-    wantedBy = [ "multi-user.target" ];
-    path = [ pkgs.flatpak ];
-    script = ''
-      flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-    '';
-  };
+  services.flatpak.packages = [
+    "com.calibre_ebook.calibre"
+    "com.getpostman.Postman"
+    "com.github.junrrein.PDFSlicer"
+    "com.github.rajsolai.textsnatcher"
+    "com.github.skylot.jadx"
+    "com.github.tchx84.Flatseal"
+    "com.github.xournalpp.xournalpp"
+    "com.google.Chrome"
+    "com.ktechpit.whatsie"
+    "com.oppzippy.OpenSCQ30"
+    "com.prusa3d.PrusaSlicer"
+    "com.slack.Slack"
+    "com.spotify.Client"
+    "com.ulduzsoft.Birdtray"
+    "com.valvesoftware.Steam"
+    "de.bund.ausweisapp.ausweisapp2"
+    "im.nheko.Nheko"
+    "io.dbeaver.DBeaverCommunity"
+    "io.github.TransmissionRemoteGtk"
+    "net.pcsx2.PCSX2"
+    "net.werwolv.ImHex"
+    "org.bleachbit.BleachBit"
+    "org.filezillaproject.Filezilla"
+    "org.inkscape.Inkscape"
+    "org.jdownloader.JDownloader"
+    "org.kde.filelight"
+    "org.kde.itinerary"
+    "org.kde.okteta"
+    "org.keepassxc.KeePassXC"
+    "org.libreoffice.LibreOffice"
+    "org.mozilla.Thunderbird"
+    "org.mozilla.firefox"
+    "org.openscad.OpenSCAD"
+    "org.pulseaudio.pavucontrol"
+    "org.remmina.Remmina"
+    "org.signal.Signal"
+    "org.speedcrunch.SpeedCrunch"
+    "org.telegram.desktop"
+    "org.torproject.torbrowser-launcher"
+    "org.videolan.VLC"
+    "org.zealdocs.Zeal"
+  ];
 
 
   # Enable NTFS support

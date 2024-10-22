@@ -9,6 +9,7 @@
     nixos-hardware.url = "github:casept/nixos-hardware";
     # Used by the dev shell
     flake-utils.url = "github:numtide/flake-utils";
+    nix-flatpak.url = "github:gmodena/nix-flatpak";
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       flake = false;
@@ -30,8 +31,17 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nixos-hardware, home-manager
-    , comma, nixos-vsliveshare, ... }:
+  outputs =
+    { self
+    , nixpkgs
+    , nixpkgs-unstable
+    , nixos-hardware
+    , home-manager
+    , comma
+    , nixos-vsliveshare
+    , nix-flatpak
+    , ...
+    }:
     let
       system = "x86_64-linux";
       overlay-unstable = self: super: {
@@ -46,17 +56,21 @@
         mullvad-vpn = super.unstable.pkgs.mullvad-vpn;
       };
       extra-pkgs = self: super:
-        { # pkgs.comma = (super.callPackage comma { });
+        {
+          # pkgs.comma = (super.callPackage comma { });
         };
-    in {
+    in
+    {
       nixosConfigurations.l13 = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
-          ({ lib, config, pkgs, ... }: {
+          ({ lib, pkgs, ... }: {
             imports = [
               # These should be imported in the hardware/role modules, but that causes infinite recursion
               home-manager.nixosModules.home-manager
               nixos-hardware.nixosModules.lenovo-thinkpad-l13-amd-gen2-yoga
+
+              nix-flatpak.nixosModules.nix-flatpak
 
               (import ./boxes/l13.nix {
                 inherit pkgs lib comma nixpkgs nixpkgs-unstable nixos-hardware
@@ -81,11 +95,13 @@
       nixosConfigurations.twods = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
-          ({ lib, config, pkgs, ... }: {
+          ({ lib, pkgs, ... }: {
             imports = [
               # These should be imported in the hardware/role modules, but that causes infinite recursion
               home-manager.nixosModules.home-manager
               nixos-hardware.nixosModules.gpd-micropc
+
+              nix-flatpak.nixosModules.nix-flatpak
 
               (import ./boxes/2ds.nix {
                 inherit pkgs lib comma nixpkgs nixpkgs-unstable nixos-hardware
