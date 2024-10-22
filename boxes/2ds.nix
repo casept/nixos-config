@@ -18,27 +18,27 @@
   fileSystems =
     let
       btrfsCommon = [ "defaults" "compress=zstd:1" "autodefrag" ];
-      id = "1724ce47-b4b7-4565-b14a-0dbccdec3dd8";
+      id = "/dev/disk/by-uuid/1724ce47-b4b7-4565-b14a-0dbccdec3dd8";
     in
     {
       "/boot" = {
         fsType = "vfat";
-        uuid = "1C47-35C5";
+        device = "/dev/disk/by-uuid/1C47-35C5";
         neededForBoot = true;
       };
       "/" = {
         fsType = "btrfs";
-        uuid = id;
+        device = id;
         options = btrfsCommon ++ [ "subvol=root" ];
       };
       "/home" = {
         fsType = "btrfs";
-        uuid = id;
+        device = id;
         options = btrfsCommon ++ [ "subvol=home" ];
       };
       "/nix" = {
         fsType = "btrfs";
-        uuid = id;
+        device = id;
         options = btrfsCommon ++ [ "noatime" "subvol=nix" ];
       };
     };
