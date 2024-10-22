@@ -9,7 +9,7 @@
     ../builders.nix
     ./subroles/workstation/dev.nix
     ./subroles/workstation/ops.nix
-    ./subroles/workstation/gnome.nix
+    ./subroles/workstation/kde.nix
   ];
 
   services.mullvad-vpn.enable = true;
