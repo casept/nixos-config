@@ -25,6 +25,12 @@
   # Networking
   networking.networkmanager.enable = true;
 
+  # Tailscale
+  services.tailscale = {
+    enable = true;
+    useRoutingFeatures = "both";
+  };
+
   # Enable talking to a U2F dongle
   services.udev.extraRules =
     "ATTRS{idVendor}''=''\"2ccf''\", ATTRS{idProduct}''=''\"0854''\", MODE=''\"0660''\"";
