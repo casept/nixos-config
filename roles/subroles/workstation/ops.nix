@@ -11,6 +11,8 @@
     dockerCompat = true;
   };
 
+  environment.systemPackages = [ pkgs.distrobox ];
+
   # Creating images for funky architectures
   boot.binfmt.emulatedSystems = [
     "aarch64-linux"
