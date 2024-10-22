@@ -56,4 +56,17 @@
 
   # Better HW support
   boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  # Keyboard lacks Alt-Gr, making EURKey difficult to use
+  services.keyd = {
+    enable = true;
+    keyboards.default = {
+        ids = [ "*" ];
+        settings = {
+          main = {
+            rightshift = "rightalt";
+          };
+        };
+      };
+    };
 }
