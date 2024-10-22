@@ -1,7 +1,5 @@
 { config, pkgs, ... }: {
   # Set up virtualisation
-  virtualisation.lxd.enable = true;
-
   virtualisation.virtualbox = {
     host.enable = true;
     host.package = pkgs.unstable.virtualbox;

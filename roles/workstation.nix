@@ -1,4 +1,4 @@
-{ pkgs, hardware, home-manager, nixos-vsliveshare, rnix-lsp-flake, ... }: {
+{ pkgs, hardware, home-manager, nixos-vsliveshare, systemd, ... }: {
   services.openssh.enable = true;
   services.openssh.settings.X11Forwarding = true;
   services.openssh.settings.PasswordAuthentication = false;
@@ -40,22 +40,12 @@
     # Stable does not support new bitlocker versions
     (callPackage ../pkgs/dislocker-master { })
     pkgs.restic
-    virt-manager
-    # Required for proper QT sway support
-    qt5.qtwayland
     # The service doesn't put the client into PATH
     mullvad-vpn
   ];
 
   # Enable zsh properly
   programs.zsh.enable = true;
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
 
   #Enable CUPS to print documents.
   services.printing.enable = true;
