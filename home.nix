@@ -85,7 +85,7 @@
     imv
 
     # Reverse engineering
-    unstable.ghidra-bin
+    unstable.ghidra
     python311Packages.binwalk-full
     avalonia-ilspy
 
