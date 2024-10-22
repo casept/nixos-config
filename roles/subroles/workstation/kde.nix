@@ -7,4 +7,9 @@
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
     elisa
   ];
+
+  environment.systemPackages = [
+    # Version with Plasma 6 support not yet in stable nixos
+    pkgs.unstable.kdePackages.krohnkite
+  ];
 }
