@@ -1,5 +1,13 @@
-{ pkgs, lib, nixpkgs, nixpkgs-unstable, nixos-hardware, home-manager, comma
-, nixos-vsliveshare, ... }: {
+{ pkgs
+, lib
+, nixpkgs
+, nixpkgs-unstable
+, nixos-hardware
+, home-manager
+, comma
+, nixos-vsliveshare
+, ...
+}: {
 
   imports = [ ../roles/workstation.nix ../hardware/l13.nix ];
 
@@ -8,9 +16,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.configurationLimit = 50;
   boot.loader.systemd-boot.editor = false;
-
-  networking.interfaces.enp0s25.useDHCP = true;
-  networking.interfaces.wlan0.useDHCP = true;
 
   networking.hostName = "l13";
   networking.hostId = "8aa2b679";
