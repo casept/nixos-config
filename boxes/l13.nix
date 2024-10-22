@@ -117,4 +117,6 @@
   # Allegedly, ZFS does not like the kernel scheduler messing with it
   # TODO: Research how to set this only for /dev/nmvme0n1p2
   boot.kernelParams = [ "elevator=none" ];
+
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 }
