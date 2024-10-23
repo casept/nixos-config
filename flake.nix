@@ -123,6 +123,36 @@
         ];
       };
 
+      nixosConfigurations.clobus = nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules = [
+          ({ lib, pkgs, ... }: {
+            imports = [
+              # These should be imported in the hardware/role modules, but that causes infinite recursion
+              home-manager.nixosModules.home-manager
+
+              nix-flatpak.nixosModules.nix-flatpak
+
+              (import ./boxes/clobus.nix {
+                inherit pkgs lib comma nixpkgs nixpkgs-unstable nixos-hardware
+                  home-manager nixos-vsliveshare;
+              })
+              (import ./common/flake-conf.nix {
+                inherit pkgs nixpkgs nixpkgs-unstable;
+              })
+            ];
+            nixpkgs.overlays = [ overlay-unstable overlay-mullvad extra-pkgs ];
+            nixpkgs.config.allowUnfree = true;
+            nixpkgs.config.allowBroken = true;
+            nixpkgs.config.pipewire = true; # Needed for waybar PA widget
+            # Let 'nixos-version --json' know about the Git revision of this flake.
+            system.configurationRevision =
+              nixpkgs.lib.mkIf (self ? rev) self.rev;
+            nix.registry.nixpkgs.flake = nixpkgs;
+          })
+        ];
+      };
+
       # TODO: Load dev shell with tools for working on this config
     };
 }
