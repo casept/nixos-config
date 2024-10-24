@@ -25,6 +25,7 @@
         fsType = "vfat";
         device = "/dev/disk/by-uuid/C92B-5AC1";
         neededForBoot = true;
+        options = [ "umask=022" ];
       };
       "/" = {
         fsType = "btrfs";
