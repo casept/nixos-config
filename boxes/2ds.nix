@@ -25,6 +25,7 @@
         fsType = "vfat";
         device = "/dev/disk/by-uuid/1C47-35C5";
         neededForBoot = true;
+        options = [ "umask=022" ];
       };
       "/" = {
         fsType = "btrfs";
@@ -61,12 +62,12 @@
   services.keyd = {
     enable = true;
     keyboards.default = {
-        ids = [ "*" ];
-        settings = {
-          main = {
-            rightshift = "rightalt";
-          };
+      ids = [ "*" ];
+      settings = {
+        main = {
+          rightshift = "rightalt";
         };
       };
     };
+  };
 }
