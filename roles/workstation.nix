@@ -149,6 +149,7 @@
 
   # I'm the only user and desktop Linux security is a mess, so this isn't really a problem
   nix.settings.trusted-users = [ "root" "casept" ];
+  security.sudo.wheelNeedsPassword = false;
 
   # Way too annoying to manage on a desktop system IMHO
   networking.firewall.enable = false;
