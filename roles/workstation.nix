@@ -46,6 +46,7 @@
     # Stable does not support new bitlocker versions
     (callPackage ../pkgs/dislocker-master { })
     unstable.rustic
+    mosh
     # The service doesn't put the client into PATH
     mullvad-vpn
   ];
