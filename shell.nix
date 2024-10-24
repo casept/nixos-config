@@ -13,4 +13,5 @@ let
     nix-linter.nix-linter
     nixpkgs.nixops
   ];
-in nixpkgs.mkShell { buildInputs = shellPackages; }
+in
+nixpkgs.mkShell { buildInputs = shellPackages; }

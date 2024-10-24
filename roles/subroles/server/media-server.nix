@@ -9,7 +9,8 @@ let
   # User that all this stuff runs under
   media_user = "media";
   media_group = "media";
-in {
+in
+{
   system.stateVersion = "23.05";
   networking.firewall.enable = true;
   # VPN
