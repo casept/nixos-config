@@ -1,4 +1,4 @@
-{ pkgs, nixos-vsliveshare, ... }: {
+{ pkgs, ... }: {
   imports = [ ./home/vscode.nix ];
 
   # Let Home Manager install and manage itself.
@@ -60,6 +60,7 @@
     nixpkgs-fmt
     unstable.nixd
     # Misc. Unix-ish tools
+    starship
     direnv
     ripgrep
     ripgrep-all
