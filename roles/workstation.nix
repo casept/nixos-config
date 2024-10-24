@@ -42,10 +42,10 @@
     openconnect
     bleachbit
     # Desktop backup
-    pkgs.rclone
+    rclone
     # Stable does not support new bitlocker versions
     (callPackage ../pkgs/dislocker-master { })
-    pkgs.restic
+    unstable.rustic
     # The service doesn't put the client into PATH
     mullvad-vpn
   ];
