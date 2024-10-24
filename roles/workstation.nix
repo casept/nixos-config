@@ -86,6 +86,7 @@
     "com.github.rajsolai.textsnatcher"
     "com.github.skylot.jadx"
     "com.github.tchx84.Flatseal"
+    "com.github.zocker_160.SyncThingy"
     "com.github.xournalpp.xournalpp"
     "com.google.Chrome"
     "com.ktechpit.whatsie"
