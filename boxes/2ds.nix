@@ -60,6 +60,10 @@
   # Better HW support
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  boot.plymouth.enable = true;
+  boot.initrd.systemd.enable = true;
+  boot.kernelParams = [ "quiet" ];
+
   # Keyboard lacks Alt-Gr, making EURKey difficult to use
   services.keyd = {
     enable = true;
