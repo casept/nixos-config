@@ -6,7 +6,6 @@
   time.timeZone = "Europe/Berlin";
 
   imports = [
-    ../builders.nix
     ./subroles/workstation/dev.nix
     ./subroles/workstation/ops.nix
     ./subroles/workstation/kde.nix
