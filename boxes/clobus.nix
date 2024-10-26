@@ -37,11 +37,6 @@
         device = id;
         options = btrfsCommon ++ [ "subvol=home" ];
       };
-      "/nix" = {
-        fsType = "btrfs";
-        device = id;
-        options = btrfsCommon ++ [ "noatime" "subvol=nix" ];
-      };
     };
 
   # Add BTRFS support
