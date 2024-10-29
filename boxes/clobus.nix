@@ -67,4 +67,14 @@
       };
     };
   };
+
+  # Configure the machine as a remote builder
+  # Setting up the SSH keys is not done here
+  users.users.nixremote = {
+    isNormalUser = true;
+    home = "/home/nixremote";
+    description = "Unprivileged user for remote builds";
+    group = "nogroup";
+  };
+  services.displayManager.hiddenUsers = [ "nixremote" ];
 }
