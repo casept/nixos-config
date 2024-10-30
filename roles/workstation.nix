@@ -46,6 +46,7 @@
     (callPackage ../pkgs/dislocker-master { })
     unstable.rustic
     mosh
+    sshuttle
     # The service doesn't put the client into PATH
     mullvad-vpn
   ];
