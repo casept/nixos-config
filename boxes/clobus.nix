@@ -49,6 +49,9 @@
     fileSystems = [ "/" ];
   };
 
+  zramSwap.enable = true;
+  zramSwap.memoryPercent = 100;
+
   # Better HW support
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
