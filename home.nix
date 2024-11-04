@@ -54,6 +54,8 @@
   home.packages = with pkgs; [
     # Editors
     unstable.helix
+    unstable.zed-editor
+    (pkgs.writeShellScriptBin "z" "exec -a $0 ${unstable.zed-editor}/bin/zeditor $@")
 
     # Linters and formatters (global for convenience)
     shellcheck
