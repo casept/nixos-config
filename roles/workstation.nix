@@ -78,6 +78,8 @@
     enable = true;
   };
 
+  programs.ssh.startAgent = true;
+
   # Enable flatpak support
   services.flatpak.enable = true;
   services.flatpak.packages = [
