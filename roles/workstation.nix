@@ -14,7 +14,7 @@
   services.mullvad-vpn.enable = true;
 
   # Needed for steam and many games.
-  hardware.opengl.driSupport32Bit = true;
+  hardware.graphics.enable32Bit = true;
   services.pipewire.alsa.support32Bit = true;
 
   # For Dualshock 3 support

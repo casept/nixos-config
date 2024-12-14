@@ -84,13 +84,12 @@
     git
     sshfs
     pv
-    psensor
+    monitorets
     imv
 
     # Reverse engineering
     unstable.ghidra
     python311Packages.binwalk-full
-    avalonia-ilspy
 
     # Nix-specific tools
     (appimage-run.override { extraPkgs = pkgs: [ pkgs.xorg.libxshmfence ]; })

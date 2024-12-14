@@ -5,6 +5,6 @@
     nixpkgs.flake = nixpkgs;
     nixpkgs-unstable.flake = nixpkgs-unstable;
   };
-  nix.package = pkgs.nixFlakes;
+  nix.package = pkgs.nixVersions.stable;
   nix.extraOptions = "experimental-features = nix-command flakes";
 }

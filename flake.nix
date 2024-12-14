@@ -3,7 +3,7 @@
 
   inputs = {
     # Used by the core system config
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     # TODO: Switch back once l13 amd yoga gen2 is merged
     nixos-hardware.url = "github:casept/nixos-hardware";
@@ -17,7 +17,7 @@
 
     # Used by home-manager
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     comma = {
