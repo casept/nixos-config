@@ -2,6 +2,7 @@
   services.openssh.enable = true;
   services.openssh.settings.X11Forwarding = true;
   services.openssh.settings.PasswordAuthentication = false;
+  programs.mosh.enable = true;
 
   time.timeZone = "Europe/Berlin";
 
@@ -157,4 +158,12 @@
 
   # Way too annoying to manage on a desktop system IMHO
   networking.firewall.enable = false;
+
+  i18n.supportedLocales = [
+    "C.UTF-8/UTF-8"
+    "en_US.UTF-8/UTF-8"
+    "de_DE.UTF-8/UTF-8"
+    "lv_LV.UTF-8/UTF-8"
+    "ru_RU.UTF-8/UTF-8"
+  ];
 }
