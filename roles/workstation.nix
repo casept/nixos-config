@@ -14,6 +14,9 @@
 
   services.mullvad-vpn.enable = true;
 
+  # Allow running dynamically-linked binaries for FHS Linux
+  programs.nix-ld.enable = true;
+
   # Needed for steam and many games.
   hardware.graphics.enable32Bit = true;
   services.pipewire.alsa.support32Bit = true;
