@@ -111,9 +111,10 @@
     simple-scan
     texlive.combined.scheme-full
 
-    # Network diagnostics
+    # Diagnostics
     nmap
     inetutils
+    usbutils
 
     # Media
     unstable.noisetorch
