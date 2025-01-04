@@ -41,12 +41,27 @@
 
   # Add BTRFS support
   boot.supportedFilesystems = [ "btrfs" ];
-  # BTRFS scrubbing, but only on AC power
+  # BTRFS scrubbing
   services.btrfs.autoScrub = {
     enable = true;
     interval = "weekly";
     # Will scrub all subvols on FS
     fileSystems = [ "/" ];
+  };
+
+  # Automatic BTRFS snapshots
+  services.snapper = {
+    persistentTimer = true;
+    cleanupInterval = "1d";
+    configs.home = {
+      # Snapshot just enough to recover from overzealous rm usage
+      SUBVOLUME = "/home";
+      ALLOW_USERS = [ "casept" ];
+      TIMELINE_CREATE = true;
+      TIMELINE_CLEANUP = true;
+      TIMELINE_LIMIT_DAILY = 1;
+      TIMELINE_LIMIT_HOURLY = 2;
+    };
   };
 
   zramSwap.enable = true;

@@ -42,6 +42,7 @@
 
 
   environment.systemPackages = with pkgs; [
+    btrfs-assistant
     openconnect
     bleachbit
     # Desktop backup
