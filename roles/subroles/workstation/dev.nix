@@ -1,10 +1,11 @@
 { config, environment, pkgs, ... }: {
   programs.adb.enable = true;
 
-  # Udev rules for programming a RISC-V dev board from china
-  services.udev.extraRules =
-    "ATTRS{idVendor}''=''\"28e9''\", ATTRS{idProduct}''=''\"0189''\", MODE=''\"0666''\", ENV{ID_MM_DEVICE_IGNORE}''=''\"1''\", ENV{IF_MM_PORT_IGNORE}''=''\"1''\"";
-
+  # DJI
+  services.udev.extraRules = ''
+    ATTRS{idVendor}=="2ca3", ATTRS{idProduct}=="0022", MODE="0660", GROUP="wheel"
+    ATTRS{idVendor}=="2ca3", ATTRS{idProduct}=="0040", MODE="0660", GROUP="wheel"
+  '';
 
   environment.systemPackages = with pkgs; [
     # Common programming tools I always want available
