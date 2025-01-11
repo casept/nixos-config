@@ -2,7 +2,7 @@
   # Set up virtualisation
   virtualisation.virtualbox = {
     host.enable = true;
-    host.package = pkgs.unstable.virtualbox;
+    host.package = pkgs.virtualbox;
     host.enableExtensionPack = true;
   };
 
