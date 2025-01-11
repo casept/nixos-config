@@ -9,7 +9,7 @@
 , ...
 }: {
 
-  imports = [ ../roles/workstation.nix ../hardware/l13.nix ];
+  imports = [ ../roles/workstation.nix ../hardware/t14.nix ];
 
   # I like systemd, fite me
   boot.loader.systemd-boot.enable = true;
@@ -17,7 +17,7 @@
   boot.loader.systemd-boot.configurationLimit = 50;
   boot.loader.systemd-boot.editor = false;
 
-  networking.hostName = "l13";
+  networking.hostName = "laptop";
   networking.hostId = "8aa2b679";
 
   # See https://grahamc.com/blog/erase-your-darlings for rationale behind this setup

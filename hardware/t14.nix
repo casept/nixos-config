@@ -10,16 +10,13 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
-  nix.settings.max-jobs = lib.mkDefault 4;
+  nix.settings.max-jobs = lib.mkDefault 12;
   powerManagement.cpuFreqGovernor = lib.mkDefault "conservative";
 
   # Firmware updates
   services.fwupd.enable = true;
 
   #### Input configuration ####
-  # Enable wacom support.
-  services.xserver.modules = [ pkgs.xf86_input_wacom ];
-  services.xserver.wacom.enable = true;
   # Enable touchpad support.
   services.libinput.enable = true;
 

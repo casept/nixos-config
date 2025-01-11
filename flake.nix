@@ -5,7 +5,7 @@
     # Used by the core system config
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    # TODO: Switch back once l13 amd yoga gen2 is merged
+    # TODO: Switch back once all machines are merged
     nixos-hardware.url = "github:casept/nixos-hardware";
     # Used by the dev shell
     flake-utils.url = "github:numtide/flake-utils";
@@ -61,18 +61,18 @@
         };
     in
     {
-      nixosConfigurations.l13 = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
           ({ lib, pkgs, ... }: {
             imports = [
               # These should be imported in the hardware/role modules, but that causes infinite recursion
               home-manager.nixosModules.home-manager
-              nixos-hardware.nixosModules.lenovo-thinkpad-l13-amd-gen2-yoga
+              nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen1
 
               nix-flatpak.nixosModules.nix-flatpak
 
-              (import ./boxes/l13.nix {
+              (import ./boxes/laptop.nix {
                 inherit pkgs lib comma nixpkgs nixpkgs-unstable nixos-hardware
                   home-manager nixos-vsliveshare;
               })
