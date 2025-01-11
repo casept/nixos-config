@@ -4,6 +4,7 @@
   # DJI
   services.udev.extraRules = ''
     ATTRS{idVendor}=="2ca3", ATTRS{idProduct}=="0022", MODE="0660", GROUP="wheel"
+    ATTRS{idVendor}=="2ca3", ATTRS{idProduct}=="0020", MODE="0660", GROUP="wheel"
     ATTRS{idVendor}=="2ca3", ATTRS{idProduct}=="0040", MODE="0660", GROUP="wheel"
   '';
 
