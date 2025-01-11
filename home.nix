@@ -114,6 +114,7 @@
     # Diagnostics
     nmap
     inetutils
+    ethtool
     usbutils
 
     # Media
@@ -124,5 +125,6 @@
 
     # Misc
     vagrant
+    tio
   ];
 }
