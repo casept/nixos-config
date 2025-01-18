@@ -7,9 +7,9 @@
   time.timeZone = "Europe/Berlin";
 
   imports = [
-    ./subroles/workstation/dev.nix
-    ./subroles/workstation/ops.nix
-    ./subroles/workstation/kde.nix
+    ./dev.nix
+    ./ops.nix
+    ./kde.nix
   ];
 
   services.mullvad-vpn.enable = true;

@@ -1,6 +1,4 @@
 { pkgs, ... }: {
-  imports = [ ./home/vscode.nix ];
-
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
@@ -50,6 +48,14 @@
     "video/x-ms-wmv" = "org.videolan.VLC.desktop";
     "video/x-msvideo" = "org.videolan.VLC.desktop";
   };
+
+  programs.vscode = {
+    enable = true;
+    package = pkgs.unstable.vscode.fhs;
+  };
+
+  # Enable native Wayland support
+  home.sessionVariables.NIXOS_OZONE_WL = "1";
 
   home.packages = with pkgs; [
     # Editors
