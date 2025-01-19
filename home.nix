@@ -94,7 +94,7 @@
     imv
 
     # Reverse engineering
-    unstable.ghidra
+    ghidra
     python311Packages.binwalk-full
 
     # Nix-specific tools
