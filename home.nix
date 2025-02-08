@@ -17,12 +17,6 @@
   # changes in each release.
   home.stateVersion = "24.05";
 
-  services.lorri.enable = true;
-  services.syncthing.enable = true;
-  services.syncthing.tray.enable = true;
-  services.kdeconnect.enable = true;
-  services.kdeconnect.indicator = true;
-
   xdg.mime.enable = true;
   xdg.mimeApps.enable = true;
   xdg.mimeApps.defaultApplications = {
