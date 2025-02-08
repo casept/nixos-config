@@ -104,7 +104,7 @@
     hostName = "vm-build-big?remote-program=/nix/var/nix/profiles/default/bin/nix-daemon";
     sshUser = "nixremote";
     systems = [ "x86_64-linux" "i686-linux" ];
-    maxJobs = 40;
+    maxJobs = 2;
     speedFactor = 20;
     supportedFeatures = [ "benchmark" "big-parallel" ];
     mandatoryFeatures = [ ];
