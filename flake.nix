@@ -51,14 +51,6 @@
           config.allowBroken = true;
         };
       };
-      # The Mullvad client in stable is outdated
-      overlay-mullvad = self: super: {
-        mullvad-vpn = super.unstable.pkgs.mullvad-vpn;
-      };
-      extra-pkgs = self: super:
-        {
-          # pkgs.comma = (super.callPackage comma { });
-        };
     in
     {
       nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
@@ -80,7 +72,7 @@
                 inherit pkgs nixpkgs nixpkgs-unstable;
               })
             ];
-            nixpkgs.overlays = [ overlay-unstable overlay-mullvad extra-pkgs ];
+            nixpkgs.overlays = [ overlay-unstable ];
             nixpkgs.config.allowUnfree = true;
             nixpkgs.config.allowBroken = true;
             nixpkgs.config.pipewire = true; # Needed for waybar PA widget
@@ -111,7 +103,7 @@
                 inherit pkgs nixpkgs nixpkgs-unstable;
               })
             ];
-            nixpkgs.overlays = [ overlay-unstable overlay-mullvad extra-pkgs ];
+            nixpkgs.overlays = [ overlay-unstable ];
             nixpkgs.config.allowUnfree = true;
             nixpkgs.config.allowBroken = true;
             nixpkgs.config.pipewire = true; # Needed for waybar PA widget
@@ -141,7 +133,7 @@
                 inherit pkgs nixpkgs nixpkgs-unstable;
               })
             ];
-            nixpkgs.overlays = [ overlay-unstable overlay-mullvad extra-pkgs ];
+            nixpkgs.overlays = [ overlay-unstable ];
             nixpkgs.config.allowUnfree = true;
             nixpkgs.config.allowBroken = true;
             nixpkgs.config.pipewire = true; # Needed for waybar PA widget
