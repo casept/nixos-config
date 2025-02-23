@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  imports = [ ../workstation/workstation.nix ../hardware/z440.nix ];
+  imports = [ ../workstation ../hardware/z440.nix ];
 
   # I like systemd, fite me
   boot.loader.systemd-boot.enable = true;
