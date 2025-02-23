@@ -11,6 +11,8 @@
     elisa
   ];
 
+  programs.kdeconnect.enable = true;
+
   environment.systemPackages = [
     # Version with Plasma 6 support not yet in stable nixos
     pkgs.unstable.kdePackages.krohnkite
