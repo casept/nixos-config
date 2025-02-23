@@ -39,8 +39,7 @@
       };
     };
 
-  # Add BTRFS support
-  boot.supportedFilesystems = [ "btrfs" ];
+  boot.supportedFilesystems = [ "btrfs" "zfs" ];
   # BTRFS scrubbing
   services.btrfs.autoScrub = {
     enable = true;
