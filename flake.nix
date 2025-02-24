@@ -145,6 +145,28 @@
         ];
       };
 
-      # TODO: Load dev shell with tools for working on this config
+      nixosConfigurations.fakepi = nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules = [
+          ({ lib, pkgs, ... }: {
+            imports = [
+              (import ./boxes/fakepi.nix {
+                inherit pkgs lib comma nixpkgs nixpkgs-unstable nixos-hardware
+                  ;
+              })
+              (import ./common/flake-conf.nix {
+                inherit pkgs nixpkgs nixpkgs-unstable;
+              })
+            ];
+            nixpkgs.overlays = [ overlay-unstable ];
+            nixpkgs.config.allowUnfree = true;
+            nixpkgs.config.allowBroken = true;
+            # Let 'nixos-version --json' know about the Git revision of this flake.
+            system.configurationRevision =
+              nixpkgs.lib.mkIf (self ? rev) self.rev;
+            nix.registry.nixpkgs.flake = nixpkgs;
+          })
+        ];
+      };
     };
 }
