@@ -7,7 +7,7 @@
   boot.loader.systemd-boot.configurationLimit = 5;
   boot.loader.systemd-boot.editor = false;
 
-  networking.hostName = "2ds";
+  networking.hostName = "komarik";
   networking.hostId = "ef3d24fd";
 
   # Needed so that nixos-hardware enables CPU microcode updates

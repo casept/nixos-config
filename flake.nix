@@ -84,7 +84,7 @@
         ];
       };
 
-      nixosConfigurations.twods = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.komarik = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
           ({ lib, pkgs, ... }: {
@@ -95,7 +95,7 @@
 
               nix-flatpak.nixosModules.nix-flatpak
 
-              (import ./boxes/2ds.nix {
+              (import ./boxes/komarik.nix {
                 inherit pkgs lib comma nixpkgs nixpkgs-unstable nixos-hardware
                   home-manager nixos-vsliveshare;
               })
