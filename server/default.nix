@@ -17,6 +17,19 @@
     useRoutingFeatures = "both";
   };
 
+  # Syncthing
+  services = {
+    syncthing = {
+      enable = true;
+      # Want to sync stuff to my home as well
+      user = "casept";
+      group = "users";
+      dataDir = "/tank/syncthing/";
+      configDir = "/tank/syncthing/config";
+      guiAddress = "http://0.0.0.0:8384"; # Password protected
+    };
+  };
+
 
   environment.systemPackages = with pkgs; [
     # Backup
@@ -48,6 +61,7 @@
 
   networking.firewall.enable = true;
   networking.firewall.allowPing = true;
+  networking.firewall.allowedTCPPorts = [ 8384 ];
 
   # Imperative containers
   virtualisation.incus.enable = true;
