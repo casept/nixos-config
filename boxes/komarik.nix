@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  imports = [ ../workstation ../hardware/micropc.nix ];
+  imports = [ ../workstation ../builders.nix ../hardware/micropc.nix ];
 
   # I like systemd, fite me
   boot.loader.systemd-boot.enable = true;
@@ -77,18 +77,4 @@
       };
     };
   };
-
-  nix.buildMachines = [{
-    hostName = "clobus";
-    systems = [ "x86_64-linux" "i686-linux" ];
-    maxJobs = 10;
-    speedFactor = 10;
-    supportedFeatures = [ "benchmark" "big-parallel" ];
-    mandatoryFeatures = [ ];
-    protocol = "ssh-ng";
-  }];
-  nix.distributedBuilds = true;
-  nix.extraOptions = ''
-    builders-use-substitutes = true
-  '';
 }

@@ -1,5 +1,5 @@
 { pkgs, lib, ... }: {
-  imports = [ ../server ../hardware/t14.nix ];
+  imports = [ ../server ../builders.nix ../hardware/t14.nix ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

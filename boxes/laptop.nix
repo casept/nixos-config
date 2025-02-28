@@ -9,7 +9,7 @@
 , ...
 }: {
 
-  imports = [ ../workstation ../hardware/t14.nix ];
+  imports = [ ../workstation ../builders.nix ../hardware/t14.nix ];
 
   # I like systemd, fite me
   boot.loader.systemd-boot.enable = true;
