@@ -148,6 +148,8 @@
       nixosConfigurations.fakepi = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
+          home-manager.nixosModules.home-manager
+
           ({ lib, pkgs, ... }: {
             imports = [
               (import ./boxes/fakepi.nix {

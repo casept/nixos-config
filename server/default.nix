@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, home-manager, ... }: {
 
   imports = [
     ./transmission.nix
@@ -46,6 +46,9 @@
     isNormalUser = true;
     extraGroups = [ "wheel" ];
   };
+
+  home-manager.useGlobalPkgs = true;
+  home-manager.users.casept = ../home.nix;
 
   # I'm the only user and desktop Linux security is a mess, so this isn't really a problem
   nix.settings.trusted-users = [ "root" "casept" ];
