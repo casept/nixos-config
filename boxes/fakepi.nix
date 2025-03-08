@@ -33,6 +33,7 @@
   # Add ZFS support
   boot.supportedFilesystems = [ "zfs" ];
   boot.zfs.requestEncryptionCredentials = true;
+  boot.zfs.extraPools = [ "tank" ];
   services.zfs.autoSnapshot.enable = true;
   services.zfs.autoScrub.enable = true;
   services.zfs.trim.enable = true;
