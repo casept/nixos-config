@@ -61,7 +61,8 @@
     shellcheck
     nixpkgs-fmt
     unstable.nixd
-    # Misc. Unix-ish tools
+    # Misc. tools
+    cloudflared
     starship
     direnv
     ripgrep
