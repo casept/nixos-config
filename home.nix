@@ -83,6 +83,7 @@
     killall
     xorg.xkill
     git
+    git-lfs
     sshfs
     pv
     monitorets
