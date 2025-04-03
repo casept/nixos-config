@@ -66,8 +66,8 @@
   zramSwap.enable = true;
   zramSwap.memoryPercent = 100;
 
-  # Better HW support
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # Pin for ZFS support
+  boot.kernelPackages = pkgs.linuxPackages_6_13;
 
   # Permit unlocking the root drive remotely after netboot
   boot.kernelParams = [ "ip=dhcp" ];
