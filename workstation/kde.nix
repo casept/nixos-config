@@ -5,10 +5,10 @@
   services.desktopManager.plasma6.enable = true;
 
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    # Don't use these
     elisa
     # For some reason env activation after rebuild gets blocked until index completes
     baloo
-    elisa
   ];
 
   programs.kdeconnect.enable = true;
@@ -18,6 +18,7 @@
     pkgs.unstable.kdePackages.krohnkite
     pkgs.kdePackages.yakuake
     pkgs.kdePackages.discover
+    pkgs.kdePackages.partitionmanager
     (pkgs.callPackage ../pkgs/kwin6-bismuth-decoration { })
     # Most distros call this qdbus6, create symlink so I can keep scripts portable
     (pkgs.writeShellScriptBin "qdbus6" "exec -a $0 ${pkgs.kdePackages.qttools}/bin/qdbus $@")
