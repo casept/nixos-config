@@ -69,8 +69,29 @@
   # Pin for ZFS support
   boot.kernelPackages = pkgs.linuxPackages_6_13;
 
-  # Permit unlocking the root drive remotely after netboot
-  boot.kernelParams = [ "ip=dhcp" ];
+  # Hardware-specific tuning utils
+  environment.systemPackages = with pkgs; [
+    lact
+    corectrl
+  ];
+  # For some reason, lactd does not have a nixos option
+  systemd.services.lactd = {
+    enable = true;
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.lact}/bin/lact daemon";
+      Restart = "on-failure";
+    };
+    wantedBy = [ "default.target" ];
+  };
+
+  boot.kernelParams = [
+    # Permit unlocking the root drive remotely after netboot
+    "ip=dhcp"
+    # Permit AMD GPU overclock
+    "amdgpu.ppfeaturemask=0xffffffff"
+  ];
+
   boot.initrd = {
     availableKernelModules = [ "e1000e" ];
     systemd.users.root.shell = "/bin/cryptsetup-askpass";
