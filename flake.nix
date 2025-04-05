@@ -5,6 +5,7 @@
     # Used by the core system config
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    vpn-confinement.url = "github:Maroka-chan/VPN-Confinement";
     # TODO: Switch back once all machines are merged
     nixos-hardware.url = "github:casept/nixos-hardware";
     # Used by the dev shell
@@ -40,6 +41,7 @@
     , comma
     , nixos-vsliveshare
     , nix-flatpak
+    , vpn-confinement
     , ...
     }:
     let
@@ -149,6 +151,7 @@
         inherit system;
         modules = [
           home-manager.nixosModules.home-manager
+          vpn-confinement.nixosModules.default
 
           ({ lib, pkgs, ... }: {
             imports = [
