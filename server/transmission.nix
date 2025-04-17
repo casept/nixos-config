@@ -4,7 +4,10 @@
     enable = true;
     wireguardConfigFile = /. + "/root/mullvad.conf";
     accessibleFrom = [
+      # LAN
       "192.168.0.0/24"
+      # Tailnet
+      "100.0.0.0/8"
     ];
     portMappings = [
       # Make transmission webUI accessible from outside the NS
@@ -28,7 +31,10 @@
 
     settings = {
       "rpc-bind-address" = "0.0.0.0";
-      "rpc-whitelist" = "192.168.0.*";
+      # Need multiple IP ranges which this doesn't support.
+      # Shouldn't matter anyways, as confinement configures a firewall anyways
+      "rpc-whitelist-enabled" = "false";
+      "rpc-host-whitelist-enabled" = "false";
       "port-forwarding-enabled" = "false";
       "lpd-enabled" = "false";
 
