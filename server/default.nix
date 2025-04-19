@@ -2,6 +2,7 @@
 
   imports = [
     ./transmission.nix
+    ./jellyfin.nix
     ./network_shares.nix
   ];
 
