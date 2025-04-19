@@ -69,4 +69,13 @@
   # Imperative containers
   virtualisation.incus.enable = true;
   networking.nftables.enable = true;
+
+  # User shared by multimedia services
+  users.groups.media = { };
+  users.users.media = {
+    isNormalUser = false;
+    isSystemUser = true;
+    description = "Shared user for multimedia services";
+    group = "media";
+  };
 }

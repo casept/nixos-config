@@ -28,6 +28,8 @@
 
   services.transmission = {
     enable = true;
+    user = "media";
+    group = "media";
 
     settings = {
       "rpc-bind-address" = "0.0.0.0";
