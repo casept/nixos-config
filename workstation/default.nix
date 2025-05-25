@@ -36,9 +36,9 @@
   };
 
   # Enable talking to a U2F dongle
-  services.udev.extraRules =
-    "ATTRS{idVendor}''=''\"2ccf''\", ATTRS{idProduct}''=''\"0854''\", MODE=''\"0660''\"";
-
+  services.udev.extraRules = ''
+    ATTRS{idVendor}=="2ccf", ATTRS{idProduct}=="0854", MODE="0660"
+  '';
   # Misc. uncategorized packages
 
 

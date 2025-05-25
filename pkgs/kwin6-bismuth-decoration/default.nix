@@ -6,8 +6,8 @@ stdenv.mkDerivation {
   src = fetchFromGitHub {
     owner = "ivan-cukic";
     repo = "kwin6-bismuth-decoration";
-    rev = "603f3cca4d9b1c383a352f6e570a2e56138ecedb";
-    sha256 = "sha256-4M8LwnR7Cl/iN2PR+pX0vauOyyilbPEtzFxTxD2ouA8=";
+    rev = "ab6755fa1ca8d61535ff41e6a60d82b680847008";
+    sha256 = "sha256-AXIyBRAW16pPVxWbhRcecCi9Lf3MsQMakSZD+a+BtSU=";
   };
 
   nativeBuildInputs = [ cmake kdePackages.extra-cmake-modules pkg-config ];

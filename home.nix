@@ -68,7 +68,6 @@
     ripgrep
     ripgrep-all
     fzf
-    filet
     gnupg
     htop
     stow
@@ -91,7 +90,7 @@
 
     # Reverse engineering
     unstable.ghidra
-    python311Packages.binwalk-full
+    unstable.binwalk
 
     # Nix-specific tools
     (appimage-run.override { extraPkgs = pkgs: [ pkgs.xorg.libxshmfence ]; })
