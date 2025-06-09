@@ -36,6 +36,7 @@
   boot.zfs.extraPools = [ "tank" ];
   services.zfs.autoSnapshot.enable = true;
   services.zfs.autoScrub.enable = true;
+  services.zfs.autoScrub.interval = "monthly"; # Tank is slow
   services.zfs.trim.enable = true;
 
   # Allegedly, ZFS does not like the kernel scheduler messing with it
