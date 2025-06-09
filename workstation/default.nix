@@ -152,6 +152,15 @@
       "rfkill"
       "wireshark"
     ];
+
+    subUidRanges = [{
+      startUid = 100000;
+      count = 65536;
+    }];
+    subGidRanges = [{
+      startGid = 100000;
+      count = 65536;
+    }];
   };
 
   home-manager.useGlobalPkgs = true;
