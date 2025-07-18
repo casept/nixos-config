@@ -58,6 +58,7 @@
     nameservers = [ "192.168.0.1" ];
   };
 
+  # Magic to disable the lid switch
   services.logind.lidSwitchExternalPower = "ignore";
   systemd.sleep.extraConfig = ''
     AllowSuspend=no
@@ -65,4 +66,14 @@
     AllowHybridSleep=no
     AllowSuspendThenHibernate=no
   '';
+
+  # Force minimum brightness to save power
+  systemd.services = {
+    "dim-screen" = {
+      wantedBy = [ "multi-user.target" ];
+      serviceConfig = {
+        ExecStart = "${pkgs.bash}/bin/bash -c 'echo 0 > /sys/class/backlight/amdgpu_bl1/brightness'";
+      };
+    };
+  };
 }
