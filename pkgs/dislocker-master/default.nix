@@ -8,8 +8,8 @@ stdenv.mkDerivation {
   src = fetchFromGitHub {
     owner = "aorimn";
     repo = "dislocker";
-    rev = "845e20c76147b12f52be531b34242922a0661771";
-    sha256 = "sha256-ckJVaGPINuLepnUfV6usWpYTx8pPWQihnWXdVk7I+H0=";
+    rev = "4572dc727940cc42249c9f967cee9c505f16b121";
+    sha256 = "sha256-So5KpRR1fk+OG3saZRpNHXNJmsT5PRtkz89Te7WQhto=";
   };
 
   nativeBuildInputs = [ cmake pkg-config ];
