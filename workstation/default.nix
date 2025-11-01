@@ -1,4 +1,4 @@
-{ pkgs, hardware, home-manager, nixos-vsliveshare, systemd, ... }: {
+{ pkgs, hardware, home-manager, systemd, ... }: {
   services.openssh.enable = true;
   services.openssh.settings.X11Forwarding = true;
   services.openssh.settings.PasswordAuthentication = false;
@@ -48,8 +48,6 @@
     bleachbit
     # Desktop backup
     rclone
-    # Stable does not support new bitlocker versions
-    (callPackage ../pkgs/dislocker-master { })
     unstable.rustic
     mosh
     sshuttle
