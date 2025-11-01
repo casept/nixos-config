@@ -25,11 +25,6 @@
       url = "github:Shopify/comma";
       flake = false;
     };
-    # TODO: Switch back to upstream once flakeified
-    nixos-vsliveshare = {
-      url = "github:Flakebi/nixos-vsliveshare";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
@@ -39,7 +34,6 @@
     , nixos-hardware
     , home-manager
     , comma
-    , nixos-vsliveshare
     , nix-flatpak
     , vpn-confinement
     , ...
@@ -68,7 +62,7 @@
 
               (import ./boxes/laptop.nix {
                 inherit pkgs lib comma nixpkgs nixpkgs-unstable nixos-hardware
-                  home-manager nixos-vsliveshare;
+                  home-manager;
               })
               (import ./common/flake-conf.nix {
                 inherit pkgs nixpkgs nixpkgs-unstable;
@@ -99,7 +93,7 @@
 
               (import ./boxes/komarik.nix {
                 inherit pkgs lib comma nixpkgs nixpkgs-unstable nixos-hardware
-                  home-manager nixos-vsliveshare;
+                  home-manager;
               })
               (import ./common/flake-conf.nix {
                 inherit pkgs nixpkgs nixpkgs-unstable;
@@ -129,7 +123,7 @@
 
               (import ./boxes/clobus.nix {
                 inherit pkgs lib comma nixpkgs nixpkgs-unstable nixos-hardware
-                  home-manager nixos-vsliveshare;
+                  home-manager;
               })
               (import ./common/flake-conf.nix {
                 inherit pkgs nixpkgs nixpkgs-unstable;

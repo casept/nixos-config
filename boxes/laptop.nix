@@ -5,7 +5,6 @@
 , nixos-hardware
 , home-manager
 , comma
-, nixos-vsliveshare
 , ...
 }: {
 
