@@ -102,10 +102,9 @@
 
     # Games
     prismlauncher
-    (pkgs.callPackage ./pkgs/technic-launcher { })
     wine
-    (lowPrio wineWowPackages.full)
-    steam-run-native
+    (lib.lowPrio wineWowPackages.full)
+    steam-run
     unstable.lutris
 
     # Note-taking

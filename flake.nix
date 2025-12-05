@@ -3,7 +3,7 @@
 
   inputs = {
     # Used by the core system config
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     vpn-confinement.url = "github:Maroka-chan/VPN-Confinement";
     # TODO: Switch back once all machines are merged
@@ -18,7 +18,7 @@
 
     # Used by home-manager
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     comma = {

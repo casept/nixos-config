@@ -31,6 +31,8 @@
     user = "media";
     group = "media";
 
+    package = pkgs.transmission_4;
+
     settings = {
       "rpc-bind-address" = "0.0.0.0";
       # Need multiple IP ranges which this doesn't support.
