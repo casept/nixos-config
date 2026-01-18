@@ -42,7 +42,7 @@
       "port-forwarding-enabled" = "false";
       "lpd-enabled" = "false";
 
-      "download-dir" = "/tank/torrents";
+      "download-dir" = "/nas/torrents";
       "download-queue-enabled" = "false";
     };
   };

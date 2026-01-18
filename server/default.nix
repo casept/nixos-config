@@ -3,7 +3,6 @@
   imports = [
     ./transmission.nix
     ./jellyfin.nix
-    ./network_shares.nix
   ];
 
   services.openssh.enable = true;
@@ -16,19 +15,6 @@
   services.tailscale = {
     enable = true;
     useRoutingFeatures = "both";
-  };
-
-  # Syncthing
-  services = {
-    syncthing = {
-      enable = true;
-      # Want to sync stuff to my home as well
-      user = "casept";
-      group = "users";
-      dataDir = "/tank/syncthing/";
-      configDir = "/tank/syncthing/config";
-      guiAddress = "http://0.0.0.0:8384"; # Password protected
-    };
   };
 
 

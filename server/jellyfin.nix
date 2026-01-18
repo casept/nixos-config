@@ -5,7 +5,7 @@
       openFirewall = true;
       user = "media";
       group = "media";
-      dataDir = "/tank/jellyfin";
+      dataDir = "/nas/jellyfin";
     };
 
   environment.systemPackages = with pkgs;
