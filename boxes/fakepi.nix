@@ -59,7 +59,7 @@
   };
 
   # Magic to disable the lid switch
-  services.logind.lidSwitchExternalPower = "ignore";
+  services.logind.settings.Login.HandleLidSwitchExternalPower = "ignore";
   systemd.sleep.extraConfig = ''
     AllowSuspend=no
     AllowHibernation=no
