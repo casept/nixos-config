@@ -67,7 +67,7 @@
   zramSwap.memoryPercent = 100;
 
   # Pin for ZFS support
-  boot.kernelPackages = pkgs.linuxPackages_6_12;
+  boot.kernelPackages = pkgs.linuxPackages_6_18;
 
   # Hardware-specific tuning utils
   environment.systemPackages = with pkgs; [
