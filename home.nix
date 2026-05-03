@@ -105,7 +105,6 @@
     wine
     (lib.lowPrio wineWowPackages.full)
     steam-run
-    unstable.lutris
 
     # Note-taking
     simple-scan
