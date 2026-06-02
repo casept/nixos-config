@@ -26,6 +26,5 @@
 
   # Debugging the network
   programs.wireshark.enable = true;
-  programs.wireshark.package = pkgs.wireshark-qt;
   # services.geoipupdate.enable = true;
 }

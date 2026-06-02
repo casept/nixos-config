@@ -59,12 +59,12 @@
 
   # Magic to disable the lid switch
   services.logind.settings.Login.HandleLidSwitchExternalPower = "ignore";
-  systemd.sleep.extraConfig = ''
-    AllowSuspend=no
-    AllowHibernation=no
-    AllowHybridSleep=no
-    AllowSuspendThenHibernate=no
-  '';
+  systemd.sleep.settings.Sleep = {
+    AllowSuspend = false;
+    AllowHibernation = false;
+    AllowHybridSleep = false;
+    AllowSuspendThenHibernate = false;
+  };
 
   # Force minimum brightness to save power
   systemd.services = {

@@ -94,7 +94,7 @@
 
   boot.initrd = {
     availableKernelModules = [ "e1000e" ];
-    systemd.users.root.shell = "/bin/cryptsetup-askpass";
+    systemd.users.root.shell = "/usr/bin/systemd-tty-ask-password-agent";
     network = {
       enable = true;
       ssh = {

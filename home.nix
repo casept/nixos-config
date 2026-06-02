@@ -80,7 +80,7 @@
     binutils
     file
     killall
-    xorg.xkill
+    xkill
     git
     git-lfs
     sshfs
@@ -93,7 +93,7 @@
     unstable.binwalk
 
     # Nix-specific tools
-    (appimage-run.override { extraPkgs = pkgs: [ pkgs.xorg.libxshmfence ]; })
+    (appimage-run.override { extraPkgs = pkgs: [ pkgs.libxshmfence ]; })
     nix-index
     patchelf
     cachix
@@ -103,7 +103,7 @@
     # Games
     prismlauncher
     wine
-    (lib.lowPrio wineWowPackages.full)
+    (lib.lowPrio wineWow64Packages.full)
     steam-run
 
     # Note-taking

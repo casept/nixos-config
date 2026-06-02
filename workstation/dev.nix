@@ -1,5 +1,4 @@
 { config, environment, pkgs, ... }: {
-  programs.adb.enable = true;
 
   # DJI and FTDI devices
   services.udev.extraRules = ''
@@ -28,5 +27,6 @@
     unstable.cargo-fuzz
     # Python
     python3
+    android-tools
   ];
 }
