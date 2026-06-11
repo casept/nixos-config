@@ -125,5 +125,6 @@
     # Misc
     vagrant
     tio
+    wl-clipboard
   ];
 }
