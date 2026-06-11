@@ -89,7 +89,34 @@
     imv
 
     # Reverse engineering
-    unstable.ghidra
+    # Ghidra wrapped so that the `ghidra` command launches via PyGhidra,
+    # giving Python 3 scripting support (the default launcher only ships
+    # Jython/Python 2, which newer Ghidra releases no longer provide).
+    #
+    # We bypass Ghidra's pyghidraRun launcher because it insists on
+    # creating/managing its own venv under ~/.config/ghidra (the Nix
+    # python is "externally managed"), which ignores the pyghidra we
+    # provide. Instead we invoke `python -m pyghidra` directly with a
+    # pyghidra-enabled interpreter and a JDK, exactly as the launcher
+    # would after its venv dance.
+    (
+      let
+        pyghidraEnv = unstable.python3.withPackages (ps: [ ps.pyghidra ]);
+      in
+      unstable.symlinkJoin {
+        name = "ghidra-pyghidra";
+        paths = [ unstable.ghidra ];
+        nativeBuildInputs = [ unstable.makeWrapper ];
+        postBuild = ''
+          rm -f $out/bin/ghidra
+          makeWrapper ${pyghidraEnv}/bin/python3 $out/bin/ghidra \
+            --add-flags "-m pyghidra -g --install-dir ${unstable.ghidra}/lib/ghidra" \
+            --set JAVA_HOME ${unstable.openjdk21} \
+            --prefix PATH : ${unstable.openjdk21}/bin \
+            --set GHIDRA_INSTALL_DIR ${unstable.ghidra}/lib/ghidra
+        '';
+      }
+    )
     unstable.binwalk
 
     # Nix-specific tools
