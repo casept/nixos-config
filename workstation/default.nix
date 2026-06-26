@@ -131,6 +131,8 @@
     "org.videolan.VLC"
     "org.zealdocs.Zeal"
   ];
+  # So fonts show up in Flatpak apps
+  fonts.fontDir.enable = true;
 
 
   # Enable NTFS support
