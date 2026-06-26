@@ -46,6 +46,7 @@
     btrfs-assistant
     openconnect
     bleachbit
+    waypipe
     # Desktop backup
     rclone
     unstable.rustic
