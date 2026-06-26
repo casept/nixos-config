@@ -105,4 +105,41 @@
       };
     };
   };
+
+  # VR
+  services.monado = {
+    enable = true;
+    defaultRuntime = true;
+    # Stock nixpkgs monado lacks the OpenHMD driver, which is the only thing
+    # that can drive the original Oculus Rift CV1 (3DoF orientation only).
+    # openhmd was removed from nixpkgs, so it is resurrected in ../pkgs/openhmd.
+    package = pkgs.monado.overrideAttrs (old: {
+      buildInputs = (old.buildInputs or [ ]) ++ [ (pkgs.callPackage ../pkgs/openhmd { }) ];
+      cmakeFlags = (old.cmakeFlags or [ ]) ++ [
+        (pkgs.lib.cmakeBool "XRT_BUILD_DRIVER_OHMD" true)
+      ];
+    });
+  };
+
+  systemd.user.services.monado.environment = {
+    STEAMVR_LH_ENABLE = "1";
+    XRT_COMPOSITOR_COMPUTE = "1";
+  };
+
+  programs.steam = {
+    enable = true;
+    package = pkgs.steam.override {
+      extraProfile = ''
+        # Allows Monado/WiVRn to be used
+        export PRESSURE_VESSEL_IMPORT_OPENXR_1_RUNTIMES=1
+      '';
+    };
+  };
+
+  # For downloading hand tracking data
+  programs.git = {
+    enable = true;
+    lfs.enable = true;
+  };
 }
+
