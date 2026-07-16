@@ -149,6 +149,10 @@
     unstable.obs-studio
     unstable.obs-studio-plugins.wlrobs
 
+    # Vibes
+    unstable.claude-code
+    unstable.opencode
+
     # Misc
     vagrant
     tio
