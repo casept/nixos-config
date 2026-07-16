@@ -64,6 +64,7 @@
     nixpkgs-fmt
     unstable.nixd
     # Misc. tools
+    atuin
     cloudflared
     starship
     direnv
