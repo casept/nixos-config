@@ -25,6 +25,8 @@
     "x-scheme-handler/https" = "org.mozilla.firefox.desktop";
     "x-scheme-handler/about" = "org.mozilla.firefox.desktop";
     "x-scheme-handler/unknown" = "org.mozilla.firefox.desktop";
+    # Registered by claude-code; managed here so it survives HM activation.
+    "x-scheme-handler/claude-cli" = "claude-code-url-handler.desktop";
 
     "application/x-bittorrent" = "com.transmissionbt.Transmission.desktop";
     "x-scheme-handler/magnet" = "com.transmissionbt.Transmission.desktop";

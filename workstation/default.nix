@@ -165,6 +165,9 @@
   };
 
   home-manager.useGlobalPkgs = true;
+  # Move conflicting target files aside (e.g. mimeapps.list edited by
+  # claude-code's installer) instead of aborting activation.
+  home-manager.backupFileExtension = "backup";
   home-manager.users.casept = ../home.nix;
 
   # I'm the only user and desktop Linux security is a mess, so this isn't really a problem
