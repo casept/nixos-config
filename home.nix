@@ -75,7 +75,6 @@
     htop
     stow
     tmux
-    tmate
     wget
     curl
     unar
