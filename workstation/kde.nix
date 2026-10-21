@@ -14,8 +14,8 @@
   programs.kdeconnect.enable = true;
 
   environment.systemPackages = [
-    # Version with Plasma 6 support not yet in stable nixos
-    pkgs.unstable.kdePackages.krohnkite
+    # Latest git master, includes fixes not yet in a tagged release
+    (pkgs.unstable.callPackage ../pkgs/krohnkite { })
     pkgs.kdePackages.yakuake
     pkgs.kdePackages.discover
     pkgs.kdePackages.partitionmanager
