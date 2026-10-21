@@ -137,7 +137,6 @@
 
     # Note-taking
     simple-scan
-    texlive.combined.scheme-full
 
     # Diagnostics
     nmap
@@ -146,7 +145,6 @@
     usbutils
 
     # Media
-    unstable.noisetorch
     unstable.droidcam
     unstable.obs-studio
     unstable.obs-studio-plugins.wlrobs
@@ -156,7 +154,6 @@
     unstable.opencode
 
     # Misc
-    vagrant
     tio
     wl-clipboard
   ];
