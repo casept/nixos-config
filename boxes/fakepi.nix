@@ -32,6 +32,7 @@
 
   # Add ZFS support
   boot.supportedFilesystems = [ "zfs" ];
+  boot.zfs.forceImportRoot = false;
   boot.zfs.requestEncryptionCredentials = true;
   services.zfs.autoSnapshot.enable = true;
   services.zfs.autoScrub.enable = true;
