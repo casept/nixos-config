@@ -54,8 +54,31 @@
         prefixLength = 24;
       }
     ];
-    defaultGateway = "192.168.31.1";
+    # The interface is set so that the initrd networkd config
+    # (which mirrors this block) gets a default route too
+    defaultGateway = {
+      address = "192.168.31.1";
+      interface = "br0";
+    };
     nameservers = [ "192.168.31.1" ];
+  };
+
+  boot.initrd = {
+    systemd = {
+      enable = true;
+      settings.Manager.DefaultDeviceTimeoutSec = "infinity";
+      users.root.shell = "/usr/bin/systemd-tty-ask-password-agent";
+    };
+    availableKernelModules = [ "cdc_ncm" ];
+    network = {
+      enable = true;
+      ssh = {
+        enable = true;
+        port = 22;
+        authorizedKeys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILJPSyPY5YwoFRbuijaSHsUY4CAQH/e3lRslTrt0wFUT user@casept-x230t" ];
+        hostKeys = [ "/etc/secrets/initrd/ssh_host_ed25519_key" ];
+      };
+    };
   };
 
   # Magic to disable the lid switch
