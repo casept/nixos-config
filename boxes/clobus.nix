@@ -10,11 +10,16 @@
   networking.hostName = "clobus";
   networking.hostId = "07bfa1ff";
 
+  networking.interfaces.eno1.wakeOnLan.enable = true;
+
   # Needed so that nixos-hardware enables CPU microcode updates
   hardware.enableRedistributableFirmware = true;
 
   # Configure filesystems
-  boot.initrd.luks.devices.cryptroot.device = "/dev/disk/by-uuid/a577451b-e824-47c9-a2f0-5bb611c02c67";
+  boot.initrd.luks.devices.cryptroot = {
+    device = "/dev/disk/by-uuid/a577451b-e824-47c9-a2f0-5bb611c02c67";
+    crypttabExtraOpts = [ "tries=10" ];
+  };
   fileSystems =
     let
       btrfsCommon = [ "defaults" "compress=zstd:1" "autodefrag" ];
@@ -88,15 +93,24 @@
   };
 
   boot.kernelParams = [
-    # Permit unlocking the root drive remotely after netboot
-    "ip=dhcp"
     # Permit AMD GPU overclock
     "amdgpu.ppfeaturemask=0xffffffff"
   ];
 
   boot.initrd = {
-    availableKernelModules = [ "e1000e" ];
-    systemd.users.root.shell = "/usr/bin/systemd-tty-ask-password-agent";
+    systemd = {
+      enable = true;
+      settings.Manager.DefaultDeviceTimeoutSec = "infinity";
+      users.root.shell = "/usr/bin/systemd-tty-ask-password-agent";
+      network.networks."99-ethernet-dhcp" = {
+        matchConfig = {
+          Type = "ether";
+          Kind = "!*";
+        };
+        DHCP = "yes";
+      };
+    };
+    availableKernelModules = [ "e1000e" "igb" ];
     network = {
       enable = true;
       ssh = {
