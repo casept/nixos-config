@@ -151,7 +151,7 @@
 
     # Vibes
     unstable.claude-code
-    unstable.opencode
+    opencode
 
     # Misc
     tio

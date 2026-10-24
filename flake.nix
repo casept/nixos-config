@@ -6,6 +6,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     vpn-confinement.url = "github:Maroka-chan/VPN-Confinement";
+    opencode.url = "github:anomalyco/opencode";
     # TODO: Switch back once all machines are merged
     nixos-hardware.url = "github:casept/nixos-hardware";
     # Used by the dev shell
@@ -36,6 +37,7 @@
     , comma
     , nix-flatpak
     , vpn-confinement
+    , opencode
     , ...
     }:
     let
@@ -46,6 +48,7 @@
           config.allowUnfree = true;
           config.allowBroken = true;
         };
+        opencode = opencode.packages.${system}.default;
       };
     in
     {
