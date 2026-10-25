@@ -119,7 +119,7 @@
     "org.kde.okteta"
     "org.keepassxc.KeePassXC"
     "org.libreoffice.LibreOffice"
-    "org.mozilla.Thunderbird"
+    "org.mozilla.thunderbird"
     "org.mozilla.firefox"
     "org.openscad.OpenSCAD"
     "org.pulseaudio.pavucontrol"
