@@ -10,7 +10,14 @@
   networking.hostName = "clobus";
   networking.hostId = "07bfa1ff";
 
-  networking.interfaces.eno1.wakeOnLan.enable = true;
+  # Wake-on-LAN must not be configured through networking.interfaces.eno1:
+  # that implicitly generates 40-eno1.network (DHCP=no), which is also merged
+  # into the initrd (because boot.initrd.network.enable is set) and shadows
+  # 99-ethernet-dhcp.network there, since networkd uses the first match.
+  systemd.network.links."40-eno1" = {
+    matchConfig.OriginalName = "eno1";
+    linkConfig.WakeOnLan = "magic";
+  };
 
   # Needed so that nixos-hardware enables CPU microcode updates
   hardware.enableRedistributableFirmware = true;
@@ -123,6 +130,8 @@
     availableKernelModules = [ "e1000e" "igb" ];
     network = {
       enable = true;
+      # Ensure it doesn't survive to confuse NetworkManager
+      flushBeforeStage2 = true;
       ssh = {
         enable = true;
         port = 22;
