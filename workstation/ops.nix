@@ -1,17 +1,14 @@
 { config, pkgs, ... }: {
   # Set up virtualisation
-  virtualisation.virtualbox = {
-    host.enable = true;
-    host.package = pkgs.virtualbox;
-    host.enableExtensionPack = true;
-  };
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
 
   virtualisation.podman = {
     enable = true;
     dockerCompat = true;
   };
 
-  environment.systemPackages = with pkgs; [ distrobox ];
+  environment.systemPackages = with pkgs; [ distrobox gnome-boxes ];
 
   # Creating images for funky architectures
   boot.binfmt.emulatedSystems = [

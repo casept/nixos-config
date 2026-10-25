@@ -148,7 +148,7 @@
       "adbusers"
       "lp"
       "scanner"
-      "vboxusers"
+      "libvirtd"
       "video"
       "rfkill"
       "wireshark"
