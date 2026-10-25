@@ -147,6 +147,7 @@
       "lp"
       "scanner"
       "libvirtd"
+      "podman"
       "video"
       "rfkill"
       "wireshark"
