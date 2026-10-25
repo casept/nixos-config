@@ -89,6 +89,9 @@
     pv
     monitorets
     imv
+    unstable.glab
+    unstable.github-cli
+    unstable.gitlab-ci-local
 
     # Reverse engineering
     # Ghidra wrapped so that the `ghidra` command launches via PyGhidra,
