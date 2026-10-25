@@ -143,7 +143,6 @@
     extraGroups = [
       "wheel"
       "plugdev"
-      "adbusers"
       "lp"
       "scanner"
       "libvirtd"
