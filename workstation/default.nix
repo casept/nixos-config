@@ -101,8 +101,6 @@
     "com.oppzippy.OpenSCQ30"
     "com.prusa3d.PrusaSlicer"
     "com.slack.Slack"
-    "com.spotify.Client"
-    "com.ulduzsoft.Birdtray"
     "com.valvesoftware.Steam"
     "de.bund.ausweisapp.ausweisapp2"
     "im.riot.Riot"
