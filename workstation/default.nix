@@ -90,7 +90,7 @@
   services.flatpak.packages = [
     "com.calibre_ebook.calibre"
     "com.getpostman.Postman"
-    "com.github.junrrein.PDFSlicer"
+    "com.github.jeromerobert.pdfarranger"
     "com.github.rajsolai.textsnatcher"
     "com.github.skylot.jadx"
     "com.github.tchx84.Flatseal"
@@ -105,7 +105,7 @@
     "com.ulduzsoft.Birdtray"
     "com.valvesoftware.Steam"
     "de.bund.ausweisapp.ausweisapp2"
-    "im.nheko.Nheko"
+    "im.riot.Riot"
     "io.dbeaver.DBeaverCommunity"
     "io.github.TransmissionRemoteGtk"
     "net.pcsx2.PCSX2"
