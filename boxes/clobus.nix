@@ -19,10 +19,11 @@
   boot.initrd.luks.devices.cryptroot = {
     device = "/dev/disk/by-uuid/a577451b-e824-47c9-a2f0-5bb611c02c67";
     crypttabExtraOpts = [ "tries=10" ];
+    allowDiscards = true;
   };
   fileSystems =
     let
-      btrfsCommon = [ "defaults" "compress=zstd:1" "autodefrag" ];
+      btrfsCommon = [ "defaults" "compress=zstd:1" "noatime" ];
       id = "/dev/disk/by-uuid/5b29964e-9edb-4d28-bf52-fc684438bd93";
     in
     {
@@ -95,7 +96,16 @@
   boot.kernelParams = [
     # Permit AMD GPU overclock
     "amdgpu.ppfeaturemask=0xffffffff"
+    # Latency-oriented tuning (costs idle power)
+    # Disable NVMe APST so the drive stays in PS0 (removes up to ~4ms wake penalty)
+    "nvme_core.default_ps_max_latency_us=0"
   ];
+
+  # Keep the NVMe write path unthrottled (costs a little fairness/latency under
+  # mixed load, favours bursty writes).
+  services.udev.extraRules = ''
+    ACTION=="add|change", KERNEL=="nvme[0-9]n[0-9]", ATTR{queue/wbt_lat_usec}="0"
+  '';
 
   boot.initrd = {
     systemd = {
