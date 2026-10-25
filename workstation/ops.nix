@@ -22,7 +22,9 @@
     "mipsel-linux"
   ];
 
-  # Debugging the network
-  programs.wireshark.enable = true;
+  programs.wireshark = {
+    enable = true;
+    package = pkgs.wireshark;
+  };
   # services.geoipupdate.enable = true;
 }
