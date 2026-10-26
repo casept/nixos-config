@@ -15,7 +15,7 @@
   # into the initrd (because boot.initrd.network.enable is set) and shadows
   # 99-ethernet-dhcp.network there, since networkd uses the first match.
   systemd.network.links."40-eno1" = {
-    matchConfig.OriginalName = "eno1";
+    matchConfig.MACAddress = "a0:8c:fd:d8:b6:48";
     linkConfig.WakeOnLan = "magic";
   };
 
