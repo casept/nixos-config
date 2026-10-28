@@ -1,5 +1,10 @@
 { pkgs, ... }: {
-  imports = [ ../workstation ../builders.nix ../hardware/z440.nix ];
+  imports = [
+    ../workstation
+    ../builders.nix
+    ../hardware/z440.nix
+    ../common/lact.nix
+  ];
 
   # I like systemd, fite me
   boot.loader.systemd-boot.enable = true;
@@ -88,19 +93,8 @@
 
   # Hardware-specific tuning utils
   environment.systemPackages = with pkgs; [
-    lact
     corectrl
   ];
-  # For some reason, lactd does not have a nixos option
-  systemd.services.lactd = {
-    enable = true;
-    serviceConfig = {
-      Type = "simple";
-      ExecStart = "${pkgs.lact}/bin/lact daemon";
-      Restart = "on-failure";
-    };
-    wantedBy = [ "default.target" ];
-  };
 
   boot.kernelParams = [
     # Permit AMD GPU overclock
