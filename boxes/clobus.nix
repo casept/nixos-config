@@ -55,6 +55,8 @@
   boot.supportedFilesystems = [ "btrfs" "zfs" ];
   boot.zfs.forceImportRoot = false;
 
+  boot.tmp.useTmpfs = true;
+
   # BTRFS scrubbing
   services.btrfs.autoScrub = {
     enable = true;
