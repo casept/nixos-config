@@ -8,6 +8,7 @@
   time.timeZone = "Europe/Berlin";
 
   imports = [
+    ../common/tailscale.nix
     ./dev.nix
     ./ops.nix
     ./kde.nix
@@ -28,12 +29,6 @@
 
   # Networking
   networking.networkmanager.enable = true;
-
-  # Tailscale
-  services.tailscale = {
-    enable = true;
-    useRoutingFeatures = "both";
-  };
 
   # Enable talking to a U2F dongle
   services.udev.extraRules = ''

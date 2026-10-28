@@ -1,6 +1,7 @@
 { pkgs, home-manager, ... }: {
 
   imports = [
+    ../common/tailscale.nix
     ./transmission.nix
     ./jellyfin.nix
   ];
@@ -10,13 +11,6 @@
   programs.mosh.enable = true;
 
   time.timeZone = "Europe/Berlin";
-
-  # Tailscale
-  services.tailscale = {
-    enable = true;
-    useRoutingFeatures = "both";
-  };
-
 
   environment.systemPackages = with pkgs; [
     # Backup
