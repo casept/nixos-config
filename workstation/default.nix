@@ -9,6 +9,7 @@
 
   imports = [
     ../common/tailscale.nix
+    ./cups.nix
     ./dev.nix
     ./ops.nix
     ./kde.nix
@@ -53,22 +54,6 @@
 
   # Enable zsh properly
   programs.zsh.enable = true;
-
-  #Enable CUPS to print documents.
-  services.printing.enable = true;
-  services.printing.drivers = with pkgs; [
-    gutenprint
-    gutenprintBin
-    hplipWithPlugin
-    samsung-unified-linux-driver
-    splix
-    brlaser
-    brgenml1lpr
-    brgenml1cupswrapper
-    cups-dymo
-    mfcl2700dncupswrapper
-    mfcl2700dnlpr
-  ];
 
   # Enable SANE.
   hardware.sane.enable = true;
