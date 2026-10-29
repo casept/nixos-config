@@ -13,7 +13,8 @@ let
     chmod u+w $out/lib/${mallocName}
     ${pkgs.patchelf}/bin/patchelf --remove-rpath $out/lib/${mallocName}
   '';
-in {
+in
+{
   # Enable flatpak support
   services.flatpak.enable = true;
 
@@ -30,6 +31,11 @@ in {
           ELECTRON_OZONE_PLATFORM_HINT = "auto";
         };
       };
+
+      # These don't like hardened_malloc
+      settings."org.mozilla.firefox".Context."unset-environment" = [ "LD_PRELOAD" ];
+      settings."org.mozilla.thunderbird".Context."unset-environment" = [ "LD_PRELOAD" ];
+      settings."org.torproject.torbrowser-launcher".Context."unset-environment" = [ "LD_PRELOAD" ];
     };
 
   services.flatpak.packages = [
