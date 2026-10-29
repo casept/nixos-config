@@ -15,20 +15,13 @@
     ./flatpak.nix
     ./ops.nix
     ./kde.nix
+    ./steam.nix
   ];
 
   services.mullvad-vpn.enable = true;
 
   # Allow running dynamically-linked binaries for FHS Linux
   programs.nix-ld.enable = true;
-
-  # Needed for steam and many games.
-  hardware.graphics.enable32Bit = true;
-  services.pipewire.alsa.support32Bit = true;
-
-  # For Dualshock 3 support
-  hardware.bluetooth.package = pkgs.bluez;
-  hardware.steam-hardware.enable = true;
 
   # Networking
   networking.networkmanager.enable = true;

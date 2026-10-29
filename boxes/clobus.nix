@@ -159,16 +159,6 @@
     XRT_COMPOSITOR_COMPUTE = "1";
   };
 
-  programs.steam = {
-    enable = true;
-    package = pkgs.steam.override {
-      extraProfile = ''
-        # Allows Monado/WiVRn to be used
-        export PRESSURE_VESSEL_IMPORT_OPENXR_1_RUNTIMES=1
-      '';
-    };
-  };
-
   # For downloading hand tracking data
   programs.git = {
     enable = true;
