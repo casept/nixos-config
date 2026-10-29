@@ -11,6 +11,7 @@
     ../common/tailscale.nix
     ./cups.nix
     ./dev.nix
+    ./flatpak.nix
     ./ops.nix
     ./kde.nix
   ];
@@ -64,54 +65,6 @@
   };
 
   programs.ssh.startAgent = true;
-
-  # Enable flatpak support
-  services.flatpak.enable = true;
-  services.flatpak.packages = [
-    "com.calibre_ebook.calibre"
-    "com.getpostman.Postman"
-    "com.github.jeromerobert.pdfarranger"
-    "com.github.rajsolai.textsnatcher"
-    "com.github.skylot.jadx"
-    "com.github.tchx84.Flatseal"
-    "com.github.zocker_160.SyncThingy"
-    "com.github.xournalpp.xournalpp"
-    "com.google.Chrome"
-    "com.ktechpit.whatsie"
-    "com.oppzippy.OpenSCQ30"
-    "com.prusa3d.PrusaSlicer"
-    "com.slack.Slack"
-    "com.valvesoftware.Steam"
-    "de.bund.ausweisapp.ausweisapp2"
-    "im.riot.Riot"
-    "io.dbeaver.DBeaverCommunity"
-    "io.github.TransmissionRemoteGtk"
-    "net.pcsx2.PCSX2"
-    "net.werwolv.ImHex"
-    "org.bleachbit.BleachBit"
-    "org.filezillaproject.Filezilla"
-    "org.inkscape.Inkscape"
-    "org.jdownloader.JDownloader"
-    "org.kde.filelight"
-    "org.kde.itinerary"
-    "org.kde.okteta"
-    "org.keepassxc.KeePassXC"
-    "org.libreoffice.LibreOffice"
-    "org.mozilla.thunderbird"
-    "org.mozilla.firefox"
-    "org.openscad.OpenSCAD"
-    "org.pulseaudio.pavucontrol"
-    "org.remmina.Remmina"
-    "org.signal.Signal"
-    "org.speedcrunch.SpeedCrunch"
-    "org.telegram.desktop"
-    "org.torproject.torbrowser-launcher"
-    "org.videolan.VLC"
-    "org.zealdocs.Zeal"
-  ];
-  # So fonts show up in Flatpak apps
-  fonts.fontDir.enable = true;
-
 
   # Enable NTFS support
   boot.supportedFilesystems = [ "ntfs" ];
