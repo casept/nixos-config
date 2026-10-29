@@ -9,6 +9,7 @@
 
   imports = [
     ../common/tailscale.nix
+    ../common/hardening.nix
     ./cups.nix
     ./dev.nix
     ./flatpak.nix

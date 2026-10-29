@@ -2,6 +2,7 @@
 
   imports = [
     ../common/tailscale.nix
+    ../common/hardening.nix
     ./transmission.nix
     ./jellyfin.nix
   ];
