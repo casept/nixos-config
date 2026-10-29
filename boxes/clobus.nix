@@ -3,6 +3,7 @@
     ../workstation
     ../builders.nix
     ../hardware/z440.nix
+    ../common/btrfs.nix
     ../common/lact.nix
   ];
 

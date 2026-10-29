@@ -1,5 +1,10 @@
 { pkgs, ... }: {
-  imports = [ ../workstation ../builders.nix ../hardware/micropc.nix ];
+  imports = [
+    ../workstation
+    ../builders.nix
+    ../hardware/micropc.nix
+    ../common/btrfs.nix
+  ];
 
   # I like systemd, fite me
   boot.loader.systemd-boot.enable = true;
@@ -53,7 +58,7 @@
     # Will scrub all subvols on FS
     fileSystems = [ "/" ];
   };
-  systemd.services.btrfs-scrub.unitConfig.ConditionACPower = true;
+  systemd.services."btrfs-scrub--".unitConfig.ConditionACPower = true;
 
   zramSwap.enable = true;
   zramSwap.memoryPercent = 100;
