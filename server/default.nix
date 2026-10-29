@@ -5,6 +5,7 @@
     ../common/hardening.nix
     ./transmission.nix
     ./jellyfin.nix
+    ./hister.nix
   ];
 
   services.openssh.enable = true;

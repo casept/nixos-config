@@ -7,6 +7,10 @@
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     vpn-confinement.url = "github:Maroka-chan/VPN-Confinement";
     opencode.url = "github:anomalyco/opencode";
+    hister = {
+      url = "github:asciimoo/hister";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     # TODO: Switch back once all machines are merged
     nixos-hardware.url = "github:casept/nixos-hardware";
     # Used by the dev shell
@@ -38,6 +42,7 @@
     , nix-flatpak
     , vpn-confinement
     , opencode
+    , hister
     , ...
     }:
     let
@@ -149,6 +154,7 @@
         modules = [
           home-manager.nixosModules.home-manager
           vpn-confinement.nixosModules.default
+          hister.nixosModules.default
 
           ({ lib, pkgs, ... }: {
             imports = [
