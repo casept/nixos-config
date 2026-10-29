@@ -90,12 +90,13 @@
   zramSwap.memoryPercent = 100;
 
   # Pin for ZFS support
-  boot.kernelPackages = pkgs.linuxPackages_6_18;
+  boot.kernelPackages = pkgs.callPackage ../pkgs/linux-hardened { };
 
   # Hardware-specific tuning utils
-  environment.systemPackages = with pkgs; [
-    corectrl
-  ];
+  environment.systemPackages = with pkgs;
+    [
+      corectrl
+    ];
 
   boot.kernelParams = [
     # Permit AMD GPU overclock

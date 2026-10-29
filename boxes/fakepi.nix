@@ -42,6 +42,8 @@
   # Allegedly, ZFS does not like the kernel scheduler messing with it
   boot.kernelParams = [ "elevator=none" ];
 
+  boot.kernelPackages = pkgs.callPackage ../pkgs/linux-hardened { };
+
   # Host-specific networking config
   networking = {
     useDHCP = false;
