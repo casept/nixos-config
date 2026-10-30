@@ -5,6 +5,7 @@
     ../hardware/z440.nix
     ../common/btrfs.nix
     ../common/lact.nix
+    ../common/snapper-hardening.nix
   ];
 
   # I like systemd, fite me
