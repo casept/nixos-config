@@ -10,6 +10,7 @@
   imports = [
     ../common/tailscale.nix
     ../common/hardening.nix
+    ../common/udisks2-hardening.nix
     ./cups.nix
     ./dev.nix
     ./flatpak.nix
