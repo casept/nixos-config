@@ -79,6 +79,38 @@ let
     RestrictAddressFamilies = [ "AF_UNIX" ];
   };
 
+  libvirtGuestsHardening = {
+    CapabilityBoundingSet = [ "" ];
+    NoNewPrivileges = true;
+    PrivateDevices = true;
+    PrivateMounts = true;
+    PrivateTmp = true;
+    ProtectSystem = "strict";
+    # LISTFILE and the "started" lock file.
+    ReadWritePaths = [
+      "/var/lib/libvirt"
+      "/run/lock"
+    ];
+    ProtectHome = true;
+    ProtectProc = "invisible";
+    ProtectClock = true;
+    ProtectControlGroups = true;
+    ProtectHostname = true;
+    ProtectKernelLogs = true;
+    ProtectKernelModules = true;
+    ProtectKernelTunables = true;
+    RestrictNamespaces = true;
+    RestrictRealtime = true;
+    RestrictSUIDSGID = true;
+    LockPersonality = true;
+    MemoryDenyWriteExecute = true;
+    SystemCallArchitectures = "native";
+    SystemCallFilter = [ "@system-service" ];
+    # Local URIs only
+    RestrictAddressFamilies = [ "AF_UNIX" ];
+    UMask = "0077";
+  };
+
   # libvirtd plus the modular daemons it can be split into.
   virtDaemons = [
     "libvirtd"
@@ -105,6 +137,7 @@ in
     // {
       virtlogd.serviceConfig = virtLogdHardening;
       virtlockd.serviceConfig = virtLockdHardening;
+      libvirt-guests.serviceConfig = libvirtGuestsHardening;
     };
 
   virtualisation.podman = {
