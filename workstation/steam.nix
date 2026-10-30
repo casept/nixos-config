@@ -9,7 +9,16 @@
 
   programs.steam = {
     enable = true;
+
+    extraPackages = [ pkgs.mangohud ];
+
     package = pkgs.steam.override {
+      # Always load, but hide by default
+      extraEnv = {
+        MANGOHUD = "1";
+        MANGOHUD_CONFIG = "no_display=1,toggle_hud=Shift_L+F12";
+      };
+
       extraProfile = ''
         # Allows Monado/WiVRn to be used
         export PRESSURE_VESSEL_IMPORT_OPENXR_1_RUNTIMES=1
