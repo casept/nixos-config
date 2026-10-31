@@ -1,4 +1,4 @@
-{ environment, pkgs, services, ... }:
+{ environment, lib, pkgs, services, ... }:
 let
   hardeningBase = {
     NoNewPrivileges = true;
@@ -31,6 +31,10 @@ let
     UMask = "0077";
   };
 
+  # NixOS gives units defined here a minimal PATH (coreutils/findutils/...).
+  # Third-party units that exec helpers by name need the normal paths back.
+  servicePath = "/run/wrappers/bin:/run/current-system/sw/bin";
+
   mkHardenedService = extra: {
     overrideStrategy = "asDropin";
     serviceConfig = hardeningBase // extra;
@@ -39,6 +43,72 @@ let
   mkSystemService = extra: {
     overrideStrategy = "asDropinIfExists";
     serviceConfig = hardeningBase // extra;
+  };
+
+  # Daemons that never spawn arbitrary programs: full sandbox
+  mkTightService = extra: {
+    overrideStrategy = "asDropin";
+    environment.PATH = lib.mkForce servicePath;
+    serviceConfig = hardeningBase // {
+      CapabilityBoundingSet = "";
+      RestrictSUIDSGID = true;
+      RestrictRealtime = true;
+      RestrictAddressFamilies = [ "AF_UNIX" ];
+    } // extra;
+  };
+
+  mkPipewireService = extra: {
+    overrideStrategy = "asDropin";
+    environment.PATH = lib.mkForce servicePath;
+    serviceConfig = {
+      NoNewPrivileges = true;
+      ProtectSystem = "strict";
+      ProtectHome = "read-only";
+      PrivateTmp = true;
+      PrivateDevices = true;
+      RestrictNamespaces = true;
+      LockPersonality = true;
+      ProtectClock = true;
+      ProtectHostname = true;
+      ProtectKernelLogs = true;
+      ProtectKernelModules = true;
+      ProtectKernelTunables = true;
+      ProtectControlGroups = true;
+      CapabilityBoundingSet = "";
+      RestrictSUIDSGID = true;
+      RestrictAddressFamilies = [
+        "AF_UNIX"
+        "AF_NETLINK"
+      ];
+      UMask = "0077";
+      ReadWritePaths = [ "%t" ];
+    } // extra;
+  };
+
+  # Services whose helper children are known
+  mkMediumService = extra: {
+    overrideStrategy = "asDropin";
+    environment.PATH = lib.mkForce servicePath;
+    serviceConfig = {
+      ProtectSystem = "full";
+      ProtectHome = "read-only";
+      PrivateTmp = false;
+      PrivateDevices = false;
+      RestrictNamespaces = false;
+      ProtectClock = true;
+      ProtectHostname = true;
+      ProtectKernelLogs = true;
+      ProtectKernelModules = true;
+      ProtectKernelTunables = true;
+      ProtectControlGroups = true;
+      ReadWritePaths = [
+        "%t"
+        "%h/.config"
+        "%h/.cache"
+        "%h/.local/share"
+        "%h/.local/state"
+      ];
+    } // extra;
   };
 in
 {
@@ -186,6 +256,125 @@ in
       ReadWritePaths = [
         "%t"
         "%h/.cache"
+      ];
+    };
+
+    dconf = mkTightService {
+      # writes ~/.config/dconf/user; no cache directory is used
+      ReadWritePaths = [
+        "%t"
+        "%h/.config"
+      ];
+    };
+
+    at-spi-dbus-bus = mkTightService {
+      ReadWritePaths = [ "%t" ];
+    };
+
+    xdg-permission-store = mkTightService {
+      # Permissions under ~/.local/share/flatpak/db
+      ReadWritePaths = [
+        "%t"
+        "%h/.local/share"
+      ];
+    };
+
+    plasma-kactivitymanagerd = mkTightService {
+      ReadWritePaths = [
+        "%t"
+        "%h/.config"
+        "%h/.local/share"
+      ];
+    };
+
+    # Only exposes GTK menu models over D-Bus
+    plasma-gmenudbusmenuproxy = mkTightService {
+      ReadWritePaths = [
+        "%t"
+        "%h/.cache"
+      ];
+    };
+
+    plasma-xembedsniproxy = mkTightService {
+      PrivateTmp = false;
+      ReadWritePaths = [
+        "%t"
+        "%h/.cache"
+      ];
+    };
+
+    plasma-baloorunner = mkTightService {
+      ReadWritePaths = [
+        "%t"
+        "%h/.local/share/baloo"
+      ];
+    };
+
+    plasma-kaccess = mkTightService {
+      PrivateTmp = false;
+      ReadWritePaths = [
+        "%t"
+        "%h/.config"
+        "%h/.cache"
+      ];
+    };
+
+    pipewire = mkPipewireService {
+      PrivateDevices = false; # /dev/snd/controlC*, pcmC*, seq
+      ReadWritePaths = [
+        "%t"
+        "-%h/.config/pipewire"
+        "-%h/.local/state/pipewire"
+      ];
+    };
+
+    pipewire-pulse = mkPipewireService {
+      ReadWritePaths = [
+        "%t"
+        "-%h/.config/pulse"
+      ];
+    };
+
+    wireplumber = mkPipewireService {
+      PrivateDevices = false; # /dev/snd/controlC*
+      RestrictAddressFamilies = [
+        "AF_UNIX"
+        "AF_NETLINK"
+        "AF_BLUETOOTH"
+      ];
+      ReadWritePaths = [
+        "%t"
+        "-%h/.config/wireplumber"
+        "%h/.local/state/wireplumber"
+      ];
+    };
+
+    plasma-kded6 = mkMediumService {
+      PrivateDevices = false; # /dev/rfkill and /dev/dri/renderD128
+      RestrictAddressFamilies = [
+        "AF_UNIX"
+        "AF_INET"
+        "AF_INET6"
+        "AF_NETLINK"
+      ];
+      ReadWritePaths = [
+        "%t"
+        "%h/.config"
+        "%h/.cache"
+        "%h/.local/share"
+        "%h/.local/state"
+        # Browser integration with Flatpak apps
+        "-%h/.var/app"
+      ];
+    };
+
+    plasma-xdg-desktop-portal-kde = mkMediumService {
+      PrivateDevices = false; # /dev/dri for ScreenCast/Screenshot
+      RestrictAddressFamilies = [
+        "AF_UNIX"
+        "AF_INET"
+        "AF_INET6"
+        "AF_NETLINK"
       ];
     };
   };
