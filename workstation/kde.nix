@@ -283,7 +283,9 @@ in
       ReadWritePaths = [
         "%t"
         "%h/.config"
+        "%h/.cache"
         "%h/.local/share"
+        "%h/.local/state"
       ];
     };
 
@@ -369,6 +371,7 @@ in
     };
 
     plasma-xdg-desktop-portal-kde = mkMediumService {
+      ProtectHome = false;
       PrivateDevices = false; # /dev/dri for ScreenCast/Screenshot
       RestrictAddressFamilies = [
         "AF_UNIX"
