@@ -1,7 +1,9 @@
 { config, ... }:
 let
-  port = 4433;
-  baseUrl = "http://${config.networking.hostName}:${toString port}";
+  port = 4432;
+  publicPort = 4433;
+  domain = "${config.networking.hostName}.tail1cdfa.ts.net";
+  baseUrl = "https://${domain}:${toString publicPort}";
 in
 {
   services.hister = {
@@ -12,13 +14,20 @@ in
     environmentFile = "/etc/hister.env";
 
     settings.server = {
-      address = "0.0.0.0:${toString port}";
+      address = "127.0.0.1:${toString port}";
       base_url = baseUrl;
     };
   };
 
-  # Only expose Hister on loopback (always allowed) and the tailnet.
-  networking.firewall.interfaces.${config.services.tailscale.interfaceName}.allowedTCPPorts = [ port ];
+  services.caddy = {
+    enable = true;
+    virtualHosts."${domain}:${toString publicPort}".extraConfig = ''
+      reverse_proxy 127.0.0.1:${toString port}
+    '';
+  };
+
+  services.tailscale.permitCertUid = "caddy";
+  networking.firewall.interfaces.${config.services.tailscale.interfaceName}.allowedTCPPorts = [ publicPort ];
 
   systemd.services.hister.serviceConfig = {
     # In addition to upstream hardening
