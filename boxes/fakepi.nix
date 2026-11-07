@@ -96,7 +96,9 @@
     "dim-screen" = {
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
-        ExecStart = "${pkgs.bash}/bin/bash -c 'echo 0 > /sys/class/backlight/amdgpu_bl1/brightness'";
+        Type = "oneshot";
+        RemainAfterExit = true;
+        ExecStart = "${pkgs.bash}/bin/bash -c 'for i in $(seq 100); do [ -w /sys/class/backlight/amdgpu_bl1/brightness ] && break; sleep 0.1; done; echo 0 > /sys/class/backlight/amdgpu_bl1/brightness'";
       };
     };
   };
