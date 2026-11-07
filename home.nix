@@ -105,6 +105,7 @@
           rm -f $out/bin/ghidra
           makeWrapper ${pyghidraEnv}/bin/python3 $out/bin/ghidra \
             --add-flags "-m pyghidra -g --install-dir ${unstable.ghidra}/lib/ghidra" \
+            --set JAVA_TOOL_OPTIONS "-Dghidra.disable.loopback.server.authentication=true" \
             --set JAVA_HOME ${unstable.openjdk25} \
             --prefix PATH : ${unstable.openjdk25}/bin \
             --set GHIDRA_INSTALL_DIR ${unstable.ghidra}/lib/ghidra
