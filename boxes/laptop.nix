@@ -26,9 +26,15 @@
     device = "rpool/expendable/wipedonboot";
     fsType = "zfs";
   };
-  boot.initrd.postDeviceCommands = lib.mkAfter ''
-    zfs rollback -r rpool/expendable/wipedonboot@blank
-  '';
+  boot.initrd.systemd.services.rollback-root = {
+    description = "Roll back the root dataset";
+    wantedBy = [ "initrd.target" ];
+    after = [ "zfs-import.target" ];
+    before = [ "sysroot.mount" ];
+    unitConfig.DefaultDependencies = "no";
+    serviceConfig.Type = "oneshot";
+    script = "zfs rollback -r rpool/expendable/wipedonboot@blank";
+  };
 
   fileSystems."/nix" = {
     device = "rpool/expendable/nix";
@@ -103,6 +109,7 @@
 
   # Add ZFS support
   boot.supportedFilesystems = [ "zfs" ];
+  boot.zfs.forceImportRoot = false;
   boot.zfs.requestEncryptionCredentials = true;
   # ZFS services
   services.zfs.autoSnapshot.enable = true;

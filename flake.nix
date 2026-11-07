@@ -3,10 +3,11 @@
 
   inputs = {
     # Used by the core system config
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+    # TODO: Switch to nixos-26.11 once out
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     vpn-confinement.url = "github:Maroka-chan/VPN-Confinement";
-    opencode.url = "github:anomalyco/opencode";
+    opencode.url = "github:anomalyco/opencode/bf544cd419c5f17535c0d5af929f7ecd41188320";
     hister = {
       url = "github:asciimoo/hister";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -23,7 +24,8 @@
 
     # Used by home-manager
     home-manager = {
-      url = "github:nix-community/home-manager/release-26.05";
+      # TODO: Switch once release-26.11 branch exists
+      url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     comma = {
@@ -47,13 +49,22 @@
     }:
     let
       system = "x86_64-linux";
+      # They don't sync their lockfile properly, override to fix that
+      opencode' =
+        let
+          pkg = opencode.packages.${system}.opencode;
+          node_modules = pkg.node_modules.override {
+            hash = "sha256-Lk3dNKEm/iJ011b0gK2iIBxIUW/QEIALb9LHX49WUI0=";
+          };
+        in
+        pkg.override { inherit node_modules; };
       overlay-unstable = self: super: {
         unstable = import nixpkgs-unstable {
           inherit system;
           config.allowUnfree = true;
           config.allowBroken = true;
         };
-        opencode = opencode.packages.${system}.default;
+        opencode = opencode';
       };
     in
     {

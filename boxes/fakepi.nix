@@ -67,7 +67,6 @@
 
   boot.initrd = {
     systemd = {
-      enable = true;
       settings.Manager.DefaultDeviceTimeoutSec = "infinity";
       users.root.shell = "/usr/bin/systemd-tty-ask-password-agent";
     };
