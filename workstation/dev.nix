@@ -1,4 +1,12 @@
-{ config, environment, pkgs, ... }: {
+{ config, environment, pkgs, lib, ... }:
+
+let
+  glasgow-master = pkgs.callPackage ../pkgs/glasgow-master {
+    glasgow = pkgs.glasgow;
+  };
+in
+{
+  services.udev.packages = [ glasgow-master ];
 
   # DJI and FTDI devices
   services.udev.extraRules = ''
@@ -18,7 +26,6 @@
     unstable.go
     unstable.gopls
     unstable.delve
-    unstable.gomodifytags
     unstable.gotests
     unstable.impl
     # Rust
@@ -28,5 +35,6 @@
     # Python
     python3
     android-tools
+    glasgow-master
   ];
 }
